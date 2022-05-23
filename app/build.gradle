@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 29
+    compileSdk 32
 
     defaultConfig {
         applicationId "nl.hhs.apep2122group1"
         minSdk 21
-        targetSdk 32
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
