@@ -13,3 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# General
+*.bak
+~$*.*
+
+# Java
+out/
+
+# Visual Paradigm
+*.lck
+*.bak_*
