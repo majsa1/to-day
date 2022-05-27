@@ -45,4 +45,5 @@
     </string>
     <string name="add_date_btn_text">Deadline</string>
     <string name="add_name_btn_text">Name</string>
+    <string name="task_list_title_tv_text">Tasks</string>
 </resources>

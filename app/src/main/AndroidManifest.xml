@@ -17,9 +17,11 @@
             android:name=".AddTaskActivity"
             android:exported="false" />
         <activity
+            android:name=".TaskListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Today">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
