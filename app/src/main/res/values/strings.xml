@@ -53,4 +53,20 @@
     <string name="task_list_sort_btn_description">Sort tasks</string>
     <string name="task_list_add_btn_description">Add task</string>
 
+    <!-- Register -->
+    <string name="register_title">Register</string>
+    <string name="register_name_et_hint">Your name</string>
+    <string name="register_retype_password_et_hint">Retype password</string>
+    <string name="register_login_instead_tv_text">Login instead</string>
+    <string name="register_register_btn_title">Register</string>
+
+    <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="login_register_instead_tv_text">Register instead</string>
+    <string name="login_login_btn_title">Login</string>
+
+    <!-- Generic Register/Login -->
+    <string name="username_et_hint">Username</string>
+    <string name="password_et_hint">Password</string>
+
 </resources>
