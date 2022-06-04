@@ -103,6 +103,7 @@
         tools:ignore="ImageContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/task_list_rv_id"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
