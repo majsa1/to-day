@@ -104,4 +104,13 @@ public class Task implements Comparable<Task> {
             return this.completed.compareTo(task.getCompleted());
         }
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void markTaskDone() {
+        this.completed = LocalDateTime.now();
+    }
+
+    public void markTaskToDo() {
+        this.completed = null;
+    }
 }

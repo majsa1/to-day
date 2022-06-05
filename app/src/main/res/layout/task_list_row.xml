@@ -12,9 +12,11 @@
         android:layout_height="wrap_content">
 
         <CheckBox
-            android:id="@+id/row_complete_cb_id"
+            android:id="@+id/row_status_cb_id"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:onClick="refresh" />
 
         <LinearLayout
             android:layout_width="wrap_content"

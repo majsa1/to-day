@@ -1,11 +1,15 @@
 package nl.hhs.apep2122group1;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -30,12 +34,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = tasks.get(position);
+        boolean completed = task.getCompleted() != null;
+
+        holder.taskStatusCb.setChecked(completed);
         holder.taskTitleTv.setText(task.getTitle());
 
-        // check in comparison to status + parsing of date:
-        String taskDate = task.getCompleted() == null ? String.valueOf(task.getDeadline()) : String.valueOf(task.getCompleted());
-
+        // check formatting of date:
+        String taskDate = completed ? String.valueOf(task.getCompleted()) : String.valueOf(task.getDeadline());
         holder.taskDateTv.setText(taskDate);
+
+        holder.taskStatusCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    tasks.get(holder.getAdapterPosition()).markTaskDone();
+                } else {
+                    tasks.get(holder.getAdapterPosition()).markTaskToDo();
+                }
+            }
+        });
     }
 
     @Override
@@ -44,11 +62,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        // add textviews for Due / Done
+
+        private CheckBox taskStatusCb;
         private TextView taskTitleTv;
         private TextView taskDateTv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            taskStatusCb = itemView.findViewById(R.id.row_status_cb_id);
             taskTitleTv = itemView.findViewById(R.id.row_title_tv_id);
             taskDateTv = itemView.findViewById(R.id.row_date_tv_id);
         }

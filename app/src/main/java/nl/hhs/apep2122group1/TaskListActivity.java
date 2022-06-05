@@ -37,7 +37,6 @@ public class TaskListActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-//                        tasks.clear();
                         tasks = Task.getDemo();
                         sortedTasks = new ArrayList<>(tasks);
                         Collections.sort(sortedTasks);
@@ -72,6 +71,11 @@ public class TaskListActivity extends AppCompatActivity {
                 sortedTasks.add(task);
             }
         }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void refresh(View view) {
+        // attempt to refresh the view, not working...
         adapter.notifyDataSetChanged();
     }
 }
