@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class TaskListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
     private List<Task> tasks;
+    private List<Task> sortedTasks;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -35,20 +38,40 @@ public class TaskListActivity extends AppCompatActivity {
                     @Override
                     public void onActivityResult(ActivityResult result) {
 //                        tasks.clear();
-//                        tasks.addAll(Task.getAll(getApplicationContext()));
                         tasks = Task.getDemo();
-                        Collections.sort(tasks);
-                        adapter = new TaskAdapter(tasks);
+                        sortedTasks = new ArrayList<>(tasks);
+                        Collections.sort(sortedTasks);
+                        adapter = new TaskAdapter(sortedTasks);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
                 });
-//        tasks = Task.getAll(this);
         tasks = Task.getDemo();
+        sortedTasks = new ArrayList<>(tasks);
         recyclerView = findViewById(R.id.task_list_rv_id);
-        Collections.sort(tasks);
-        adapter = new TaskAdapter(tasks);
+        Collections.sort(sortedTasks);
+        adapter = new TaskAdapter(sortedTasks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void getToDoTasks(View view) {
+        sortedTasks.clear();
+        for (Task task : tasks) {
+            if (task.getCompleted() == null) {
+                sortedTasks.add(task);
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void getDoneTasks(View view) {
+        sortedTasks.clear();
+        for (Task task : tasks) {
+            if (task.getCompleted() != null) {
+                sortedTasks.add(task);
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 }
