@@ -37,7 +37,7 @@ public class Task implements Comparable<Task> {
         null));
 
         add(new Task("Test task One",
-                LocalDateTime.of(2022, 7, 1, 11, 0),
+                LocalDateTime.of(2022, 5, 1, 11, 0),
                 null));
 
         add(new Task("Test task Two",

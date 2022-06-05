@@ -1,5 +1,6 @@
 package nl.hhs.apep2122group1;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,18 +32,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = tasks.get(position);
         boolean completed = task.getCompleted() != null;
 
         holder.taskStatusCb.setChecked(completed);
-        holder.taskTitleTv.setText(task.getTitle());
-
-        // check formatting of date:
-        String taskDate = completed ? String.valueOf(task.getCompleted()) : String.valueOf(task.getDeadline());
-        holder.taskDateTv.setText(taskDate);
-
         holder.taskStatusCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -54,6 +50,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 }
             }
         });
+
+        holder.taskTitleTv.setText(task.getTitle());
+
+        holder.taskStatusTv.setText(completed ? "Completed: " : "Due: ");
+
+        // check formatting of date:
+        String taskDate = completed ? String.valueOf(task.getCompleted()) : String.valueOf(task.getDeadline());
+        holder.taskDateTv.setText(taskDate);
     }
 
     @Override
@@ -66,12 +70,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         private CheckBox taskStatusCb;
         private TextView taskTitleTv;
+        private TextView taskStatusTv;
         private TextView taskDateTv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             taskStatusCb = itemView.findViewById(R.id.row_status_cb_id);
             taskTitleTv = itemView.findViewById(R.id.row_title_tv_id);
+            taskStatusTv = itemView.findViewById(R.id.row_status_tv_id);
             taskDateTv = itemView.findViewById(R.id.row_date_tv_id);
         }
     }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/row_card_cv_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
+    android:onClick="getDetail"
     cardview:cardCornerRadius="8dp">
 
     <LinearLayout
@@ -21,9 +22,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:orientation="vertical" >
+            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/row_title_tv_id"
@@ -31,13 +32,27 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+
             <TextView
+                android:id="@+id/row_status_tv_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+                <TextView
                 android:id="@+id/row_date_tv_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="TextView" />
 
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

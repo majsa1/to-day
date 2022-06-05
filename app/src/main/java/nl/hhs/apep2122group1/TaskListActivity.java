@@ -59,6 +59,7 @@ public class TaskListActivity extends AppCompatActivity {
         for (Task task : tasks) {
             if (task.getCompleted() == null) {
                 sortedTasks.add(task);
+                Collections.sort(sortedTasks);
             }
         }
         adapter.notifyDataSetChanged();
@@ -69,6 +70,7 @@ public class TaskListActivity extends AppCompatActivity {
         for (Task task : tasks) {
             if (task.getCompleted() != null) {
                 sortedTasks.add(task);
+                Collections.sort(sortedTasks);
             }
         }
         adapter.notifyDataSetChanged();
@@ -77,5 +79,9 @@ public class TaskListActivity extends AppCompatActivity {
     public void refresh(View view) {
         // attempt to refresh the view, not working...
         adapter.notifyDataSetChanged();
+    }
+
+    public void getDetail(View view) {
+        System.out.println("Proceed to detail view");
     }
 }
