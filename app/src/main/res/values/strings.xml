@@ -46,9 +46,11 @@
     <string name="add_date_btn_text">Deadline</string>
     <string name="add_name_btn_text">Name</string>
     <string name="add_name_btn_description">Logout</string>
+
+    <!-- Task list -->
     <string name="task_list_title_tv_text">Tasks</string>
-    <string name="task_list_todo_cp_text">To do</string>
-    <string name="task_list_done_cp_text">Done</string>
+    <string name="task_list_todo_mb_text">To do</string>
+    <string name="task_list_done_mb_text">Done</string>
     <string name="task_list_filter_btn_description">Filter tasks</string>
     <string name="task_list_sort_btn_description">Sort tasks</string>
     <string name="task_list_add_btn_description">Add task</string>
