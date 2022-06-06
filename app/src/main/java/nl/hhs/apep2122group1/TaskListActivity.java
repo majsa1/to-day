@@ -4,7 +4,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +26,6 @@ public class TaskListActivity extends AppCompatActivity {
     private List<Task> tasks;
     private List<Task> sortedTasks;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +68,7 @@ public class TaskListActivity extends AppCompatActivity {
         for (Task task : tasks) {
             if (task.getCompleted() != null) {
                 sortedTasks.add(task);
-                Collections.sort(sortedTasks);
+                Collections.sort(sortedTasks, Collections.reverseOrder());
             }
         }
         adapter.notifyDataSetChanged();

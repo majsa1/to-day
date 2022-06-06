@@ -1,9 +1,5 @@
 package nl.hhs.apep2122group1.models;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -22,7 +18,6 @@ public class Task implements Comparable<Task> {
         this.completed = completed;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private static ArrayList<Task> demo = new ArrayList<Task>(){{
         add(new Task("Buy birthday present",
         LocalDateTime.of(2022, 6, 10, 14, 30),
@@ -45,7 +40,6 @@ public class Task implements Comparable<Task> {
                 null));
     }};
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public static ArrayList<Task> getDemo() {
         return demo;
     }
@@ -95,7 +89,6 @@ public class Task implements Comparable<Task> {
         this.description = description;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int compareTo(Task task) {
         if (this.completed == null) { // task not yet completed
@@ -105,7 +98,6 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void markTaskDone() {
         this.completed = LocalDateTime.now();
     }
