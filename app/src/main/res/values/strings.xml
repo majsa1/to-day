@@ -21,6 +21,8 @@
     <string name="task_list_logout_btn_title">Are you sure you want to log out?</string>
     <string name="task_list_logout_btn_confirm">YES</string>
     <string name="task_list_logout_btn_cancel">NO</string>
+    <string name="task_adapter_due_tv_text">Due:</string>
+    <string name="task_adapter_completed_tv_text">Completed:</string>
 
     <string name="popup_sort_descending">Descending</string>
     <string name="popup_sort_ascending">Ascending</string>
