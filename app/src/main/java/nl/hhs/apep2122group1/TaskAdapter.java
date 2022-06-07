@@ -1,7 +1,8 @@
 package nl.hhs.apep2122group1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,20 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import nl.hhs.apep2122group1.models.Task;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+    private Context context;
     private List<Task> tasks;
 
-    public TaskAdapter(List<Task> tasks) {
+    public TaskAdapter(Context context, List<Task> tasks) {
+        this.context = context;
         this.tasks = tasks;
     }
 
@@ -61,8 +66,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 //        incorrectly also makes the same row in Done list red:
 //        if (tasks.get(holder.getAdapterPosition()).getDeadline().compareTo(LocalDateTime.now()) < 0 && tasks.get(holder.getAdapterPosition()).getCompleted() == null) {
 //            holder.taskDateTv.setTextColor(Color.RED);
-//            System.out.println("POSITION: " + task.getTitle() + tasks.get(holder.getAdapterPosition()));
 //        }
+
+        holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewActivity.class); // why crash? Works with another activity
+                System.out.println(task.getTitle());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -75,6 +88,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         private TextView taskTitleTv;
         private TextView taskStatusTv;
         private TextView taskDateTv;
+        private CardView taskRowCv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +96,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             taskTitleTv = itemView.findViewById(R.id.row_title_tv_id);
             taskStatusTv = itemView.findViewById(R.id.row_status_tv_id);
             taskDateTv = itemView.findViewById(R.id.row_date_tv_id);
+            taskRowCv = itemView.findViewById(R.id.row_card_cv_id);
         }
     }
 }
