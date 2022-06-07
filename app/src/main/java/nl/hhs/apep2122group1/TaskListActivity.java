@@ -163,6 +163,11 @@ public class TaskListActivity extends AppCompatActivity {
         }
     }
 
+    public void onAdd(View view) {
+        System.out.println("Adding item");
+        startActivity(new Intent(this, AddEditActivity.class));
+    }
+
     public void getDetail(View view) { // will be replaced
         System.out.println("To detail view");
     }
