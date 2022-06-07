@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +43,7 @@ public class TaskListActivity extends AppCompatActivity {
                         adapter = new TaskAdapter(sortedTasks);
                         recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+                        // which one is checked (toDo/Done) on return?
                     }
                 });
         tasks = Task.getDemo();
@@ -50,6 +53,8 @@ public class TaskListActivity extends AppCompatActivity {
         adapter = new TaskAdapter(sortedTasks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        MaterialButton toDo = findViewById(R.id.task_list_todo_mb_id); // is there a better way?
+        toDo.performClick();
     }
 
     public void getToDoTasks(View view) {
@@ -74,9 +79,14 @@ public class TaskListActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void refresh(View view) {
-        // attempt to refresh the view, not working...
-        adapter.notifyDataSetChanged();
+    public void refresh(View view) { // is there a better way? Now bound to checkbox!
+        MaterialButton toDo = findViewById(R.id.task_list_todo_mb_id);
+        MaterialButton done = findViewById(R.id.task_list_done_mb_id);
+        if (toDo.isChecked()) {
+            toDo.performClick();
+        } else {
+            done.performClick();
+        }
     }
 
     public void getDetail(View view) {
