@@ -65,8 +65,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        // add textviews for Due / Done
-
         private CheckBox taskStatusCb;
         private TextView taskTitleTv;
         private TextView taskStatusTv;
