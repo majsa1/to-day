@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/popup_sort_title"
+        android:checkable="false"
+        android:enabled="false"
+        android:title="@string/popup_sort_title" />
+
+    <item
+        android:id="@+id/popup_sort_ascending"
+        android:checked="false"
+        android:title="@string/popup_sort_ascending" />
+
+    <item
+        android:id="@+id/popup_sort_descending"
+        android:checked="false"
+        android:title="@string/popup_sort_descending" />
+
+</menu>

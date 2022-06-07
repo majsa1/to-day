@@ -4,14 +4,18 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -25,8 +29,10 @@ public class TaskListActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> launcher;
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
+    private AlertDialog.Builder builder;
     private List<Task> tasks;
     private List<Task> sortedTasks;
+    private List<Task> filteredTasks; // to be used for filtering by labels
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +43,92 @@ public class TaskListActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-                        tasks = Task.getDemo();
-                        sortedTasks = new ArrayList<>(tasks);
-                        Collections.sort(sortedTasks);
-                        adapter = new TaskAdapter(sortedTasks);
-                        recyclerView.setAdapter(adapter);
+                        prepareTaskList();
                         adapter.notifyDataSetChanged();
-                        // which one is checked (toDo/Done) on return?
+                        // which materialbutton is checked on return?
                     }
                 });
+
+        prepareTaskList();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // there must be a better way...
+        MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
+        toDoBtn.performClick();
+
+        prepareSort();
+        prepareLogout();
+    }
+
+    private void prepareTaskList() {
+        prepareTasks();
+        prepareList();
+    }
+
+    private void prepareTasks() {
         tasks = Task.getDemo();
         sortedTasks = new ArrayList<>(tasks);
-        recyclerView = findViewById(R.id.task_list_rv_id);
         Collections.sort(sortedTasks);
+    }
+
+    public void prepareList() {
+        recyclerView = findViewById(R.id.task_list_rv_id);
         adapter = new TaskAdapter(sortedTasks);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MaterialButton toDo = findViewById(R.id.task_list_todo_mb_id); // is there a better way?
-        toDo.performClick();
+    }
+
+    private void prepareLogout() {
+        builder = new AlertDialog.Builder(this);
+        ImageButton logout = findViewById(R.id.task_list_logout_btn_id);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder.setTitle(R.string.task_list_logout_btn_title)
+                        .setCancelable(false) // cannot be cancelled by pressing outside of dialog
+                        .setPositiveButton(R.string.task_list_logout_btn_confirm, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.task_list_logout_btn_cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+    }
+
+    private void prepareSort() {
+        ImageButton sortBtn = (ImageButton) findViewById(R.id.task_list_sort_btn_id);
+
+        sortBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(getApplicationContext(), sortBtn);
+
+                popupMenu.getMenuInflater().inflate(R.menu.popup_sort, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.popup_sort_ascending) {
+                            Collections.sort(sortedTasks);
+                            prepareList();
+                            return true;
+                        }
+                        if (menuItem.getItemId() == R.id.popup_sort_descending) {
+                            Collections.sort(sortedTasks, Collections.reverseOrder());
+                            prepareList();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
     }
 
     public void getToDoTasks(View view) {
@@ -80,16 +154,16 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void refresh(View view) { // is there a better way? Now bound to checkbox!
-        MaterialButton toDo = findViewById(R.id.task_list_todo_mb_id);
-        MaterialButton done = findViewById(R.id.task_list_done_mb_id);
-        if (toDo.isChecked()) {
-            toDo.performClick();
+        MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
+        MaterialButton doneBtn = findViewById(R.id.task_list_done_mb_id);
+        if (toDoBtn.isChecked()) {
+            toDoBtn.performClick();
         } else {
-            done.performClick();
+            doneBtn.performClick();
         }
     }
 
-    public void getDetail(View view) {
-        System.out.println("Proceed to detail view");
+    public void getDetail(View view) { // will be replaced
+        System.out.println("To detail view");
     }
 }
