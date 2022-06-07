@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -31,13 +31,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/username_et_hint" />
+                android:hint="@string/username_et_hint"
+                android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -45,13 +45,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPassword"
-                android:text="@string/password_et_hint" />
+                android:hint="@string/password_et_hint"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -66,6 +66,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:minHeight="48dp"
+                android:onClick="onNavigateToRegister"
                 android:text="@string/login_register_instead_tv_text" />
 
             <Button
@@ -73,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onLogin"
                 android:text="@string/login_login_btn_title" />
         </LinearLayout>
     </LinearLayout>
