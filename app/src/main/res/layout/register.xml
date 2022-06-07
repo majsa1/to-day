@@ -98,10 +98,11 @@
                 android:text="@string/register_login_instead_tv_text" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/register_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onRegister"
                 android:text="@string/register_register_btn_title" />
         </LinearLayout>
     </LinearLayout>
