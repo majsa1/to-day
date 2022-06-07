@@ -14,10 +14,10 @@
         android:theme="@style/Theme.Today"
         tools:targetApi="31">
         <activity
-            android:name=".EditTaskActivity"
+            android:name=".ViewActivity"
             android:exported="false" />
         <activity
-            android:name=".AddTaskActivity"
+            android:name=".AddEditActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
