@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewActivity">
+
+    <TextView
+        android:id="@+id/view_name_task_tv"
+        android:layout_width="372dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="116dp"
+        android:hint="@string/view_name_task_tv"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/view_deadline_tv"
+        android:layout_width="372dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/view_deadline_tv"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_name_task_tv" />
+
+    <TextView
+        android:id="@+id/view_description_tv"
+        android:layout_width="372dp"
+        android:layout_height="88dp"
+        android:layout_marginBottom="32dp"
+        android:hint="@string/view_description_tv"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/view_back_btn_id"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="67dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/view_name_task_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/view_label_tv"
+        android:layout_width="372dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginBottom="48dp"
+        android:hint="@string/add_edit_label_sp_text"
+        android:textColorHint="#8D6E63"
+        app:layout_constraintBottom_toTopOf="@+id/view_description_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_deadline_tv"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/view_completed_tv"
+        android:layout_width="372dp"
+        android:layout_height="88dp"
+        android:hint="@string/view_completed_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.536" />
+</androidx.constraintlayout.widget.ConstraintLayout>
