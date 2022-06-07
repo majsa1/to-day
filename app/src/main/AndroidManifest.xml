@@ -28,7 +28,7 @@
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
-            android:name=".AddTaskActivity"
+            android:name=".AddEditActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -105,6 +105,7 @@
         android:clickable="true"
         android:contentDescription="@string/task_list_add_btn_description"
         android:focusable="true"
+        android:onClick="onAdd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/task_list_logout_btn_id"
         app:layout_constraintHorizontal_bias="1.0"

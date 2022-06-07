@@ -18,6 +18,12 @@
     <string name="task_list_filter_btn_description">Filter tasks</string>
     <string name="task_list_sort_btn_description">Sort tasks</string>
     <string name="task_list_add_btn_description">Add task</string>
+    <string name="task_list_logout_btn_title">Are you sure you want to log out?</string>
+    <string name="task_list_logout_btn_confirm">YES</string>
+    <string name="task_list_logout_btn_cancel">NO</string>
+
+    <string name="popup_sort_descending">Descending</string>
+    <string name="popup_sort_ascending">Ascending</string>
 
     <!-- Register -->
     <string name="register_title">Register</string>
@@ -34,6 +40,7 @@
     <!-- Generic Register/Login -->
     <string name="username_et_hint">Username</string>
     <string name="password_et_hint">Password</string>
+    <string name="popup_sort_title">Sort by deadline</string>
 
     <!-- AddEdit-->
     <string name="add_edit_name_tv">Name</string>
