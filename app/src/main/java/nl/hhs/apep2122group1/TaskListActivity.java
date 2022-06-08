@@ -54,7 +54,7 @@ public class TaskListActivity extends AppCompatActivity {
 
         // there must be a better way...
         MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
-        toDoBtn.performClick();
+        getToDoTasks(toDoBtn);
 
         prepareSort();
         prepareLogout();
@@ -163,7 +163,6 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onAdd(View view) {
-        System.out.println("Adding item");
         startActivity(new Intent(this, AddEditActivity.class));
     }
 }
