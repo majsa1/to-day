@@ -20,7 +20,8 @@ public class Task implements Comparable<Task> {
     // foreign keys to be added
 
     // for demo data on list (constructor and static list):
-    public Task(String title, LocalDateTime deadline, LocalDateTime completed) {
+    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed) {
+        this.id = id;
         this.title = title;
         this.deadline = deadline;
         this.completed = completed;
@@ -28,23 +29,23 @@ public class Task implements Comparable<Task> {
 
     @Ignore
     private static ArrayList<Task> demo = new ArrayList<Task>(){{
-        add(new Task("Buy birthday present",
+        add(new Task(1, "Buy birthday present",
         LocalDateTime.of(2022, 6, 10, 14, 30),
         LocalDateTime.of(2022, 6, 8, 14, 10)));
 
-        add(new Task("Submit project",
+        add(new Task(2, "Submit project",
         LocalDateTime.of(2022, 6, 17, 23, 59),
         null));
 
-        add(new Task("Visit grandma",
+        add(new Task(3, "Visit grandma",
         LocalDateTime.of(2022, 7, 1, 11, 0),
         null));
 
-        add(new Task("Test task One",
+        add(new Task(4, "Test task One",
                 LocalDateTime.of(2022, 5, 1, 11, 0),
                 null));
 
-        add(new Task("Test task Two",
+        add(new Task(5, "Test task Two",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
                 null));
     }};
