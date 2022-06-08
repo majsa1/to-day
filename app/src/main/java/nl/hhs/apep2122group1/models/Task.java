@@ -1,14 +1,30 @@
 package nl.hhs.apep2122group1.models;
 
+import static androidx.room.ForeignKey.SET_NULL;
+
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-@Entity
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = User.class,
+                parentColumns = "username",
+                childColumns = "taskOwnerId",
+                onDelete = SET_NULL), // check if correct
+
+        @ForeignKey(
+                entity = Label.class,
+                parentColumns = "id",
+                childColumns = "labelOwnerId",
+                onDelete = SET_NULL) // check if correct
+})
+
 public class Task implements Comparable<Task> {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
@@ -17,7 +33,18 @@ public class Task implements Comparable<Task> {
     private LocalDateTime deadline;
     private LocalDateTime completed;
     private String description;
-    // foreign keys to be added
+
+    @ColumnInfo(name = "User_username") // name from ERD
+    private Integer taskOwnerId;
+
+    @ColumnInfo(name = "Label_id") // name from ERD
+    private Integer labelOwnerId;
+
+    @Ignore
+    private User owner; // is one owner for both tasks and labels enough?
+
+    @Ignore
+    private Label label;
 
     // for demo data on list (constructor and static list):
     public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed) {
@@ -97,6 +124,38 @@ public class Task implements Comparable<Task> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getTaskOwnerId() {
+        return taskOwnerId;
+    }
+
+    public void setTaskOwnerId(Integer taskOwnerId) {
+        this.taskOwnerId = taskOwnerId;
+    }
+
+    public Integer getLabelOwnerId() {
+        return labelOwnerId;
+    }
+
+    public void setLabelOwnerId(Integer labelOwnerId) {
+        this.labelOwnerId = labelOwnerId;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
     }
 
     @Override
