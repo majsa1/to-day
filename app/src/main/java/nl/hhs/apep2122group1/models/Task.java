@@ -15,13 +15,13 @@ import java.util.ArrayList;
         @ForeignKey(
                 entity = User.class,
                 parentColumns = "username",
-                childColumns = "taskOwnerId",
+                childColumns = "User_username",
                 onDelete = SET_NULL), // check if correct
 
         @ForeignKey(
                 entity = Label.class,
                 parentColumns = "id",
-                childColumns = "labelOwnerId",
+                childColumns = "Label_id",
                 onDelete = SET_NULL) // check if correct
 })
 
@@ -35,13 +35,13 @@ public class Task implements Comparable<Task> {
     private String description;
 
     @ColumnInfo(name = "User_username") // name from ERD
-    private Integer taskOwnerId;
+    private Integer ownerUsername;
 
     @ColumnInfo(name = "Label_id") // name from ERD
-    private Integer labelOwnerId;
+    private Integer labelId;
 
     @Ignore
-    private User owner; // is one owner for both tasks and labels enough?
+    private User owner;
 
     @Ignore
     private Label label;
@@ -126,20 +126,20 @@ public class Task implements Comparable<Task> {
         this.description = description;
     }
 
-    public Integer getTaskOwnerId() {
-        return taskOwnerId;
+    public Integer getOwnerUsername() {
+        return ownerUsername;
     }
 
-    public void setTaskOwnerId(Integer taskOwnerId) {
-        this.taskOwnerId = taskOwnerId;
+    public void setOwnerUsername(Integer ownerUsername) {
+        this.ownerUsername = ownerUsername;
     }
 
-    public Integer getLabelOwnerId() {
-        return labelOwnerId;
+    public Integer getLabelId() {
+        return labelId;
     }
 
-    public void setLabelOwnerId(Integer labelOwnerId) {
-        this.labelOwnerId = labelOwnerId;
+    public void setLabelId(Integer labelOwnerId) {
+        this.labelId = labelOwnerId;
     }
 
     public User getOwner() {
