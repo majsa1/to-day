@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             usernameField.setError("Username already in use!");
         } else {
             Toast.makeText(this, "Added account, you can now log in!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
 
