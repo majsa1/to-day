@@ -12,6 +12,12 @@ public class RoomDatabase implements Database {
     }
 
     @Override
+    public Task getTask(int id) {
+        // TODO
+        return null;
+    }
+
+    @Override
     public void upsertTask(Task task) {
         // TODO
     }

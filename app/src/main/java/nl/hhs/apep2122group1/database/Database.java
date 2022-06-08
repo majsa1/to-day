@@ -7,6 +7,7 @@ import nl.hhs.apep2122group1.models.User;
 public interface Database {
     // tasks
     Task[] getAllTasks();
+    Task getTask(int id);
     void upsertTask(Task task);
     void deleteTask(Task task);
     void markTask(Task task, boolean done);

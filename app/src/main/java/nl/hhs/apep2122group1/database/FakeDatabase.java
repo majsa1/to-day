@@ -28,6 +28,16 @@ public class FakeDatabase implements Database {
     }
 
     @Override
+    public Task getTask(int id) {
+        for (Task t : tasks) {
+            if (t.getId() == id) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void upsertTask(Task task) {
         deleteTask(task);
         tasks.add(task);
