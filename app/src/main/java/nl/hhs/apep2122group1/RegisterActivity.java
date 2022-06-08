@@ -1,5 +1,6 @@
 package nl.hhs.apep2122group1;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,7 +21,16 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onNavigateToLogin(View view) {
-        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // set focus to name field for convenience
+        TextInputEditText nameField = findViewById(R.id.name_et);
+        nameField.requestFocus();
     }
 
     // TODO: validations should be translatable

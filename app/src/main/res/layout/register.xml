@@ -79,7 +79,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:hint="@string/register_retype_password_et_hint" />
+                android:hint="@string/register_retype_password_et_hint"
+                android:nextFocusDown="@id/register_btn"
+                android:nextFocusForward="@id/register_btn" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout

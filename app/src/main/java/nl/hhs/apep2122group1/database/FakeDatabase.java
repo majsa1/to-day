@@ -7,16 +7,16 @@ import nl.hhs.apep2122group1.models.Task;
 import nl.hhs.apep2122group1.models.User;
 
 public class FakeDatabase implements Database {
-    private ArrayList<User> users = new ArrayList<User>() {{
-        add(new User());
+    private final ArrayList<User> users = new ArrayList<User>() {{
+        add(new User("test", "Test User", "testpw"));
     }};
-    private ArrayList<Task> tasks = new ArrayList<Task>() {{
+    private final ArrayList<Task> tasks = new ArrayList<Task>() {{
         add(new Task());
         add(new Task());
         add(new Task());
         add(new Task());
     }};
-    private ArrayList<Label> labels = new ArrayList<Label>() {{
+    private final ArrayList<Label> labels = new ArrayList<Label>() {{
         add(new Label());
         add(new Label());
         add(new Label());
@@ -64,22 +64,27 @@ public class FakeDatabase implements Database {
 
     @Override
     public void deleteLabel(Label label) {
-        //labels.removeIf((listLabel) -> listLabel.getId().equals(label.getId()));
+        labels.removeIf((listLabel) -> listLabel.getId().equals(label.getId()));
     }
 
     @Override
     public User getUser(String username, String password) {
-        //for (User u : users) {
-        //    if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-        //        return u;
-        //    }
-        //}
+        for (User u : users) {
+            if (u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password)) {
+                return u;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean insertUser(String username, String password, String name) {
-        return false;
-        //users.add(new User());
+        for (User u : users) {
+            if (u.getUsername().equalsIgnoreCase(username)) {
+                return false;
+            }
+        }
+        users.add(new User(username, name, password));
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package nl.hhs.apep2122group1;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,6 +23,28 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onNavigateToRegister(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // get fields
+        TextInputEditText usernameField = findViewById(R.id.username_et);
+        TextInputEditText passwordField = findViewById(R.id.password_et);
+
+        // clear their text
+        usernameField.setText("");
+        passwordField.setText("");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // set focus to username field for convenience
+        TextInputEditText usernameField = findViewById(R.id.username_et);
+        usernameField.requestFocus();
     }
 
     public void onLogin(View view) {
