@@ -73,7 +73,7 @@ public class TaskListActivity extends AppCompatActivity {
 
     public void prepareList() {
         recyclerView = findViewById(R.id.task_list_rv_id);
-        adapter = new TaskAdapter(sortedTasks);
+        adapter = new TaskAdapter(this, sortedTasks);
         recyclerView.setAdapter(adapter);
     }
 
@@ -155,20 +155,15 @@ public class TaskListActivity extends AppCompatActivity {
 
     public void refresh(View view) { // is there a better way? Now bound to checkbox!
         MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
-        MaterialButton doneBtn = findViewById(R.id.task_list_done_mb_id);
         if (toDoBtn.isChecked()) {
-            toDoBtn.performClick();
+            getToDoTasks(view);
         } else {
-            doneBtn.performClick();
+            getDoneTasks(view);
         }
     }
 
     public void onAdd(View view) {
         System.out.println("Adding item");
         startActivity(new Intent(this, AddEditActivity.class));
-    }
-
-    public void getDetail(View view) { // will be replaced
-        System.out.println("To detail view");
     }
 }

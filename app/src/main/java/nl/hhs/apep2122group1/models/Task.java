@@ -1,11 +1,19 @@
 package nl.hhs.apep2122group1.models;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@Entity
 public class Task implements Comparable<Task> {
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String title;
+//    @TypeConverters({Converter.class}) -> make class
     private LocalDateTime deadline;
     private LocalDateTime completed;
     private String description;
@@ -18,6 +26,7 @@ public class Task implements Comparable<Task> {
         this.completed = completed;
     }
 
+    @Ignore
     private static ArrayList<Task> demo = new ArrayList<Task>(){{
         add(new Task("Buy birthday present",
         LocalDateTime.of(2022, 6, 10, 14, 30),
@@ -44,7 +53,7 @@ public class Task implements Comparable<Task> {
         return demo;
     }
 
-    // for db:
+    // constructor for db:
     public Task() {
     }
 
