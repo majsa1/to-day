@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class ViewActivity extends AppCompatActivity {
 
@@ -14,5 +15,9 @@ public class ViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int taskId = intent.getIntExtra("TASK_ID", 0);
+    }
+    public void goTotaskListActivity(View view){
+        Intent intent = new Intent(this, TaskListActivity.class);
+        startActivity(intent);
     }
 }
