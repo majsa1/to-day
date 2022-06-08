@@ -71,8 +71,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewActivity.class); // why crash? Works with another activity
-                System.out.println(task.getTitle());
+                Intent intent = new Intent(context, ViewActivity.class);
+                int taskId = task.getId();
+                intent.putExtra("TASK_ID", taskId);
                 context.startActivity(intent);
             }
         });
