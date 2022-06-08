@@ -49,7 +49,7 @@
     <string name="add_edit_description_tv">Description</string>
     <string name="add_edit_title_pt">Create task</string>
     <string name="add_edit_deadline_dt">Deadline</string>
-    <string name="add_edit_name_ti_text">Name</string>
+    <string name="edit_name_ti_text">Name</string>
     <string name="add_edit_description_ti_text">Description</string>
     <string name="add_edit_clear_task_btn_id">Clear task</string>
     <string name="add_edit_save_btn_id">Save</string>
@@ -63,6 +63,7 @@
     <string name="view_description_tv">Description</string>
     <string name="view_back_btn_id">back</string>
     <string name="view_completed_tv">Completed</string>
+    <string name="add_edit_clear_btn_id">Clear</string>
 
 
 </resources>
