@@ -35,7 +35,10 @@
             android:exported="false" />
         <activity
             android:name=".TaskListActivity"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".ViewActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
