@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/add_edit_back_btn_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -10,100 +9,109 @@
     tools:layout_editor_absoluteX="-12dp"
     tools:layout_editor_absoluteY="0dp">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <Button
+        android:id="@+id/add_edit_save_btn_id"
+        android:layout_width="133dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/add_edit_save_btn_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918" />
+
+    <Button
+        android:id="@+id/add_edit_clear_btn_id"
+        android:layout_width="133dp"
+        android:layout_height="48dp"
+        android:onClick="goTotaskListActivity"
+        android:text="@string/add_edit_clear_btn_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_edit_save_btn_id"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.918" />
+
     <EditText
         android:id="@+id/add_edit_title_pt"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_width="408dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="112dp"
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
         android:text="@string/add_edit_title_pt"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/add_edit_name_ti_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.187" />
+        app:layout_constraintVertical_bias="0.328" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/add_edit_name_ti_text"
+        android:layout_width="393dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="28dp"
+        android:gravity="center"
+        android:hint="@string/edit_name_ti_text"
+        app:layout_constraintBottom_toTopOf="@+id/add_edit_deadline_dt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
     <EditText
         android:id="@+id/add_edit_deadline_dt"
-        android:layout_width="314dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="400dp"
+        android:layout_height="76dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:gravity="center"
         android:hint="@string/add_edit_deadline_dt"
         android:importantForAutofill="no"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/add_edit_label_sp_text"
+        app:layout_constraintBottom_toTopOf="@+id/add_edit_description_ti_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck,TextContrastCheck" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/add_edit_name_ti_text"
-        android:layout_width="314dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="252dp"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
-        android:hint="@string/add_edit_name_tv"
-        app:layout_constraintBottom_toTopOf="@+id/add_edit_deadline_dt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_edit_description_ti_text"
-        android:layout_width="314dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="402dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="4dp"
         android:drawableRight="@android:drawable/btn_dialog"
+
         android:gravity="center"
 
         android:hint="@string/add_edit_description_ti_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintHorizontal_bias="0.0"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_edit_label_sp_text"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.667"
         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck,ExtraText">
 
+        <Spinner
+            android:id="@+id/add_edit_label_sp_text"
+            android:layout_width="408dp"
+            android:layout_height="76dp"
+            android:layout_marginBottom="17dp"
+            android:autofillHints="@string/add_edit_label_sp_text"
+            android:gravity="center"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/add_edit_label_sp_text"
-        android:layout_width="314dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="256dp"
-        android:autofillHints="@string/add_edit_label_sp_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_edit_clear_label_btn_id"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/add_edit_save_btn_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:text="@string/add_edit_save_btn_id"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.928" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -114,77 +122,26 @@
         android:onClick="goTotaskListActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.056"
+        app:layout_constraintVertical_bias="0.064"
         app:srcCompat="@drawable/ic_baseline_arrow_back_24"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <Button
-        android:id="@+id/add_edit_clear_btn_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="128dp"
-        android:onClick="goTotaskListActivity"
-        android:text="@string/add_edit_clear_btn_id"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/add_edit_descriptin_et"
+        android:layout_width="417dp"
+        android:layout_height="84dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/add_edit_description_et"
+        android:inputType="textPersonName"
+        android:text="@string/add_edit_description_et"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_edit_save_btn_id"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
-
-    <ImageButton
-        android:id="@+id/add_edit_clear_title_btn_id"
-        android:layout_width="50dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_edit_clear_deadline_btn_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/add_edit_name_ti_text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/add_edit_clear_deadline_btn_id"
-        android:layout_width="50dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="318dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_edit_clear_label_btn_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/add_edit_deadline_dt"
-        app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/add_edit_clear_label_btn_id"
-        android:layout_width="50dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="50dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="152dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/btn_dialog"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/add_edit_deadline_dt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
