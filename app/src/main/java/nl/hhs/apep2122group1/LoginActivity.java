@@ -1,6 +1,5 @@
 package nl.hhs.apep2122group1;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -77,7 +76,11 @@ public class LoginActivity extends AppCompatActivity {
             passwordField.setError("Incorrect credentials!");
         } else {
             Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, TaskListActivity.class));
+
+            Intent intent = new Intent(this, TaskListActivity.class);
+            String currentUser = user.getUsername();
+            intent.putExtra("USERNAME", currentUser);
+            this.startActivity(intent);
         }
     }
 

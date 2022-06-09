@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -16,23 +17,35 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Task;
+import nl.hhs.apep2122group1.models.User;
 
 public class TaskListActivity extends AppCompatActivity {
     private TaskAdapter adapter;
     private List<Task> tasks;
     private List<Task> sortedTasks;
     private List<Task> filteredTasks; // to be used for filtering by labels
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
+        getUser();
         setTaskList();
     }
 
 //    private methods:
+
+    private void getUser() {
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("USERNAME");
+        user = DatabaseFactory.getDatabase().getUser(username);
+        TextView title = findViewById(R.id.task_list_title_tv_id);
+        title.setText(String.format(getResources().getString(R.string.task_list_title_tv_text), user.getName()));
+    }
 
     private void setTaskList() {
         setTasks();
@@ -45,7 +58,7 @@ public class TaskListActivity extends AppCompatActivity {
         sortedTasks = new ArrayList<>();
     }
 
-    private void sortTasksByStatus(boolean toDo) {
+    private void sortTasksByStatus(boolean toDo) { // test
         sortedTasks.clear();
         for (Task task : tasks) {
             if (toDo && task.getCompleted() == null) {
@@ -70,6 +83,12 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
 //    public methods for views:
+
+    public void onLabelClick(View view) {
+        Intent intent = new Intent(this, Labels.class);
+        intent.putExtra("USERNAME", user.getUsername());
+        this.startActivity(intent);
+    }
 
     public void onSortByDeadline(View view) {
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
