@@ -19,5 +19,6 @@ public interface Database {
 
     // users
     User getUser(String username, String password);
+    User getUser(String username);
     boolean insertUser(String username, String password, String name);
 }
