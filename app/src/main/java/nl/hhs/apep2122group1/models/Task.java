@@ -1,5 +1,6 @@
 package nl.hhs.apep2122group1.models;
 
+import static androidx.room.ForeignKey.CASCADE;
 import static androidx.room.ForeignKey.SET_NULL;
 
 import androidx.room.ColumnInfo;
@@ -16,13 +17,13 @@ import java.util.ArrayList;
                 entity = User.class,
                 parentColumns = "username",
                 childColumns = "User_username",
-                onDelete = SET_NULL), // check if correct
+                onDelete = CASCADE),
 
         @ForeignKey(
                 entity = Label.class,
                 parentColumns = "id",
                 childColumns = "Label_id",
-                onDelete = SET_NULL) // check if correct
+                onDelete = SET_NULL)
 })
 
 public class Task implements Comparable<Task> {
@@ -34,10 +35,10 @@ public class Task implements Comparable<Task> {
     private LocalDateTime completed;
     private String description;
 
-    @ColumnInfo(name = "User_username") // name from ERD
+    @ColumnInfo(name = "User_username")
     private Integer ownerUsername;
 
-    @ColumnInfo(name = "Label_id") // name from ERD
+    @ColumnInfo(name = "Label_id")
     private Integer labelId;
 
     @Ignore
