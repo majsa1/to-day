@@ -55,6 +55,13 @@ public class RoomDatabase implements Database {
     }
 
     @Override
+    public User getUser(String username) {
+        // TODO
+        return null;
+    }
+
+
+    @Override
     public boolean insertUser(String username, String password, String name) {
         return true;
         // TODO

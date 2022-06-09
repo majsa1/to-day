@@ -88,6 +88,16 @@ public class FakeDatabase implements Database {
     }
 
     @Override
+    public User getUser(String username) {
+        for (User u : users) {
+            if (u.getUsername().equals(username)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean insertUser(String username, String password, String name) {
         for (User u : users) {
             if (u.getUsername().equalsIgnoreCase(username)) {
