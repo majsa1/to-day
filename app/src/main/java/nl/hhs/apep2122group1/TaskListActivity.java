@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void setTasks() {
-        tasks = Task.getDemo();
+        tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks());
         sortedTasks = new ArrayList<>();
     }
 
