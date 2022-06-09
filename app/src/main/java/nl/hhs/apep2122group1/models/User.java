@@ -5,16 +5,16 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private String username;
     private String name;
     private String password;
 
-    public User(){                //lege constructor voor room
+    public User (){                //lege constructor voor room
 
     }
 
-    public User(String username,String name, String password) {
+    public User(String username, String name, String password) {
         this.username = username;
         this.name = name;
         this.password = password;
