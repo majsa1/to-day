@@ -13,7 +13,7 @@ public class FakeDatabase implements Database {
     }};
     private final ArrayList<Task> tasks = new ArrayList<Task>() {{
         add(new Task(1, "Buy birthday present",
-                LocalDateTime.of(2022, 6, 10, 14, 30),
+                LocalDateTime.of(2022, 5, 10, 14, 30),
                 LocalDateTime.of(2022, 6, 8, 14, 10)));
 
         add(new Task(2, "Submit project",
@@ -30,7 +30,7 @@ public class FakeDatabase implements Database {
 
         add(new Task(5, "Test task Two",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                null));
+                LocalDateTime.of(2022, 6, 2, 14, 10)));
     }};
     private final ArrayList<Label> labels = new ArrayList<Label>() {{
         add(new Label());

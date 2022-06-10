@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDateTime;
@@ -45,12 +46,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.taskStatusCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Task task = tasks.get(holder.getAdapterPosition());
+                boolean completed = task.getCompleted() != null;
                 if (isChecked) {
-                    if (tasks.get(holder.getAdapterPosition()).getCompleted() == null) {
-                        tasks.get(holder.getAdapterPosition()).markTaskDone();
+                    if (!completed) {
+                        task.markTaskDone();
                     }
                 } else {
-                    tasks.get(holder.getAdapterPosition()).markTaskToDo();
+                    task.markTaskToDo();
                 }
             }
         });
@@ -63,10 +66,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         String taskDate = completed ? String.valueOf(task.getCompleted()) : String.valueOf(task.getDeadline());
         holder.taskDateTv.setText(taskDate);
 
-//        incorrectly also makes the same row in Done list red:
-//        if (tasks.get(holder.getAdapterPosition()).getDeadline().compareTo(LocalDateTime.now()) < 0 && tasks.get(holder.getAdapterPosition()).getCompleted() == null) {
-//            holder.taskDateTv.setTextColor(Color.RED);
-//        }
+        if (task.getDeadline().compareTo(LocalDateTime.now()) < 0 && !completed) {
+            holder.taskDateTv.setTextColor(Color.rgb(255,184,28));
+        } else {
+            holder.taskDateTv.setTextColor(ContextCompat.getColor(context, com.google.android.material.R.color.m3_dark_default_color_primary_text));
+            // how to get the right dynamic colour? Some dynamic colours crash
+            // force dark mode?
+        }
 
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override

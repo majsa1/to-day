@@ -28,6 +28,8 @@ public class TaskListActivity extends AppCompatActivity {
     private List<Task> sortedTasks;
     private List<Task> filteredTasks; // to be used for filtering by labels
     private User user;
+    private boolean initialSorting = true;
+    private boolean ascendingOn = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +71,19 @@ public class TaskListActivity extends AppCompatActivity {
                 sortedTasks.add(task);
             }
         }
+
         if (toDo) {
-            Collections.sort(sortedTasks);
+            if (ascendingOn || initialSorting) {
+                Collections.sort(sortedTasks);
+            } else {
+                sortedTasks.sort(Collections.reverseOrder());
+            }
         } else {
-            sortedTasks.sort(Collections.reverseOrder());
+            if (!ascendingOn || initialSorting) {
+                sortedTasks.sort(Collections.reverseOrder());
+            } else {
+                Collections.sort(sortedTasks);
+            }
         }
     }
 
@@ -98,11 +109,15 @@ public class TaskListActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.popup_sort_ascending) {
                 Collections.sort(sortedTasks);
+                ascendingOn = true;
+                initialSorting = false; // allows to save user's sorting - N.B. applies to both views
                 setList();
                 return true;
             }
             if (menuItem.getItemId() == R.id.popup_sort_descending) {
                 sortedTasks.sort(Collections.reverseOrder());
+                ascendingOn = false;
+                initialSorting = false;
                 setList();
                 return true;
             }
@@ -121,17 +136,21 @@ public class TaskListActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void onCheckChanged(View view) {
+    public void onCheckChanged(View view) { // bound to checkbox for updating view
         MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
         if (toDoBtn.isChecked()) {
-            onToDo(view);
+            sortTasksByStatus(true);
         } else {
-            onDone(view);
+            sortTasksByStatus(false);
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void onAddTask(View view) {
-        startActivity(new Intent(this, AddEditActivity.class));
+        Intent intent = new Intent(this, AddEditActivity.class);
+        intent.putExtra("USERNAME", user.getUsername());
+        this.startActivity(intent);
+//        startActivity(new Intent(this, AddEditActivity.class));
     }
 
     public void onLogout(View v) {
