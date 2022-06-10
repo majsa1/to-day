@@ -14,23 +14,23 @@ public class FakeDatabase implements Database {
     private final ArrayList<Task> tasks = new ArrayList<Task>() {{
         add(new Task(1, "Buy birthday present",
                 LocalDateTime.of(2022, 5, 10, 14, 30),
-                LocalDateTime.of(2022, 6, 8, 14, 10)));
+                LocalDateTime.of(2022, 6, 8, 14, 10), null));
 
         add(new Task(2, "Submit project",
                 LocalDateTime.of(2022, 6, 17, 23, 59),
-                null));
+                null, new Label("School", "#335BFF")));
 
         add(new Task(3, "Visit grandma",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                null));
+                null, null));
 
         add(new Task(4, "Test task One",
                 LocalDateTime.of(2022, 5, 1, 11, 0),
-                null));
+                null,  new Label("Test", "#B833FF")));
 
         add(new Task(5, "Test task Two",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                LocalDateTime.of(2022, 6, 2, 14, 10)));
+                LocalDateTime.of(2022, 6, 2, 14, 10), null));
     }};
     private final ArrayList<Label> labels = new ArrayList<Label>() {{
         add(new Label());

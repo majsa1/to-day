@@ -2,6 +2,7 @@ package nl.hhs.apep2122group1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.chip.Chip;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -74,6 +77,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             // force dark mode?
         }
 
+        if (task.getLabel() != null) {
+            int color = Color.parseColor(task.getLabel().getColorCode());
+            holder.taskLabelCp.setText(task.getLabel().getTitle());
+            holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
+            holder.taskLabelCp.setVisibility(View.VISIBLE);
+        } else {
+            holder.taskLabelCp.setVisibility(View.INVISIBLE);
+        }
+
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +108,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         private TextView taskStatusTv;
         private TextView taskDateTv;
         private CardView taskRowCv;
+        private Chip taskLabelCp;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -104,6 +117,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             taskStatusTv = itemView.findViewById(R.id.row_status_tv_id);
             taskDateTv = itemView.findViewById(R.id.row_date_tv_id);
             taskRowCv = itemView.findViewById(R.id.row_card_cv_id);
+            taskLabelCp = itemView.findViewById(R.id.row_label_cp_id);
         }
     }
 }
