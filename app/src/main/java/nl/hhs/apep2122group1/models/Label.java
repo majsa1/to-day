@@ -29,6 +29,12 @@ public class Label {
     @Ignore
     private User owner;
 
+    // for demo:
+    public Label(String title, String colorCode) {
+        this.title = title;
+        this.colorCode = colorCode;
+    }
+
     // for db:
     public Label() {
     }
