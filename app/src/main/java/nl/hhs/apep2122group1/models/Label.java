@@ -1,7 +1,6 @@
 package nl.hhs.apep2122group1.models;
 
 import static androidx.room.ForeignKey.CASCADE;
-import static androidx.room.ForeignKey.SET_NULL;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -30,9 +29,11 @@ public class Label {
     private User owner;
 
     // for demo:
-    public Label(String title, String colorCode) {
+    public Label(Integer id, String title, String colorCode, User owner) {
+        this.id = id;
         this.title = title;
         this.colorCode = colorCode;
+        this.owner = owner;
     }
 
     // for db:

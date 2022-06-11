@@ -48,11 +48,21 @@ public class Task implements Comparable<Task> {
     private Label label;
 
     // for demo data on list (constructor and static list):
-    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, Label label) {
+    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, User owner, Label label) {
         this.id = id;
         this.title = title;
         this.deadline = deadline;
         this.completed = completed;
+        this.owner = owner;
+        this.label = label;
+    }
+
+    // for adding a new task:
+    public Task(String title, LocalDateTime deadline, String description, User owner, Label label) {
+        this.title = title;
+        this.deadline = deadline;
+        this.description = description;
+        this.owner = owner;
         this.label = label;
     }
 

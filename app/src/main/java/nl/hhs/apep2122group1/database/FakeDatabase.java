@@ -11,31 +11,34 @@ public class FakeDatabase implements Database {
     private final ArrayList<User> users = new ArrayList<User>() {{
         add(new User("test", "Test User", "testpw"));
     }};
+
+    private final ArrayList<Label> labels = new ArrayList<Label>() {{
+        add(new Label(1, "Test1", "#B833FF", users.get(0)));
+        add(new Label(2, "Test2", "#ff7133", users.get(0)));
+        add(new Label(3, "School", "#ff335b", users.get(0)));
+    }};
+
     private final ArrayList<Task> tasks = new ArrayList<Task>() {{
         add(new Task(1, "Buy birthday present",
                 LocalDateTime.of(2022, 5, 10, 14, 30),
-                LocalDateTime.of(2022, 6, 8, 14, 10), null));
+                LocalDateTime.of(2022, 6, 8, 14, 10), users.get(0), null));
 
         add(new Task(2, "Submit project",
                 LocalDateTime.of(2022, 6, 17, 23, 59),
-                null, new Label("School", "#335BFF")));
+                null, users.get(0), labels.get(2)));
 
         add(new Task(3, "Visit grandma",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                null, null));
+                null, users.get(0), null));
 
         add(new Task(4, "Test task One",
                 LocalDateTime.of(2022, 5, 1, 11, 0),
-                null,  new Label("Test", "#B833FF")));
+                null, users.get(0), labels.get(0)));
 
         add(new Task(5, "Test task Two",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                LocalDateTime.of(2022, 6, 2, 14, 10), null));
-    }};
-    private final ArrayList<Label> labels = new ArrayList<Label>() {{
-        add(new Label());
-        add(new Label());
-        add(new Label());
+                LocalDateTime.of(2022, 6, 2, 14, 10),
+                users.get(0), labels.get(1)));
     }};
 
     @Override
