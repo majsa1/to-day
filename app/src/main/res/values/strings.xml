@@ -47,7 +47,7 @@
 
     <!-- AddEdit-->
     <string name="add_edit_title_pt">Create task</string>
-    <string name="add_edit_deadline_dt">Deadline</string>
+    <string name="add_edit_deadline_dt">Deadline test(yyyy-mm-dd hh-mm)</string>
     <string name="edit_name_ti_text">Name</string>
     <string name="add_edit_description_ti_text">Description( yyyy-mm-dd hh-mm)</string>
     <string name="add_edit_save_btn_id">Save</string>
