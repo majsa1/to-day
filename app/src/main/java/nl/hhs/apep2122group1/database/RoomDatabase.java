@@ -6,7 +6,7 @@ import nl.hhs.apep2122group1.models.User;
 
 public class RoomDatabase implements Database {
     @Override
-    public Task[] getAllTasks() {
+    public Task[] getAllTasks(String ownerUsername) {
         // TODO
         return new Task[0];
     }
@@ -33,7 +33,7 @@ public class RoomDatabase implements Database {
     }
 
     @Override
-    public Label[] getAllLabels() {
+    public Label[] getAllLabels(String ownerUsername) {
         // TODO
         return new Label[0];
     }

@@ -62,7 +62,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void setTasks() {
-        tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks());
+        tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks(user.getUsername()));
         sortedTasks = new ArrayList<>();
     }
 
@@ -134,7 +134,7 @@ public class TaskListActivity extends AppCompatActivity {
     public void onFilterByLabel(View view) {
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
-        List<Label> labels = Arrays.asList(DatabaseFactory.getDatabase().getAllLabels());
+        List<Label> labels = Arrays.asList(DatabaseFactory.getDatabase().getAllLabels(user.getUsername()));
         ArrayList<Label> uniqueLabels = new ArrayList<>();
 
         for (int i = 0; i < labels.size(); i++) {

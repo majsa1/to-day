@@ -6,14 +6,14 @@ import nl.hhs.apep2122group1.models.User;
 
 public interface Database {
     // tasks
-    Task[] getAllTasks();
+    Task[] getAllTasks(String ownerUsername);
     Task getTask(int id);
     void upsertTask(Task task);
     void deleteTask(Task task);
     void markTask(Task task, boolean done);
 
     // labels
-    Label[] getAllLabels();
+    Label[] getAllLabels(String ownerUsername);
     void upsertLabel(Label label);
     void deleteLabel(Label label);
 
