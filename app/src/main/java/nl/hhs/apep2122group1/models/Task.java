@@ -65,14 +65,6 @@ public class Task implements Comparable<Task> {
         this.owner = owner;
         this.label = label;
     }
-    // for adding a new task:
-    public Task(String title, LocalDateTime deadline, String description, User owner, Label label) {
-        this.title = title;
-        this.deadline = deadline;
-        this.description = description;
-        this.owner = owner;
-        this.label = label;
-    }
 
     // constructor for db:
     public Task() {
