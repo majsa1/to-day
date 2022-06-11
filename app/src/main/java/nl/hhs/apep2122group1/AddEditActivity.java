@@ -13,8 +13,13 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import nl.hhs.apep2122group1.models.Task;
 
 
 public class AddEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -43,52 +48,46 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         //testchoise.setOnItemSelectedListener(this);
 
         //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,labelvoorbeeld);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, labelvoorbeeld);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         choise.setAdapter(aa);
 
-        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text );
+
     }
-//    public  void makeTask(){
-//Intent intent = new Intent(this, ) //waar gaat de data heen//);
 
-        //EditText deadline = findViewById(R.id.add_edit_deadline_dt);
-//        EditText label = findViewById(R.id.add_edit_label_sp_text);
-        //TextInputEditText description = findViewById(R.id.add_edit_description_ti_text);
-
- //       String titleString = title.getText().toString();
-//        String labelString = label.getText().toString();
-   //     String descriptionString = description.getText().toString();
-        // deadline nog toevoegen //
-
- //       if (titleString != null && !titleString.isEmpty()) {
- //           intent.putExtra("TITLE", titleString);
- //       }
- //       startActivity(intent);
+   // }
+//   public  void makeTask(){
+//       // Intent intent = new Intent(this, ) //waar gaat de data heen//);
+//        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text );
+//        EditText deadline = findViewById(R.id.add_edit_deadline_dt);
+//        Spinner label = findViewById(R.id.add_edit_label_sp_text);
+//        TextInputEditText description = findViewById(R.id.add_edit_descriptin_et);
 //
- //   }
+//        String titleString = title.getText().toString();
+//        String labelString = label.getSelectedItem().toString();
+//        String descriptionString = description.getText().toString();
+//        String deadlineString = deadline.getText().toString();
+
+//       if (titleString != null && !titleString.isEmpty()) {
+//            intent.putExtra("TITLE", titleString);
+//        }
+//        startActivity(intent);
+
+//        Task task = new Task(titleString,labelString,deadlineString,descriptionString);
+  // }
 
     public void goTotaskListActivity(View view){
         Intent intent = new Intent(this, TaskListActivity.class);
         startActivity(intent);
     }
 
-//    public void clearTitle(){
-//       title.getText().clear();
-//    }
-//    public void clearDeadline(){
-//        //deadline.getText().clear();
-//    }
-//    public void clearDescription(){
-//        description.getText().clear();
-//    }
-//    public void clearAll(){
-//        title.getText().clear();
-//        deadline.getText().clear();
-//        description.getText();
-//    }
+    public void finish(View view){
+        finish();
+    }
+    public void viewTask(View view){
 
+    }
 
 
 }
