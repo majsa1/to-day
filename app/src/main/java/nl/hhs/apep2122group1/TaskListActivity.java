@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 import nl.hhs.apep2122group1.models.User;
 
@@ -130,6 +131,40 @@ public class TaskListActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
+    public void onFilterByLabel(View view) {
+        PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
+
+        List<Label> labels = Arrays.asList(DatabaseFactory.getDatabase().getAllLabels());
+        ArrayList<Label> uniqueLabels = new ArrayList<>();
+
+        for (int i = 0; i < labels.size(); i++) {
+            if (labels.get(i).getOwner().equals(user) && !uniqueLabels.contains(labels.get(i))) {
+                uniqueLabels.add(labels.get(i));
+                popupMenu.getMenu().add(0, i, i + 2, labels.get(i).getTitle());
+            }
+        }
+
+        popupMenu.getMenuInflater().inflate(R.menu.popup_filter, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.popup_filter_all_id) {
+                System.out.println("YOU PRESSED ALL");
+                return true;
+            }
+            if (menuItem.getItemId() == R.id.popup_filter_noLabel_id) {
+                System.out.println("YOU PRESSED NO LABEL");
+                return true;
+            }
+            for (int i = 0; i < uniqueLabels.size(); i++) {
+                if (menuItem.getItemId() == i) {
+                    System.out.println("YOU PRESSED " + uniqueLabels.get(i).getTitle());
+                    return true;
+                }
+            }
+            return false;
+        });
+        popupMenu.show();
+    }
+
     public void onToDo(View view) {
         sortTasksByStatus(true);
         adapter.notifyDataSetChanged();
@@ -159,10 +194,10 @@ public class TaskListActivity extends AppCompatActivity {
 
     public void onLogout(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.task_list_logout_btn_title)
+        builder.setTitle(R.string.task_list_logout_btn_title_text)
                 .setCancelable(false) // cannot be cancelled by pressing outside of dialog
-                .setPositiveButton(R.string.task_list_logout_btn_confirm, (dialog, id) -> finish())
-                .setNegativeButton(R.string.task_list_logout_btn_cancel, (dialog, id) -> dialog.cancel());
+                .setPositiveButton(R.string.task_list_logout_btn_confirm_text, (dialog, id) -> finish())
+                .setNegativeButton(R.string.task_list_logout_btn_cancel_text, (dialog, id) -> dialog.cancel());
         AlertDialog alert = builder.create();
         alert.show();
     }

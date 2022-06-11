@@ -77,6 +77,7 @@
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/task_list_filter_btn_description"
         android:minHeight="48dp"
+        android:onClick="onFilterByLabel"
         app:layout_constraintBottom_toBottomOf="@+id/toggle_button_group"
         app:layout_constraintEnd_toEndOf="@+id/task_list_logout_btn_id"
         app:layout_constraintHorizontal_bias="1.0"

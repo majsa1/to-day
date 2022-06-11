@@ -5,16 +5,16 @@
         android:id="@+id/popup_sort_title"
         android:checkable="false"
         android:enabled="false"
-        android:title="@string/popup_sort_title" />
+        android:title="@string/popup_sort_title_text" />
 
     <item
         android:id="@+id/popup_sort_ascending"
         android:checked="false"
-        android:title="@string/popup_sort_ascending" />
+        android:title="@string/popup_sort_ascending_text" />
 
     <item
         android:id="@+id/popup_sort_descending"
         android:checked="false"
-        android:title="@string/popup_sort_descending" />
+        android:title="@string/popup_sort_descending_text" />
 
 </menu>
