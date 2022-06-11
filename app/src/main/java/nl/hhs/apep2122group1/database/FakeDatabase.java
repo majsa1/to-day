@@ -2,6 +2,7 @@ package nl.hhs.apep2122group1.database;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
@@ -21,29 +22,30 @@ public class FakeDatabase implements Database {
     private final ArrayList<Task> tasks = new ArrayList<Task>() {{
         add(new Task(1, "Buy birthday present",
                 LocalDateTime.of(2022, 5, 10, 14, 30),
-                LocalDateTime.of(2022, 6, 8, 14, 10), users.get(0), null));
+                LocalDateTime.of(2022, 6, 8, 14, 10),
+                "Description 1", users.get(0).getUsername(), null));
 
         add(new Task(2, "Submit project",
                 LocalDateTime.of(2022, 6, 17, 23, 59),
-                null, users.get(0), labels.get(2)));
+                null, "Description 2", users.get(0).getUsername(), labels.get(2).getId()));
 
         add(new Task(3, "Visit grandma",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                null, users.get(0), null));
+                null, "Description 3", users.get(0).getUsername(), null));
 
         add(new Task(4, "Test task One",
                 LocalDateTime.of(2022, 5, 1, 11, 0),
-                null, users.get(0), labels.get(0)));
+                null, "Description 4", users.get(0).getUsername(), labels.get(0).getId()));
 
         add(new Task(5, "Test task Two",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
                 LocalDateTime.of(2022, 6, 2, 14, 10),
-                users.get(0), labels.get(1)));
+                "Description 5", users.get(0).getUsername(), labels.get(1).getId()));
     }};
 
     @Override
-    public Task[] getAllTasks() {
-        return tasks.toArray(new Task[0]);
+    public Task[] getAllTasks(String ownerUsername) {
+        return tasks.stream().filter(task -> task.getOwnerUsername().equals(ownerUsername)).toArray(Task[]::new);
     }
 
     @Override
@@ -81,8 +83,8 @@ public class FakeDatabase implements Database {
     }
 
     @Override
-    public Label[] getAllLabels() {
-        return labels.toArray(new Label[0]);
+    public Label[] getAllLabels(String ownerUsername) {
+        return labels.stream().filter(label -> label.getOwnerUsername().equals(ownerUsername)).toArray(Label[]::new);
     }
 
     @Override

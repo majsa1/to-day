@@ -36,7 +36,7 @@ public class Task implements Comparable<Task> {
     private String description;
 
     @ColumnInfo(name = "User_username")
-    private Integer ownerUsername;
+    private String ownerUsername;
 
     @ColumnInfo(name = "Label_id")
     private Integer labelId;
@@ -47,23 +47,23 @@ public class Task implements Comparable<Task> {
     @Ignore
     private Label label;
 
-    // for demo data on list (constructor and static list):
-    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, User owner, Label label) {
+    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, String description, String ownerUsername, Integer labelId) {
         this.id = id;
         this.title = title;
         this.deadline = deadline;
         this.completed = completed;
-        this.owner = owner;
-        this.label = label;
+        this.description = description;
+        this.ownerUsername = ownerUsername;
+        this.labelId = labelId;
     }
 
     // for adding a new task:
-    public Task(String title, LocalDateTime deadline, String description, User owner, Label label) {
+    public Task(String title, LocalDateTime deadline, String description, String ownerUsername, Integer labelId) {
         this.title = title;
         this.deadline = deadline;
         this.description = description;
-        this.owner = owner;
-        this.label = label;
+        this.ownerUsername = ownerUsername;
+        this.labelId = labelId;
     }
 
     // constructor for db:
@@ -112,11 +112,11 @@ public class Task implements Comparable<Task> {
         this.description = description;
     }
 
-    public Integer getOwnerUsername() {
+    public String getOwnerUsername() {
         return ownerUsername;
     }
 
-    public void setOwnerUsername(Integer ownerUsername) {
+    public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
     }
 
