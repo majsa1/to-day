@@ -18,4 +18,7 @@
     <string name="popup_sort_title_text">Sorteer bij deadline</string>
     <string name="popup_sort_descending_text">Aflopend</string>
     <string name="popup_sort_ascending_text">Oplopend</string>
+
+    <!-- Labels -->
+    <string name="labels_title">Labels</string>
 </resources>
