@@ -84,7 +84,7 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
 
-        Task task = new Task(titleString, LocalDateTime.now(), descriptionString, user, null);
+        Task task = new Task(titleString, LocalDateTime.now(), descriptionString, user.getUsername(), null);
         DatabaseFactory.getDatabase().upsertTask(task);
         System.out.println("task to database");
     }

@@ -33,6 +33,12 @@ public class RoomDatabase implements Database {
     }
 
     @Override
+    public Label getLabel(int id) {
+        // TODO
+        return null;
+    }
+
+    @Override
     public Label[] getAllLabels(String ownerUsername) {
         // TODO
         return new Label[0];

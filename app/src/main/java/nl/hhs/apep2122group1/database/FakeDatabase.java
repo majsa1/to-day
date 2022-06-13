@@ -2,7 +2,6 @@ package nl.hhs.apep2122group1.database;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
@@ -14,9 +13,9 @@ public class FakeDatabase implements Database {
     }};
 
     private final ArrayList<Label> labels = new ArrayList<Label>() {{
-        add(new Label(1, "Test1", "#B833FF", users.get(0)));
-        add(new Label(2, "Test2", "#ff7133", users.get(0)));
-        add(new Label(3, "School", "#ff335b", users.get(0)));
+        add(new Label(1, "Test1", "#B833FF", users.get(0).getUsername()));
+        add(new Label(2, "Test2", "#ff7133", users.get(0).getUsername()));
+        add(new Label(3, "School", "#ff335b", users.get(0).getUsername()));
     }};
 
     private final ArrayList<Task> tasks = new ArrayList<Task>() {{
@@ -53,6 +52,17 @@ public class FakeDatabase implements Database {
         for (Task t : tasks) {
             if (t.getId() == id) {
                 return t;
+            }
+        }
+        return null;
+    }
+
+    // NEW
+    @Override
+    public Label getLabel(int id) {
+        for (Label l : labels) {
+            if (l.getId() == id) {
+                return l;
             }
         }
         return null;
