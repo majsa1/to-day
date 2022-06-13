@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -174,7 +177,11 @@ public class TaskListActivity extends AppCompatActivity {
             popupMenu.getMenu().add(0, labels[i].getId(), i + 2, labels[i].getTitle());
             popupMenu.getMenu().findItem(labels[i].getId()).setCheckable(true);
             if (selectedFilterId == labels[i].getId()) {
-                popupMenu.getMenu().findItem(labels[i].getId()).setChecked(true);
+                MenuItem item = popupMenu.getMenu().findItem(labels[i].getId());
+                item.setChecked(true);
+//                item.setIcon(R.drawable.ic_baseline_label_24);
+//                int color = Color.parseColor(labels[i].getColorCode());
+//                item.setIconTintList(ColorStateList.valueOf(color));
             }
         }
 
