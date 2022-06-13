@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="next">Volgende</string>
+    <string name="previous">Vorige</string>
+    <string name="add_name_btn_text">Naam</string>
+    <string name="add_name_btn_description">Uitloggen</string>
+    <string name="task_list_title_tv_text">%s\'s taken</string>
+    <string name="task_list_todo_mb_text">Te doen</string>
+    <string name="task_list_done_mb_text">Klaar</string>
+    <string name="task_list_filter_btn_description">Filter taken</string>
+    <string name="task_list_sort_btn_description">Sorteer taken</string>
+    <string name="task_list_add_btn_description">Voeg taak toe</string>
+    <string name="task_list_logout_btn_title_text">Weet je zeker dat je wilt stoppen?</string>
+    <string name="task_list_logout_btn_confirm_text">JA</string>
+    <string name="task_list_logout_btn_cancel_text">NO</string>
+    <string name="popup_sort_title_text">Sorteer bij deadline</string>
+    <string name="popup_sort_descending_text">Aflopend</string>
+    <string name="popup_sort_ascending_text">Oplopend</string>
+</resources>

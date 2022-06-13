@@ -7,7 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="add_date_btn_text">Deadline</string>
+    <string name="add_date_btn_text" translatable="false">Deadline</string>
     <string name="add_name_btn_text">Name</string>
     <string name="add_name_btn_description">Logout</string>
 
@@ -15,7 +15,7 @@
     <string name="task_list_title_tv_text">%s\'s tasks</string>
     <string name="task_list_todo_mb_text">To do</string>
     <string name="task_list_done_mb_text">Done</string>
-    <string name="task_list_label_btn_description">Labels</string>
+    <string name="task_list_label_btn_description" translatable="false">Labels</string>
     <string name="task_list_filter_btn_description">Filter tasks</string>
     <string name="task_list_sort_btn_description">Sort tasks</string>
     <string name="task_list_add_btn_description">Add task</string>
@@ -69,6 +69,12 @@
     <string name="add_edit_description_et">Description</string>
     <string name="view_edit_btn_id">Edit</string>
     <string name="back">back</string>
+    <string name="edit_name_lbl_tv">Name:</string>
+    <string name="edit_deadline_lbl_tv">Deadline:</string>
+    <string name="edit_completed_lbl_tv">Completed:</string>
+    <string name="edit_label_lbl_tv">Label:</string>
+    <string name="edit_description_lbl_tv">Description:</string>
+    <string name="edit_edit_task_tv">Edit task</string>
 
 
 </resources>
