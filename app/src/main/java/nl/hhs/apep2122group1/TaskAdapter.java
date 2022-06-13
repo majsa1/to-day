@@ -70,7 +70,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.taskStatusTv.setText(completed ? R.string.task_adapter_completed_tv_text : R.string.task_adapter_due_tv_text);
 
         // check formatting of date:
-        String taskDate = completed ? String.valueOf(task.getCompleted()) : String.valueOf(task.getDeadline());
+        String taskDate = completed ? Converter.dateStampToString(task.getCompleted()) : Converter.dateStampToString(task.getDeadline());
         holder.taskDateTv.setText(taskDate);
 
         if (task.getDeadline().compareTo(LocalDateTime.now()) < 0 && !completed) {
