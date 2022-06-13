@@ -10,7 +10,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 @Entity(foreignKeys = {
         @ForeignKey(
@@ -68,6 +67,9 @@ public class Task implements Comparable<Task> {
 
     // constructor for db:
     public Task() {
+    }
+
+    public Task(String titleString, LocalDateTime now, String descriptionString, User user, Object labelId) {
     }
 
 

@@ -29,17 +29,6 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
     ArrayList<String> labelvoorbeeld = new ArrayList<>(Arrays.asList("select label", "pets", "grocery's", "school", "car", "<geen label> "));
     User user;
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getApplicationContext(), labelvoorbeeld.get(position), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +46,16 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         //Setting the ArrayAdapter data on the Spinner
         choise.setAdapter(aa);
     }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getApplicationContext(), labelvoorbeeld.get(position), Toast.LENGTH_LONG).show();
+    }
 
-    // }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        Toast.makeText(this, "<no label>", Toast.LENGTH_LONG).show();
+    }
+
     private void getUser() {
         Intent intent = getIntent();
         String username = intent.getStringExtra("USERNAME");
@@ -68,7 +65,6 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
 
     public void upsertTask(View view) {
         makeTask();
-
         finish();
     }
 
@@ -77,7 +73,7 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
         Spinner label = findViewById(R.id.add_edit_label_sp_text);
-        TextInputEditText description = findViewById(R.id.add_edit_descriptin_et);
+        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
         String titleString = title.getText().toString();
         String labelString = label.getSelectedItem().toString();
@@ -93,9 +89,12 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         finish();
     }
 
-    public void viewTask(View view) {
-
+    @Override
+    public void onStart() {
+        super.onStart();
     }
+
+
 
 
 }

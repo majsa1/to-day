@@ -66,6 +66,8 @@
     <string name="view_back_btn_id">back</string>
     <string name="view_completed_tv">Completed</string>
     <string name="add_edit_description_et">Description</string>
+    <string name="view_edit_btn_id">Edit</string>
+    <string name="back">back</string>
 
 
 </resources>
