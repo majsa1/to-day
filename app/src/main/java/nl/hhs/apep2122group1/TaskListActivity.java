@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -27,11 +30,11 @@ public class TaskListActivity extends AppCompatActivity {
     private TaskAdapter adapter;
     private List<Task> tasks;
     private ArrayList<Task> sortedTasks;
-    private ArrayList<Task> filteredTasks; // to be used for filtering by labels
+    private ArrayList<Task> filteredTasks;
     private User user;
-    private Label[] labels;
-    private boolean initialSorting = true;
-    private boolean ascendingOn = true;
+    private Sorting sorting = Sorting.DEFAULT;
+    private int selectedFilterId = -1; // is this clear enough?
+    private boolean toDo = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,6 @@ public class TaskListActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getUser();
-        getLabels();
         setTaskList();
     }
 
@@ -57,19 +59,16 @@ public class TaskListActivity extends AppCompatActivity {
         title.setText(String.format(getResources().getString(R.string.task_list_title_tv_text), user.getName()));
     }
 
-    private void getLabels() {
-        labels = DatabaseFactory.getDatabase().getAllLabels(user.getUsername()); // array OK?
-    }
-
     private void setTaskList() {
         setTasks();
-        sortTasksByStatus(true); // tasks to do as default on start - how about when returning from (done) task detail?
+        sortTasksByStatus(toDo);
         setList();
     }
 
     private void setTasks() {
         tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks(user.getUsername()));
         sortedTasks = new ArrayList<>();
+        filteredTasks = new ArrayList<>();
     }
 
     private void sortTasksByStatus(boolean toDo) { // test
@@ -84,13 +83,13 @@ public class TaskListActivity extends AppCompatActivity {
         }
 
         if (toDo) {
-            if (ascendingOn || initialSorting) {
+            if (sorting == Sorting.ASCENDING || sorting == Sorting.DEFAULT) {
                 Collections.sort(sortedTasks);
             } else {
                 sortedTasks.sort(Collections.reverseOrder());
             }
         } else {
-            if (!ascendingOn || initialSorting) {
+            if (sorting == Sorting.DESCENDING || sorting == Sorting.DEFAULT) {
                 sortedTasks.sort(Collections.reverseOrder());
             } else {
                 Collections.sort(sortedTasks);
@@ -107,28 +106,49 @@ public class TaskListActivity extends AppCompatActivity {
 
 //    public methods for views:
 
-    public void onLabelClick(View view) {
+    public void onLabelBtnPressed(View view) {
         Intent intent = new Intent(this, Labels.class);
         intent.putExtra("USERNAME", user.getUsername());
         this.startActivity(intent);
     }
 
-    public void onSortByDeadline(View view) {
+    public void onSortBtnPressed(View view) {
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
+        // inflate & set checked based on state:
         popupMenu.getMenuInflater().inflate(R.menu.popup_sort, popupMenu.getMenu());
+
+        if (sorting == Sorting.DEFAULT) {
+            popupMenu.getMenu().findItem(R.id.popup_sort_default_id).setChecked(true);
+        }
+        if (sorting == Sorting.ASCENDING) {
+            popupMenu.getMenu().findItem(R.id.popup_sort_ascending_id).setChecked(true);
+        }
+        if (sorting == Sorting.DESCENDING) {
+            popupMenu.getMenu().findItem(R.id.popup_sort_descending_id).setChecked(true);
+        }
+
         popupMenu.setOnMenuItemClickListener(menuItem -> {
-            if (menuItem.getItemId() == R.id.popup_sort_ascending) {
-                Collections.sort(sortedTasks);
-                ascendingOn = true;
-                initialSorting = false; // allows to save user's sorting - N.B. applies to both views
+            if (menuItem.getItemId() == R.id.popup_sort_default_id) {
+                if (toDo) {
+                    Collections.sort(sortedTasks);
+                } else {
+                    sortedTasks.sort(Collections.reverseOrder());
+                }
+                sorting = Sorting.DEFAULT;
                 setList();
                 return true;
             }
-            if (menuItem.getItemId() == R.id.popup_sort_descending) {
+
+            if (menuItem.getItemId() == R.id.popup_sort_ascending_id) {
+                Collections.sort(sortedTasks);
+                sorting = Sorting.ASCENDING;
+                setList();
+                return true;
+            }
+            if (menuItem.getItemId() == R.id.popup_sort_descending_id) {
                 sortedTasks.sort(Collections.reverseOrder());
-                ascendingOn = false;
-                initialSorting = false;
+                sorting = Sorting.DESCENDING;
                 setList();
                 return true;
             }
@@ -137,31 +157,70 @@ public class TaskListActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
-    public void onFilterByLabel(View view) {
+    public void onFilterBtnPressed(View view) {
+        filteredTasks.clear();
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
+        Label[] labels = DatabaseFactory.getDatabase().getAllLabels(user.getUsername());
         ArrayList<Label> uniqueLabels = new ArrayList<>();
 
+        popupMenu.getMenuInflater().inflate(R.menu.popup_filter, popupMenu.getMenu());
+        if (selectedFilterId == -1) {
+            popupMenu.getMenu().findItem(R.id.popup_filter_all_id).setChecked(true);
+        }
+        if (selectedFilterId == -2) {
+            popupMenu.getMenu().findItem(R.id.popup_filter_noLabel_id).setChecked(true);
+        }
+
         for (int i = 0; i < labels.length; i++) {
-            if (!uniqueLabels.contains(labels[i])) {
-                uniqueLabels.add(labels[i]);
-                popupMenu.getMenu().add(0, i, i + 2, labels[i].getTitle());
+            uniqueLabels.add(labels[i]);
+            popupMenu.getMenu().add(0, labels[i].getId(), i + 2, labels[i].getTitle());
+            popupMenu.getMenu().findItem(labels[i].getId()).setCheckable(true);
+            if (selectedFilterId == labels[i].getId()) {
+                MenuItem item = popupMenu.getMenu().findItem(labels[i].getId());
+                item.setChecked(true);
+//                item.setIcon(R.drawable.ic_baseline_label_24);
+//                int color = Color.parseColor(labels[i].getColorCode());
+//                item.setIconTintList(ColorStateList.valueOf(color));
             }
         }
 
-        popupMenu.getMenuInflater().inflate(R.menu.popup_filter, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.popup_filter_all_id) {
-                System.out.println("YOU PRESSED ALL");
+                sortedTasks = new ArrayList<>(tasks);
+                sortTasksByStatus(toDo); // look into preserving current sorting
+                selectedFilterId = -1;
+                setList();
                 return true;
             }
             if (menuItem.getItemId() == R.id.popup_filter_noLabel_id) {
-                System.out.println("YOU PRESSED NO LABEL");
+                sortedTasks = new ArrayList<>(tasks);
+                sortTasksByStatus(toDo); // look into preserving current sorting
+
+                for (Task task : sortedTasks) {
+                    if (task.getLabelId() == null) {
+                        filteredTasks.add(task);
+                    }
+                }
+                sortedTasks = new ArrayList<>(filteredTasks);
+                selectedFilterId = -2;
+                setList();
                 return true;
             }
+
             for (int i = 0; i < uniqueLabels.size(); i++) {
-                if (menuItem.getItemId() == i) {
-                    System.out.println("YOU PRESSED " + uniqueLabels.get(i).getTitle());
+                if (uniqueLabels.get(i).getId() == menuItem.getItemId()) { // pressed - find corresponding label
+                    sortedTasks = new ArrayList<>(tasks); // look into current sorting
+                    sortTasksByStatus(toDo);
+
+                    for (Task task : sortedTasks) {
+                        if (task.getLabelId() != null && task.getLabelId().equals(uniqueLabels.get(i).getId())) {
+                            filteredTasks.add(task);
+                        }
+                    }
+                    selectedFilterId = uniqueLabels.get(i).getId();
+                    sortedTasks = new ArrayList<>(filteredTasks);
+                    setList();
                     return true;
                 }
             }
@@ -170,13 +229,17 @@ public class TaskListActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
-    public void onToDo(View view) {
-        sortTasksByStatus(true);
+    public void onToDoBtnPressed(View view) {
+        selectedFilterId = -1; // reset filter to all?
+        toDo = true;
+        sortTasksByStatus(toDo);
         adapter.notifyDataSetChanged();
     }
 
-    public void onDone(View view) {
-        sortTasksByStatus(false);
+    public void onDoneBtnPressed(View view) {
+        selectedFilterId = -1; // reset filter to all?
+        toDo = false;
+        sortTasksByStatus(toDo);
         adapter.notifyDataSetChanged();
     }
 
@@ -190,14 +253,14 @@ public class TaskListActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void onAddTask(View view) {
+    public void onAddBtnPressed(View view) {
         Intent intent = new Intent(this, AddEditActivity.class);
         intent.putExtra("USERNAME", user.getUsername());
         this.startActivity(intent);
 //        startActivity(new Intent(this, AddEditActivity.class));
     }
 
-    public void onLogout(View v) {
+    public void onLogoutBtnPressed(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.task_list_logout_btn_title_text)
                 .setCancelable(false) // cannot be cancelled by pressing outside of dialog

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -79,28 +81,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             // force dark mode?
         }
 
-        // USING DATABASE
-        if (task.getLabelId() != null) {
-            Label label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+        Label[] labels = DatabaseFactory.getDatabase().getAllLabels(task.getOwnerUsername());
 
-            int color = Color.parseColor(label.getColorCode());
-            holder.taskLabelCp.setText(label.getTitle());
-            holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
-            holder.taskLabelCp.setVisibility(View.VISIBLE);
-        } else {
-            holder.taskLabelCp.setVisibility(View.INVISIBLE);
+        for (Label label : labels) {
+            if (label.getId().equals(task.getLabelId())) {
+                int color = Color.parseColor(label.getColorCode());
+                holder.taskLabelIb.setImageTintList(ColorStateList.valueOf(color));
+                holder.taskLabelIb.setVisibility(View.VISIBLE);
+            }
+            if (task.getLabelId() == null) {
+                holder.taskLabelIb.setVisibility(View.INVISIBLE);
+            }
         }
-
-
-        // BY USING OBJECT
-//        if (task.getLabel() != null) {
-//            int color = Color.parseColor(task.getLabel().getColorCode());
-//            holder.taskLabelCp.setText(task.getLabel().getTitle());
-//            holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
-//            holder.taskLabelCp.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.taskLabelCp.setVisibility(View.INVISIBLE);
-//        }
 
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +116,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         private TextView taskStatusTv;
         private TextView taskDateTv;
         private CardView taskRowCv;
-        private Chip taskLabelCp;
+        private ImageView taskLabelIb;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,7 +125,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             taskStatusTv = itemView.findViewById(R.id.row_status_tv_id);
             taskDateTv = itemView.findViewById(R.id.row_date_tv_id);
             taskRowCv = itemView.findViewById(R.id.row_card_cv_id);
-            taskLabelCp = itemView.findViewById(R.id.row_label_cp_id);
+            taskLabelIb = itemView.findViewById(R.id.row_label_ib_id);
         }
     }
 }

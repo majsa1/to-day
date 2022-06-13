@@ -8,8 +8,11 @@
         android:title="@string/popup_filter_title_text" />
     <item
         android:id="@+id/popup_filter_all_id"
+        android:checkable="true"
+        android:checked="false"
         android:title="@string/popup_filter_all_text" />
     <item
         android:id="@+id/popup_filter_noLabel_id"
+        android:checkable="true"
         android:title="@string/popup_filter_noLabel_text" />
 </menu>
