@@ -26,9 +26,10 @@ import nl.hhs.apep2122group1.models.User;
 public class TaskListActivity extends AppCompatActivity {
     private TaskAdapter adapter;
     private List<Task> tasks;
-    private List<Task> sortedTasks;
-    private List<Task> filteredTasks; // to be used for filtering by labels
+    private ArrayList<Task> sortedTasks;
+    private ArrayList<Task> filteredTasks; // to be used for filtering by labels
     private User user;
+    private Label[] labels;
     private boolean initialSorting = true;
     private boolean ascendingOn = true;
 
@@ -42,6 +43,7 @@ public class TaskListActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getUser();
+        getLabels();
         setTaskList();
     }
 
@@ -53,6 +55,10 @@ public class TaskListActivity extends AppCompatActivity {
         user = DatabaseFactory.getDatabase().getUser(username);
         TextView title = findViewById(R.id.task_list_title_tv_id);
         title.setText(String.format(getResources().getString(R.string.task_list_title_tv_text), user.getName()));
+    }
+
+    private void getLabels() {
+        labels = DatabaseFactory.getDatabase().getAllLabels(user.getUsername()); // array OK?
     }
 
     private void setTaskList() {
@@ -134,13 +140,12 @@ public class TaskListActivity extends AppCompatActivity {
     public void onFilterByLabel(View view) {
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
-        List<Label> labels = Arrays.asList(DatabaseFactory.getDatabase().getAllLabels(user.getUsername()));
         ArrayList<Label> uniqueLabels = new ArrayList<>();
 
-        for (int i = 0; i < labels.size(); i++) {
-            if (labels.get(i).getOwner().equals(user) && !uniqueLabels.contains(labels.get(i))) {
-                uniqueLabels.add(labels.get(i));
-                popupMenu.getMenu().add(0, i, i + 2, labels.get(i).getTitle());
+        for (int i = 0; i < labels.length; i++) {
+            if (!uniqueLabels.contains(labels[i])) {
+                uniqueLabels.add(labels[i]);
+                popupMenu.getMenu().add(0, i, i + 2, labels[i].getTitle());
             }
         }
 

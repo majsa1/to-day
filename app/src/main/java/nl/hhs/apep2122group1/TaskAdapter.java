@@ -21,6 +21,8 @@ import com.google.android.material.chip.Chip;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
@@ -77,14 +79,28 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             // force dark mode?
         }
 
-        if (task.getLabel() != null) {
-            int color = Color.parseColor(task.getLabel().getColorCode());
-            holder.taskLabelCp.setText(task.getLabel().getTitle());
+        // USING DATABASE
+        if (task.getLabelId() != null) {
+            Label label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+
+            int color = Color.parseColor(label.getColorCode());
+            holder.taskLabelCp.setText(label.getTitle());
             holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
             holder.taskLabelCp.setVisibility(View.VISIBLE);
         } else {
             holder.taskLabelCp.setVisibility(View.INVISIBLE);
         }
+
+
+        // BY USING OBJECT
+//        if (task.getLabel() != null) {
+//            int color = Color.parseColor(task.getLabel().getColorCode());
+//            holder.taskLabelCp.setText(task.getLabel().getTitle());
+//            holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
+//            holder.taskLabelCp.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.taskLabelCp.setVisibility(View.INVISIBLE);
+//        }
 
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override
