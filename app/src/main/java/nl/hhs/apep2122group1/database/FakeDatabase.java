@@ -30,7 +30,7 @@ public class FakeDatabase implements Database {
 
         add(new Task(3, "Visit grandma",
                 LocalDateTime.of(2022, 7, 1, 11, 0),
-                null, "Description 3", users.get(0).getUsername(), null));
+                null, "Description 3", users.get(0).getUsername(), labels.get(0).getId()));
 
         add(new Task(4, "Test task One",
                 LocalDateTime.of(2022, 5, 1, 11, 0),

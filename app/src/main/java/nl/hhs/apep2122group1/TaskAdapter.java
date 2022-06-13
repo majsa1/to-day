@@ -79,28 +79,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             // force dark mode?
         }
 
-        // USING DATABASE
-        if (task.getLabelId() != null) {
-            Label label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+        Label[] labels = DatabaseFactory.getDatabase().getAllLabels(task.getOwnerUsername());
 
-            int color = Color.parseColor(label.getColorCode());
-            holder.taskLabelCp.setText(label.getTitle());
-            holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
-            holder.taskLabelCp.setVisibility(View.VISIBLE);
-        } else {
-            holder.taskLabelCp.setVisibility(View.INVISIBLE);
+        for (Label label : labels) {
+            if (label.getId().equals(task.getLabelId())) {
+                int color = Color.parseColor(label.getColorCode());
+                holder.taskLabelCp.setText(label.getTitle());
+                holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
+                holder.taskLabelCp.setVisibility(View.VISIBLE);
+            }
+            if (task.getLabelId() == null) {
+                holder.taskLabelCp.setVisibility(View.INVISIBLE);
+            }
         }
-
-
-        // BY USING OBJECT
-//        if (task.getLabel() != null) {
-//            int color = Color.parseColor(task.getLabel().getColorCode());
-//            holder.taskLabelCp.setText(task.getLabel().getTitle());
-//            holder.taskLabelCp.setChipBackgroundColor(ColorStateList.valueOf(color));
-//            holder.taskLabelCp.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.taskLabelCp.setVisibility(View.INVISIBLE);
-//        }
 
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override

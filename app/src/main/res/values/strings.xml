@@ -26,6 +26,7 @@
     <string name="task_adapter_completed_tv_text">Completed:</string>
 
     <string name="popup_sort_title_text">Sort by deadline</string>
+    <string name="popup_sort_default_text">Default</string>
     <string name="popup_sort_descending_text">Descending</string>
     <string name="popup_sort_ascending_text">Ascending</string>
     <string name="popup_filter_title_text">Filter by label</string>

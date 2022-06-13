@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/popup_sort_title"
@@ -8,12 +9,19 @@
         android:title="@string/popup_sort_title_text" />
 
     <item
-        android:id="@+id/popup_sort_ascending"
+        android:id="@+id/popup_sort_default_id"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/popup_sort_default_text" />
+    <item
+        android:id="@+id/popup_sort_ascending_id"
+        android:checkable="true"
         android:checked="false"
         android:title="@string/popup_sort_ascending_text" />
 
     <item
-        android:id="@+id/popup_sort_descending"
+        android:id="@+id/popup_sort_descending_id"
+        android:checkable="true"
         android:checked="false"
         android:title="@string/popup_sort_descending_text" />
 
