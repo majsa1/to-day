@@ -14,6 +14,7 @@ public interface Database {
 
     // labels
     Label[] getAllLabels(String ownerUsername);
+    Label getLabel(int id);
     void upsertLabel(Label label);
     void deleteLabel(Label label);
 

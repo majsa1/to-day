@@ -29,11 +29,11 @@ public class Label {
     private User owner;
 
     // for demo:
-    public Label(Integer id, String title, String colorCode, User owner) {
+    public Label(Integer id, String title, String colorCode, String ownerUsername) {
         this.id = id;
         this.title = title;
         this.colorCode = colorCode;
-        this.owner = owner;
+        this.ownerUsername = ownerUsername;
     }
 
     // for db:
