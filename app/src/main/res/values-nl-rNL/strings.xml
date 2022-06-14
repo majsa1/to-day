@@ -32,4 +32,42 @@
     <string name="label_create_dialog_title_hint">Titel</string>
     <string name="label_create_dialog_cancel_btn">Annuleer</string>
     <string name="label_create_dialog_create_btn">Voeg toe</string>
+    <string name="task_adapter_due_tv_text">Klaar voor:</string>
+    <string name="task_adapter_completed_tv_text">Klaar:</string>
+    <string name="popup_sort_default_text">Standaard</string>
+    <string name="popup_filter_title_text">Filter bij label</string>
+    <string name="popup_filter_all_text">Allemaal</string>
+    <string name="register_name_et_hint">Jouw naam</string>
+    <string name="register_retype_password_et_hint">Hertype password</string>
+    <string name="register_login_instead_tv_text">Liever inloggen</string>
+    <string name="login_register_instead_tv_text">Liever registeren</string>
+    <string name="register_register_btn_title">registreren</string>
+    <string name="register_title">Registreren</string>
+    <string name="username_et_hint">Gebruikersnaam</string>
+    <string name="add_edit_title_pt">Voeg  taak toe</string>
+    <string name="edit_name_ti_text">Naam</string>
+    <string name="add_edit_description_ti_text">Omschrijving</string>
+    <string name="add_edit_save_btn_id">Opslaan</string>
+    <string name="add_edit_back_btn_id">Terug</string>
+    <string name="add_edit_deadline_dt" translatable="false">Omschrijving test</string>
+    <string name="add_edit_clear_btn_id">Opschonen</string>
+    <string name="view_name_task_tv">Naam taak</string>
+    <string name="view_description_tv">Omschrijving</string>
+    <string name="view_back_btn_id">Terug</string>
+    <string name="view_completed_tv">Klaar</string>
+    <string name="add_edit_description_et">Omschrijving</string>
+    <string name="back">Terug</string>
+    <string name="view_edit_btn_id">Bewerk</string>
+    <string name="edit_name_lbl_tv">Naam:</string>
+    <string name="edit_completed_lbl_tv" translatable="false">Klaar:</string>
+    <string name="edit_description_lbl_tv">Omschrijving</string>
+    <string name="view_view_task_tv">Bekijk taak</string>
+    <string name="view_in_progress_text">Bezig</string>
+    <string name="no_label_text">Geen label</string>
+    <string name="no_deadline_text">Geen deadline</string>
+    <string name="password_et_hint">Wachtwoord</string>
+    <string name="login_login_btn_title">Log in</string>
+    <string name="login_title">Log in</string>
+    <string name="first_fragment_label">1e fragment</string>
+    <string name="second_fragment_label">2e fragment</string>
 </resources>

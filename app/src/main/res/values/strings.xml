@@ -52,16 +52,16 @@
     <string name="add_edit_title_pt">Create task</string>
     <string name="add_edit_deadline_dt">Deadline test(yyyy-mm-dd hh-mm)</string>
     <string name="edit_name_ti_text">Name</string>
-    <string name="add_edit_description_ti_text">Description( yyyy-mm-dd hh-mm)</string>
+    <string name="add_edit_description_ti_text">Description</string>
     <string name="add_edit_save_btn_id">Save</string>
-    <string name="add_edit_label_sp_text">Label</string>
+    <string name="add_edit_label_sp_text" translatable="false">Label</string>
     <string name="add_edit_back_btn_id">back</string>
     <string name="add_edit_clear_btn_id">Clear</string>
 
 
     <!--view-->
     <string name="view_name_task_tv">Name Task</string>
-    <string name="view_deadline_tv">Deadline</string>
+    <string name="view_deadline_tv" translatable="false">Deadline</string>
     <string name="view_description_tv">Description</string>
     <string name="view_back_btn_id">back</string>
     <string name="view_completed_tv">Completed</string>
@@ -69,9 +69,9 @@
     <string name="view_edit_btn_id">Edit</string>
     <string name="back">back</string>
     <string name="edit_name_lbl_tv">Name:</string>
-    <string name="edit_deadline_lbl_tv">Deadline:</string>
+    <string name="edit_deadline_lbl_tv" translatable="false">Deadline:</string>
     <string name="edit_completed_lbl_tv">Completed:</string>
-    <string name="edit_label_lbl_tv">Label:</string>
+    <string name="edit_label_lbl_tv" translatable="false">Label:</string>
     <string name="edit_description_lbl_tv">Description:</string>
     <string name="view_view_task_tv">View task</string>
     <string name="view_in_progress_text">In progress</string>
