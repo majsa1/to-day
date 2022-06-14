@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +28,6 @@ public class TaskListActivity extends AppCompatActivity {
     private TaskAdapter adapter;
     private List<Task> tasks;
     private ArrayList<Task> sortedTasks;
-    private ArrayList<Task> filteredTasks;
     private User user;
     private Sorting sorting = Sorting.DEFAULT;
     private int selectedFilterId = -1; // is this clear enough?
@@ -61,17 +58,16 @@ public class TaskListActivity extends AppCompatActivity {
 
     private void setTaskList() {
         setTasks();
-        sortTasksByStatus(toDo);
+        filterAndSortTasksByStatus(toDo);
         setList();
     }
 
     private void setTasks() {
         tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks(user.getUsername()));
         sortedTasks = new ArrayList<>();
-        filteredTasks = new ArrayList<>();
     }
 
-    private void sortTasksByStatus(boolean toDo) { // test
+    private void filterAndSortTasksByStatus(boolean toDo) { // test
         sortedTasks.clear();
         for (Task task : tasks) {
             if (toDo && task.getCompleted() == null) {
@@ -158,7 +154,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onFilterBtnPressed(View view) {
-        filteredTasks.clear();
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
         Label[] labels = DatabaseFactory.getDatabase().getAllLabels(user.getUsername());
@@ -179,23 +175,20 @@ public class TaskListActivity extends AppCompatActivity {
             if (selectedFilterId == labels[i].getId()) {
                 MenuItem item = popupMenu.getMenu().findItem(labels[i].getId());
                 item.setChecked(true);
-//                item.setIcon(R.drawable.ic_baseline_label_24);
-//                int color = Color.parseColor(labels[i].getColorCode());
-//                item.setIconTintList(ColorStateList.valueOf(color));
             }
         }
 
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.popup_filter_all_id) {
                 sortedTasks = new ArrayList<>(tasks);
-                sortTasksByStatus(toDo); // look into preserving current sorting
+                filterAndSortTasksByStatus(toDo); // look into preserving current sorting
                 selectedFilterId = -1;
                 setList();
                 return true;
             }
             if (menuItem.getItemId() == R.id.popup_filter_noLabel_id) {
                 sortedTasks = new ArrayList<>(tasks);
-                sortTasksByStatus(toDo); // look into preserving current sorting
+                filterAndSortTasksByStatus(toDo); // look into preserving current sorting
 
                 for (Task task : sortedTasks) {
                     if (task.getLabelId() == null) {
@@ -211,7 +204,7 @@ public class TaskListActivity extends AppCompatActivity {
             for (int i = 0; i < uniqueLabels.size(); i++) {
                 if (uniqueLabels.get(i).getId() == menuItem.getItemId()) { // pressed - find corresponding label
                     sortedTasks = new ArrayList<>(tasks); // look into current sorting
-                    sortTasksByStatus(toDo);
+                    filterAndSortTasksByStatus(toDo);
 
                     for (Task task : sortedTasks) {
                         if (task.getLabelId() != null && task.getLabelId().equals(uniqueLabels.get(i).getId())) {
@@ -232,23 +225,23 @@ public class TaskListActivity extends AppCompatActivity {
     public void onToDoBtnPressed(View view) {
         selectedFilterId = -1; // reset filter to all?
         toDo = true;
-        sortTasksByStatus(toDo);
+        filterAndSortTasksByStatus(toDo);
         adapter.notifyDataSetChanged();
     }
 
     public void onDoneBtnPressed(View view) {
         selectedFilterId = -1; // reset filter to all?
         toDo = false;
-        sortTasksByStatus(toDo);
+        filterAndSortTasksByStatus(toDo);
         adapter.notifyDataSetChanged();
     }
 
     public void onCheckChanged(View view) { // bound to checkbox for updating view
         MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
         if (toDoBtn.isChecked()) {
-            sortTasksByStatus(true);
+            filterAndSortTasksByStatus(true);
         } else {
-            sortTasksByStatus(false);
+            filterAndSortTasksByStatus(false);
         }
         adapter.notifyDataSetChanged();
     }
@@ -257,7 +250,6 @@ public class TaskListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddEditActivity.class);
         intent.putExtra("USERNAME", user.getUsername());
         this.startActivity(intent);
-//        startActivity(new Intent(this, AddEditActivity.class));
     }
 
     public void onLogoutBtnPressed(View v) {

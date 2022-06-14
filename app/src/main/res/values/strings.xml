@@ -31,7 +31,6 @@
     <string name="popup_sort_ascending_text">Ascending</string>
     <string name="popup_filter_title_text">Filter by label</string>
     <string name="popup_filter_all_text">All</string>
-    <string name="popup_filter_noLabel_text">No label</string>
 
     <!-- Register -->
     <string name="register_title">Register</string>
@@ -89,5 +88,9 @@
     <string name="label_create_dialog_title_hint">Title</string>
     <string name="label_create_dialog_cancel_btn">Cancel</string>
     <string name="label_create_dialog_create_btn">Create</string>
+
+    <!-- Generic -->
+    <string name="no_label_text">No label</string>
+    <string name="no_deadline_text">No deadline</string>
 
 </resources>
