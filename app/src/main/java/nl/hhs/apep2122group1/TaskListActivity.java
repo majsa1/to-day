@@ -68,6 +68,11 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void filterAndSortTasksByStatus(boolean toDo) { // test
+        filterTasksByStatus();
+        sortTasksByStatus();
+    }
+
+    private void filterTasksByStatus() {
         sortedTasks.clear();
         for (Task task : tasks) {
             if (toDo && task.getCompleted() == null) {
@@ -77,7 +82,9 @@ public class TaskListActivity extends AppCompatActivity {
                 sortedTasks.add(task);
             }
         }
+    }
 
+    private void sortTasksByStatus() {
         if (toDo) {
             if (sorting == Sorting.ASCENDING || sorting == Sorting.DEFAULT) {
                 Collections.sort(sortedTasks);
