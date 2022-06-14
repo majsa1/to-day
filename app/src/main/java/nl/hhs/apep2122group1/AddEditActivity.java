@@ -70,10 +70,9 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
 
         if (taskId != -1) {
             task = DatabaseFactory.getDatabase().getTask(taskId);
-        }
-
-        if (task.getLabelId() != null) {
-            label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+            if (task.getLabelId() != null) {
+                label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+            }
         }
     }
 
