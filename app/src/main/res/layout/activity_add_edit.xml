@@ -123,7 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFFFFF"
-        android:onClick="finish"
+        android:onClick="onBackBtnPressed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
