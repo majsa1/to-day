@@ -66,7 +66,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         holder.taskStatusTv.setText(completed ? R.string.task_adapter_completed_tv_text : R.string.task_adapter_due_tv_text);
 
-        String taskDate = completed ? Converter.dateStampToString(task.getCompleted()) : Converter.dateStampToString(task.getDeadline());
+        String taskDate = completed ? Converter.dateStampToString(context, task.getCompleted()) : Converter.dateStampToString(context, task.getDeadline());
         holder.taskDateTv.setText(taskDate);
 
         if (task.getDeadline() != null) {
