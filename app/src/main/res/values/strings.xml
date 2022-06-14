@@ -56,6 +56,18 @@
     <string name="view_description_tv">Description</string>
     <string name="view_back_btn_id">back</string>
     <string name="view_completed_tv">Completed</string>
+<<<<<<< Updated upstream
+=======
+    <string name="add_edit_description_et">Description</string>
+    <string name="view_edit_btn_id">Edit</string>
+    <string name="back">back</string>
+    <string name="edit_name_lbl_tv">Name:</string>
+    <string name="edit_deadline_lbl_tv">Deadline:</string>
+    <string name="edit_completed_lbl_tv">Completed:</string>
+    <string name="edit_label_lbl_tv">Label:</string>
+    <string name="edit_description_lbl_tv">Description:</string>
+    <string name="edit_edit_task_tv">View task</string>
+>>>>>>> Stashed changes
 
 
 </resources>

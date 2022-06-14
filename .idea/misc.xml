@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/activity_add_edit.xml" value="0.15" />
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/activity_leeg2.xml" value="0.1" />
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/activity_task_list.xml" value="0.20969202898550723" />
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/activity_view.xml" value="0.18" />
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/login.xml" value="0.10916919959473151" />
+        <entry key="..\:/Users/Corveleijn/Documents/semester 2/APEP/apep-2122-group-1/APEP-2122-group-1/app/src/main/res/layout/task_list_row.xml" value="0.21557971014492755" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

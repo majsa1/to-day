@@ -23,8 +23,65 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.16" />
+=======
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/add_edit_title_pt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_edit_title_pt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/add_edit_name_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_edit_name_ti_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center|left"
+                android:hint="@string/edit_name_ti_text"
+                app:endIconMode="clear_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/deadline_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_edit_deadline_dt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center|left"
+                android:hint="@string/add_edit_deadline_dt"
+                android:inputType="textPassword"
+                android:nextFocusDown="@id/login_btn"
+                android:nextFocusForward="@id/login_btn"
+                app:endIconMode="clear_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/add_edit_label_sp_text"
+            android:layout_width="397dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="28dp"
+            android:autofillHints="@string/add_edit_label_sp_text"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_edit_deadline_dt"
+            tools:ignore="NotSibling,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+>>>>>>> Stashed changes
 
     <EditText
         android:id="@+id/add_edit_deadline_dt"
@@ -40,6 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck,TextContrastCheck" />
 
+<<<<<<< Updated upstream
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/add_edit_name_ti_text"
         android:layout_width="372dp"
@@ -53,6 +111,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
+=======
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_edit_description_etn_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center|left"
+                android:hint="@string/add_edit_description_et"
+                android:inputType="textPersonName"
+                android:nextFocusDown="@id/login_btn"
+                android:nextFocusForward="@id/login_btn"
+                app:endIconMode="clear_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+>>>>>>> Stashed changes
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_edit_description_ti_text"
@@ -111,14 +183,20 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< Updated upstream
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
+=======
+        android:backgroundTint="#00FFFFFF"
+        android:onClick="finish"
+>>>>>>> Stashed changes
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.075"
         app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+        app:tint="?android:attr/textColorPrimary"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

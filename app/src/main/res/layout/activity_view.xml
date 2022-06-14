@@ -78,6 +78,22 @@
         android:layout_width="372dp"
         android:layout_height="88dp"
         android:hint="@string/view_completed_tv"
+<<<<<<< Updated upstream
+=======
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_label_lbl_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_completed_lbl_tv" />
+
+    <Button
+        android:id="@+id/view_edit_btn_id"
+        android:layout_width="217dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClick"
+        android:text="@string/view_edit_btn_id"
+        android:textSize="20sp"
+>>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.589"
