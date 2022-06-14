@@ -5,11 +5,11 @@ To-day. Everything you need to do today.
 This To-day android application is an application where users can keep a list of everything they need to do. It is a
 so-called 'todo-list' application.
 
-Installation
+## Installation
 
 To view and use this application you can log in with username " test " and password " testpw ".
 
-Basic operation
+## Basic operation
 
 When the app is opened, you will arrive at the login screen. Here you can log in with your existing login details or choose to register. When registering you can create your own unique code. This is so only you can see or edit your own tasks!
 
