@@ -83,7 +83,11 @@
     <string name="label_edit_dialog_delete_label_btn">Delete label</string>
     <string name="label_edit_dialog_cancel_btn">Cancel</string>
     <string name="label_edit_dialog_save_btn">Save</string>
+    <string name="label_create_dialog_title">New label</string>
     <string name="label_delete_dialog_cancel_btn">Cancel</string>
     <string name="label_delete_dialog_delete_btn">Delete label</string>
+    <string name="label_create_dialog_title_hint">Title</string>
+    <string name="label_create_dialog_cancel_btn">Cancel</string>
+    <string name="label_create_dialog_create_btn">Create</string>
 
 </resources>

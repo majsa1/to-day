@@ -2,6 +2,8 @@ package nl.hhs.apep2122group1.database;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Optional;
 
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
@@ -70,7 +72,12 @@ public class FakeDatabase implements Database {
 
     @Override
     public void upsertTask(Task task) {
-        deleteTask(task);
+        if (task.getId() == null) {
+            Integer maxId = tasks.stream().max(Comparator.comparingInt(Task::getId)).get().getId();
+            task.setId(maxId + 1);
+        } else {
+            deleteTask(task);
+        }
         tasks.add(task);
     }
 
@@ -99,7 +106,12 @@ public class FakeDatabase implements Database {
 
     @Override
     public void upsertLabel(Label label) {
-        deleteLabel(label);
+        if (label.getId() == null) {
+            Integer maxId = labels.stream().max(Comparator.comparingInt(Label::getId)).get().getId();
+            label.setId(maxId + 1);
+        } else {
+            deleteLabel(label);
+        }
         labels.add(label);
     }
 

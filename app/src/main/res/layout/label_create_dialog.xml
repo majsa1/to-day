@@ -21,9 +21,9 @@
         tools:context=".Labels">
 
         <TextView
-            android:id="@+id/label_edit_dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_create_dialog_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Space
@@ -31,16 +31,15 @@
             android:layout_height="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_edit_dialog_new_title_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/label_edit_dialog_new_title_et"
+                android:id="@+id/label_create_dialog_title_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/label_edit_dialog_new_title_hint"
+                android:hint="@string/label_create_dialog_title_hint"
                 android:inputType="textCapSentences" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,11 +52,11 @@
             android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/label_edit_dialog_delete_label_btn"
+                android:id="@+id/label_create_dialog_cancel_btn"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_edit_dialog_delete_label_btn"
+                android:text="@string/label_create_dialog_cancel_btn"
                 android:layout_weight="0" />
 
             <Space
@@ -66,19 +65,11 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/label_edit_dialog_cancel_btn"
+                android:id="@+id/label_create_dialog_create_btn"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_edit_dialog_cancel_btn"
-                android:layout_weight="0" />
-
-            <Button
-                android:id="@+id/label_edit_dialog_save_btn"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_edit_dialog_save_btn"
+                android:text="@string/label_create_dialog_create_btn"
                 android:layout_weight="0" />
 
         </LinearLayout>
