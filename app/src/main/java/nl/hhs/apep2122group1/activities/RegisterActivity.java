@@ -41,29 +41,35 @@ public class RegisterActivity extends AppCompatActivity {
         TextInputEditText passwordField = findViewById(R.id.password_et);
         TextInputEditText retypePasswordField = findViewById(R.id.retype_password_et);
 
+        // get values from fields
+        String name = nameField.getText() != null ? nameField.getText().toString() : null;
+        String username = usernameField.getText() != null ? usernameField.getText().toString() : null;
+        String password = passwordField.getText() != null ? passwordField.getText().toString() : null;
+        String retypePassword = retypePasswordField.getText() != null ? retypePasswordField.getText().toString() : null;
+
         // validate values
         boolean error = false;
-        if (!Validators.ValidateStringNotNullOrEmpty(nameField.getText())) {
+        if (!Validators.validateStringNotNullOrEmpty(name)) {
             nameField.setError("Name cannot be empty");
             error = true;
         }
-        if (!Validators.ValidateStringNotNullOrEmpty(usernameField.getText())) {
+        if (!Validators.validateStringNotNullOrEmpty(username)) {
             usernameField.setError("Username cannot be empty");
             error = true;
         }
-        else if (!Validators.ValidateStringDoesNotContainWhitespace(usernameField.getText())) {
+        else if (!Validators.validateStringDoesNotContainWhitespace(username)) {
             usernameField.setError("Username cannot contain whitespace");
             error = true;
         }
-        if (!Validators.ValidateStringNotNullOrEmpty(passwordField.getText())) {
+        if (!Validators.validateStringNotNullOrEmpty(password)) {
             passwordField.setError("Password cannot be empty");
             error = true;
         }
-        else if (!Validators.ValidateMinimumLength(passwordField.getText(), 6)) {
+        else if (!Validators.validatePasswordComplexity(password)) {
             passwordField.setError("Password should have minimum length of 6");
             error = true;
         }
-        else if (!passwordField.getText().toString().equals(retypePasswordField.getText().toString())) {
+        else if (!password.equals(retypePassword)) {
             passwordField.setError("Passwords not equal");
             retypePasswordField.setError("Passwords not equal");
             error = true;
@@ -73,10 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // values ok, save to DB
-        String username = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
-        String name = nameField.getText().toString().trim();
-        if (!DatabaseFactory.getDatabase().insertUser(username, password, name)) {
+        if (!DatabaseFactory.getDatabase().insertUser(username, password, name.trim())) {
             usernameField.setError("Username already in use!");
         } else {
             Toast.makeText(this, "Added account, you can now log in!", Toast.LENGTH_SHORT).show();

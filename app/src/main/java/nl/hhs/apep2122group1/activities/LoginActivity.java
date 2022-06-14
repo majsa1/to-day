@@ -53,13 +53,17 @@ public class LoginActivity extends AppCompatActivity {
         TextInputEditText usernameField = findViewById(R.id.username_et);
         TextInputEditText passwordField = findViewById(R.id.password_et);
 
+        // get values from fields
+        String username = usernameField.getText() != null ? usernameField.getText().toString() : null;
+        String password = passwordField.getText() != null ? passwordField.getText().toString() : null;
+
         // validate values
         boolean error = false;
-        if (!Validators.ValidateStringNotNullOrEmpty(usernameField.getText())) {
+        if (!Validators.validateStringNotNullOrEmpty(username)) {
             usernameField.setError("Username cannot be empty");
             error = true;
         }
-        if (!Validators.ValidateStringNotNullOrEmpty(passwordField.getText())) {
+        if (!Validators.validateStringNotNullOrEmpty(password)) {
             passwordField.setError("Password cannot be empty");
             error = true;
         }
@@ -68,8 +72,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // values ok, save to DB
-        String username = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
         User user = DatabaseFactory.getDatabase().getUser(username, password);
         if (user == null) {
             usernameField.setError("Incorrect credentials!");

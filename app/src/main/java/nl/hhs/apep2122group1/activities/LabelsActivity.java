@@ -16,7 +16,6 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import nl.hhs.apep2122group1.R;
@@ -148,14 +147,17 @@ public class LabelsActivity extends AppCompatActivity {
     }
 
     public void onCreateButtonClick(TextInputEditText editText, Dialog dialog) {
+        // get value from field
+        String newLabelTitle = editText.getText() != null ? editText.getText().toString() : null;
+
         // check if value valid
-        if (!Validators.ValidateStringNotNullOrEmpty(editText.getText())) {
+        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
             editText.setError("Empty not allowed!"); // TODO: translatable
             return;
-        } else if (!Validators.ValidateStringDoesNotBeginOrEndWithWhitespace(editText.getText())) {
+        } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
             editText.setError("No spaces at begin of end allowed"); // TODO: translatable
             return;
-        } else if (!Validators.ValidateNewLabelTitleUnique(editText.getText(), labels)) {
+        } else if (!Validators.validateNewLabelTitleUnique(newLabelTitle, labels)) {
             editText.setError("Label must be unique"); // TODO: translatable
             return;
         }
