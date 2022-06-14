@@ -17,10 +17,12 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
+import nl.hhs.apep2122group1.utils.Validators;
 
 public class LabelsActivity extends AppCompatActivity {
 
@@ -137,7 +139,9 @@ public class LabelsActivity extends AppCompatActivity {
     public void onSaveButtonClick(Label label, TextInputEditText editText, Dialog dialog) {
         // check if value valid
 
+
         // then submit and close dialog
+
         dialog.dismiss();
 
         // else set error to editText
@@ -145,16 +149,24 @@ public class LabelsActivity extends AppCompatActivity {
 
     public void onCreateButtonClick(TextInputEditText editText, Dialog dialog) {
         // check if value valid
-        if (editText.getText() == null || editText.getText().toString().equals("")) {
+        if (!Validators.ValidateStringNotNullOrEmpty(editText.getText())) {
             editText.setError("Empty not allowed!"); // TODO: translatable
             return;
-        } else if (Arrays.stream(labels).anyMatch(label -> label.getTitle().equalsIgnoreCase(editText.getText().toString()))) {
+        } else if (!Validators.ValidateStringDoesNotBeginOrEndWithWhitespace(editText.getText())) {
+            editText.setError("No spaces at begin of end allowed"); // TODO: translatable
+            return;
+        } else if (!Validators.ValidateNewLabelTitleUnique(editText.getText(), labels)) {
             editText.setError("Label must be unique"); // TODO: translatable
             return;
         }
 
+        // generate random color (this could be replaced by a color picker in the future)
+        String colorCodeFormat = "#%02X%02X%02X";
+        Random random = new Random();
+        String colorCode = String.format(colorCodeFormat, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
         // save new label to DB then close dialog
-        Label newLabel = new Label(editText.getText().toString(), "#123456", username);
+        Label newLabel = new Label(editText.getText().toString(), colorCode, username);
         DatabaseFactory.getDatabase().upsertLabel(newLabel);
         dialog.dismiss();
         refreshLabels();

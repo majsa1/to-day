@@ -1,17 +1,16 @@
 package nl.hhs.apep2122group1.activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.utils.Validators;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -42,31 +41,29 @@ public class RegisterActivity extends AppCompatActivity {
         TextInputEditText passwordField = findViewById(R.id.password_et);
         TextInputEditText retypePasswordField = findViewById(R.id.retype_password_et);
 
-        // get values from fields
-        String name = nameField.getText() != null ? nameField.getText().toString() : null;
-        String username = usernameField.getText() != null ? usernameField.getText().toString() : null;
-        String password = passwordField.getText() != null ? passwordField.getText().toString() : null;
-        String retypePassword = retypePasswordField.getText() != null ? retypePasswordField.getText().toString() : null;
-
         // validate values
         boolean error = false;
-        if (name == null || name.isEmpty()) {
+        if (!Validators.ValidateStringNotNullOrEmpty(nameField.getText())) {
             nameField.setError("Name cannot be empty");
             error = true;
         }
-        if (username == null || username.isEmpty()) {
+        if (!Validators.ValidateStringNotNullOrEmpty(usernameField.getText())) {
             usernameField.setError("Username cannot be empty");
             error = true;
         }
-        if (password == null || password.isEmpty()) {
+        else if (!Validators.ValidateStringDoesNotContainWhitespace(usernameField.getText())) {
+            usernameField.setError("Username cannot contain whitespace");
+            error = true;
+        }
+        if (!Validators.ValidateStringNotNullOrEmpty(passwordField.getText())) {
             passwordField.setError("Password cannot be empty");
             error = true;
         }
-        else if (password.length() < 6) {
+        else if (!Validators.ValidateMinimumLength(passwordField.getText(), 6)) {
             passwordField.setError("Password should have minimum length of 6");
             error = true;
         }
-        else if (!password.equals(retypePassword)) {
+        else if (!passwordField.getText().toString().equals(retypePasswordField.getText().toString())) {
             passwordField.setError("Passwords not equal");
             retypePasswordField.setError("Passwords not equal");
             error = true;
@@ -76,6 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // values ok, save to DB
+        String username = usernameField.getText().toString();
+        String password = passwordField.getText().toString();
+        String name = nameField.getText().toString().trim();
         if (!DatabaseFactory.getDatabase().insertUser(username, password, name)) {
             usernameField.setError("Username already in use!");
         } else {
