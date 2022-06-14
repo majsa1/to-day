@@ -7,37 +7,33 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
-import nl.hhs.apep2122group1.models.User;
 
 
 public class AddEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     // nog string maken label??
     ArrayList<String> labelvoorbeeld = new ArrayList<>(Arrays.asList("select label", "pets", "grocery's", "school", "car", "<geen label> "));
-    User user;
     Task task;
     String username;
+    Label label;
+    int taskId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
 
-        getUser();
-
+        setTaskFromIntent();
         //Getting the instance of Spinner and applying OnItemSelectedListener on it
         Spinner choise = (Spinner) findViewById(R.id.add_edit_label_sp_text);
         //testchoise.setOnItemSelectedListener(this);
@@ -47,6 +43,11 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         choise.setAdapter(aa);
+
+        if (taskId != -1) {
+        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
+        title.setText(task.getTitle());
+        }
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -58,19 +59,40 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         Toast.makeText(this, "<no label>", Toast.LENGTH_LONG).show();
     }
 
-    private void getUser() {
+    private void setUsernameFromIntent() {
         Intent intent = getIntent();
-        String username = intent.getStringExtra("USERNAME");
-        user = DatabaseFactory.getDatabase().getUser(username);
+        username = intent.getStringExtra("USERNAME");
+    }
 
+    private void setTaskFromIntent(){
+        Intent intent = getIntent();
+        taskId = intent.getIntExtra("TASK_ID", -1);
+
+        if (taskId != -1) {
+            task = DatabaseFactory.getDatabase().getTask(taskId);
+        }
+
+        if (task.getLabelId() != null) {
+            label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+        }
     }
 
     public void upsertTask(View view) {
-        makeTask();
+        if (taskId == -1) {
+            makeTask();
+        } else {
+            updateTask();
+        }
         finish();
     }
 
+    private void updateTask() {
+        // TODO: save
+
+    }
+
     private void makeTask() {
+        setUsernameFromIntent();
 
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
@@ -82,12 +104,12 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
 
-        Task task = new Task(titleString, null, descriptionString, user.getUsername(), null);
+        Task task = new Task(titleString, null, descriptionString, username, null);
         DatabaseFactory.getDatabase().upsertTask(task);
         System.out.println("task to database");
     }
 
-    public void finish(View view) {
+    public void onBackBtnPressed(View view) {
         finish();
     }
 
