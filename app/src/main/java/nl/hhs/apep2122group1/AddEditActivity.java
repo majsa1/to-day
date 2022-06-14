@@ -3,6 +3,7 @@ package nl.hhs.apep2122group1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+<<<<<<< Updated upstream
 
 public class AddEditActivity extends AppCompatActivity {
 =======
