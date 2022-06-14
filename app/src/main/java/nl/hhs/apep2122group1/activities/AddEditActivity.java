@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,7 +25,7 @@ import nl.hhs.apep2122group1.models.Task;
 
 public class AddEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     // nog string maken label??
-    ArrayList<String> labelvoorbeeld = new ArrayList<>(Arrays.asList("select label", "pets", "grocery's", "school", "car", "<geen label> "));
+    Label[] labels;
     Task task;
     String username;
     Label label;
@@ -36,32 +37,30 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_add_edit);
 
         setTaskFromIntent();
-        //Getting the instance of Spinner and applying OnItemSelectedListener on it
-        Spinner choise = (Spinner) findViewById(R.id.add_edit_label_sp_text);
-        //testchoise.setOnItemSelectedListener(this);
 
-        //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, labelvoorbeeld);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        choise.setAdapter(aa);
+        //Getting the instance of Spinner and applying OnItemSelectedListener on it
+
+
+
+
 
 
         if (taskId != -1) {
+            TextView editHeader = findViewById(R.id.add_edit_title_pt);
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
         Spinner labelname = findViewById(R.id.add_edit_label_sp_text);
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
+        editHeader.setText(R.string.edit_edit_title_pt);
         title.setText(task.getTitle());
         deadline.setText(task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline()));
-        //TODO label
         description.setText(task.getDescription());
         }
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getApplicationContext(), labelvoorbeeld.get(position), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), labels[position].getTitle(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -80,10 +79,28 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
 
         if (taskId != -1) {
             task = DatabaseFactory.getDatabase().getTask(taskId);
+            username = task.getOwnerUsername();
+        }else{
+            setUsernameFromIntent();
+        }
+        labels = DatabaseFactory.getDatabase().getAllLabels(username);
+        Spinner choise = (Spinner) findViewById(R.id.add_edit_label_sp_text);
+        ArrayAdapter<Label> dataAdapter = new ArrayAdapter<Label>(this,android.R.layout.simple_spinner_item, labels);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        choise.setAdapter(dataAdapter);
+        if (taskId != -1) {
+
             if (task.getLabelId() != null) {
-                label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+                for (int i = 0; i < labels.length; i++) {
+                    Label l = labels[i];
+                    if (task.getLabelId().equals(l.getId())) {
+                        label = l;
+                        choise.setSelection(i);
+                    }
+                }
             }
         }
+
     }
 
     public void upsertTask(View view) {
@@ -101,7 +118,6 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void makeTask() {
-        setUsernameFromIntent();
 
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);

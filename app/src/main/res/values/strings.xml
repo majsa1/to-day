@@ -57,7 +57,7 @@
     <string name="add_edit_label_sp_text" translatable="false">Label</string>
     <string name="add_edit_back_btn_id">back</string>
     <string name="add_edit_clear_btn_id">Clear</string>
-
+    <string name="edit_edit_title_pt">Edit task</string>
 
     <!--view-->
     <string name="view_name_task_tv">Name Task</string>
