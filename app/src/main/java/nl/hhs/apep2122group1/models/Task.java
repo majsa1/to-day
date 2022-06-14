@@ -6,7 +6,6 @@ import static androidx.room.ForeignKey.SET_NULL;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
@@ -29,7 +28,7 @@ public class Task implements Comparable<Task> {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String title;
-//    @TypeConverters({Converter.class}) -> make class
+//    @TypeConverters({Converter.class})
     private LocalDateTime deadline;
     private LocalDateTime completed;
     private String description;
@@ -40,12 +39,7 @@ public class Task implements Comparable<Task> {
     @ColumnInfo(name = "Label_id")
     private Integer labelId;
 
-    @Ignore
-    private User owner;
-
-    @Ignore
-    private Label label;
-
+    // TODO: for demo, remove when ready
     public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, String description, String ownerUsername, Integer labelId) {
         this.id = id;
         this.title = title;
@@ -68,10 +62,6 @@ public class Task implements Comparable<Task> {
     // constructor for db:
     public Task() {
     }
-
-    public Task(String titleString, LocalDateTime now, String descriptionString, User user, Object labelId) {
-    }
-
 
     // all setters and getters added, remove unneeded
     public Integer getId() {
@@ -130,26 +120,14 @@ public class Task implements Comparable<Task> {
         this.labelId = labelOwnerId;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public Label getLabel() {
-        return label;
-    }
-
-    public void setLabel(Label label) {
-        this.label = label;
-    }
-
     @Override
     public int compareTo(Task task) {
         if (this.completed == null) { // task not yet completed
-            return this.deadline.compareTo(task.getDeadline());
+            if (this.getDeadline() == null || task.getDeadline() == null) {
+                return 0;
+            } else {
+                return this.deadline.compareTo(task.getDeadline());
+            }
         } else {
             return this.completed.compareTo(task.getCompleted());
         }

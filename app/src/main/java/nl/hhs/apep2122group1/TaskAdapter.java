@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.chip.Chip;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -69,16 +66,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         holder.taskStatusTv.setText(completed ? R.string.task_adapter_completed_tv_text : R.string.task_adapter_due_tv_text);
 
-        // check formatting of date:
         String taskDate = completed ? Converter.dateStampToString(task.getCompleted()) : Converter.dateStampToString(task.getDeadline());
         holder.taskDateTv.setText(taskDate);
 
-        if (task.getDeadline().compareTo(LocalDateTime.now()) < 0 && !completed) {
-            holder.taskDateTv.setTextColor(Color.rgb(255,184,28));
-        } else {
-            holder.taskDateTv.setTextColor(ContextCompat.getColor(context, com.google.android.material.R.color.m3_dark_default_color_primary_text));
-            // how to get the right dynamic colour? Some dynamic colours crash
-            // force dark mode?
+        if (task.getDeadline() != null) {
+            if (task.getDeadline().compareTo(LocalDateTime.now()) < 0 && !completed) {
+                holder.taskDateTv.setTextColor(Color.rgb(255, 184, 28));
+            } else {
+                holder.taskDateTv.setTextColor(ContextCompat.getColor(context, com.google.android.material.R.color.m3_dark_default_color_primary_text));
+                // TODO: how to get the right dynamic colour? Some dynamic colours crash
+                // TODO: force dark mode?
+            }
         }
 
         Label[] labels = DatabaseFactory.getDatabase().getAllLabels(task.getOwnerUsername());

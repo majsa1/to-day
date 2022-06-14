@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +28,6 @@ public class TaskListActivity extends AppCompatActivity {
     private TaskAdapter adapter;
     private List<Task> tasks;
     private ArrayList<Task> sortedTasks;
-    private ArrayList<Task> filteredTasks;
     private User user;
     private Sorting sorting = Sorting.DEFAULT;
     private int selectedFilterId = -1; // is this clear enough?
@@ -68,7 +65,6 @@ public class TaskListActivity extends AppCompatActivity {
     private void setTasks() {
         tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks(user.getUsername()));
         sortedTasks = new ArrayList<>();
-        filteredTasks = new ArrayList<>();
     }
 
     private void sortTasksByStatus(boolean toDo) { // test
@@ -158,7 +154,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onFilterBtnPressed(View view) {
-        filteredTasks.clear();
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
         Label[] labels = DatabaseFactory.getDatabase().getAllLabels(user.getUsername());
@@ -179,9 +175,6 @@ public class TaskListActivity extends AppCompatActivity {
             if (selectedFilterId == labels[i].getId()) {
                 MenuItem item = popupMenu.getMenu().findItem(labels[i].getId());
                 item.setChecked(true);
-//                item.setIcon(R.drawable.ic_baseline_label_24);
-//                int color = Color.parseColor(labels[i].getColorCode());
-//                item.setIconTintList(ColorStateList.valueOf(color));
             }
         }
 
@@ -257,7 +250,6 @@ public class TaskListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddEditActivity.class);
         intent.putExtra("USERNAME", user.getUsername());
         this.startActivity(intent);
-//        startActivity(new Intent(this, AddEditActivity.class));
     }
 
     public void onLogoutBtnPressed(View v) {

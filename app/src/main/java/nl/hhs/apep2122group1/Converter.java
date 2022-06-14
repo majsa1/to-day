@@ -7,8 +7,11 @@ import java.time.format.FormatStyle;
 public class Converter {
 
     public static String dateStampToString(LocalDateTime dateStamp) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
-        String dateString = formatter.format(dateStamp);
-        return dateString;
+        if (dateStamp != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+            String dateString = formatter.format(dateStamp);
+            return dateString;
+        }
+        return "No deadline"; // TODO: make resource
     }
 }
