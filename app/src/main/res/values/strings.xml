@@ -76,5 +76,18 @@
     <string name="edit_description_lbl_tv">Description:</string>
     <string name="edit_edit_task_tv">Edit task</string>
 
+    <!-- Labels -->
+    <string name="labels_title">Labels</string>
+    <string name="label_delete_dialog_contents">Are you sure to delete this label?\n\nDeleting this label will not any of the items that currently have it, but it will remove the label from them.</string>
+    <string name="label_edit_dialog_new_title_hint">New title</string>
+    <string name="label_edit_dialog_delete_label_btn">Delete label</string>
+    <string name="label_edit_dialog_cancel_btn">Cancel</string>
+    <string name="label_edit_dialog_save_btn">Save</string>
+    <string name="label_create_dialog_title">New label</string>
+    <string name="label_delete_dialog_cancel_btn">Cancel</string>
+    <string name="label_delete_dialog_delete_btn">Delete label</string>
+    <string name="label_create_dialog_title_hint">Title</string>
+    <string name="label_create_dialog_cancel_btn">Cancel</string>
+    <string name="label_create_dialog_create_btn">Create</string>
 
 </resources>

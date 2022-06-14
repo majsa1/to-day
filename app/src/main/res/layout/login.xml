@@ -26,6 +26,10 @@
             android:text="@string/login_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_til"
             android:layout_width="match_parent"
@@ -55,6 +59,10 @@
                 android:nextFocusDown="@id/login_btn"
                 android:nextFocusForward="@id/login_btn" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

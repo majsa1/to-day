@@ -6,6 +6,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = {
@@ -13,7 +14,7 @@ import androidx.room.PrimaryKey;
                 entity = User.class,
                 parentColumns = "username",
                 childColumns = "User_username",
-                onDelete = CASCADE)
+                onDelete = CASCADE),
 })
 
 public class Label {
@@ -31,6 +32,12 @@ public class Label {
     // for demo:
     public Label(Integer id, String title, String colorCode, String ownerUsername) {
         this.id = id;
+        this.title = title;
+        this.colorCode = colorCode;
+        this.ownerUsername = ownerUsername;
+    }
+
+    public Label(String title, String colorCode, String ownerUsername) {
         this.title = title;
         this.colorCode = colorCode;
         this.ownerUsername = ownerUsername;
