@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -44,9 +45,17 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         //Setting the ArrayAdapter data on the Spinner
         choise.setAdapter(aa);
 
+
         if (taskId != -1) {
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
+        TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
+        Spinner labelname = findViewById(R.id.add_edit_label_sp_text);
+        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
+
         title.setText(task.getTitle());
+        deadline.setText(task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.dateStampToString(this, task.getDeadline()));
+        //TODO label
+        description.setText(task.getDescription());
         }
     }
     @Override
