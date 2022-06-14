@@ -25,9 +25,11 @@ import nl.hhs.apep2122group1.models.User;
 
 
 public class AddEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+    // nog string maken label??
     ArrayList<String> labelvoorbeeld = new ArrayList<>(Arrays.asList("select label", "pets", "grocery's", "school", "car", "<geen label> "));
     User user;
+    Task task;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         Intent intent = getIntent();
         String username = intent.getStringExtra("USERNAME");
         user = DatabaseFactory.getDatabase().getUser(username);
-        System.out.println(user.getName());
+
     }
 
     public void upsertTask(View view) {
@@ -80,7 +82,7 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
 
-        Task task = new Task(titleString, LocalDateTime.now(), descriptionString, user.getUsername(), null);
+        Task task = new Task(titleString, null, descriptionString, user.getUsername(), null);
         DatabaseFactory.getDatabase().upsertTask(task);
         System.out.println("task to database");
     }
