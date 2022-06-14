@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import nl.hhs.apep2122group1.utils.Converter;
+import nl.hhs.apep2122group1.R;
+import nl.hhs.apep2122group1.activities.ViewActivity;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;

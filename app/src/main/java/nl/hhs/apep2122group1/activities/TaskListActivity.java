@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +19,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import nl.hhs.apep2122group1.R;
+import nl.hhs.apep2122group1.utils.Sorting;
+import nl.hhs.apep2122group1.adapters.TaskAdapter;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
@@ -110,7 +113,7 @@ public class TaskListActivity extends AppCompatActivity {
 //    public methods for views:
 
     public void onLabelBtnPressed(View view) {
-        Intent intent = new Intent(this, Labels.class);
+        Intent intent = new Intent(this, LabelsActivity.class);
         intent.putExtra("USERNAME", user.getUsername());
         this.startActivity(intent);
     }

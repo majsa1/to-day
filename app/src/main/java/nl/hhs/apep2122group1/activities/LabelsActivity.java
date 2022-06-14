@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.activities;
 
 import android.app.Dialog;
 import android.content.res.ColorStateList;
@@ -18,10 +18,11 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Arrays;
 
+import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 
-public class Labels extends AppCompatActivity {
+public class LabelsActivity extends AppCompatActivity {
 
     private String username;
     private Label[] labels;
