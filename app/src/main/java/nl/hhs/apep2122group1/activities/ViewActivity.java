@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import nl.hhs.apep2122group1.utils.Converter;
+import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;

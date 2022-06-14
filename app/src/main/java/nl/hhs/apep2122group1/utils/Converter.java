@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

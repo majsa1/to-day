@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 
 public class RegisterActivity extends AppCompatActivity {

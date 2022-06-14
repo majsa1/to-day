@@ -8,6 +8,8 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
+import nl.hhs.apep2122group1.utils.Converter;
+
 public class ConverterTests {
 
     @Test

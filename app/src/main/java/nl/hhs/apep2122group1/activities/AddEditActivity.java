@@ -1,4 +1,4 @@
-package nl.hhs.apep2122group1;
+package nl.hhs.apep2122group1.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -16,6 +15,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import nl.hhs.apep2122group1.utils.Converter;
+import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
@@ -53,7 +54,7 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
         title.setText(task.getTitle());
-        deadline.setText(task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.dateStampToString(this, task.getDeadline()));
+        deadline.setText(task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline()));
         //TODO label
         description.setText(task.getDescription());
         }
