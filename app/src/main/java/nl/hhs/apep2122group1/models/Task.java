@@ -1,52 +1,77 @@
 package nl.hhs.apep2122group1.models;
 
+import static androidx.room.ForeignKey.CASCADE;
+import static androidx.room.ForeignKey.SET_NULL;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = User.class,
+                parentColumns = "username",
+                childColumns = "User_username",
+                onDelete = CASCADE),
+
+        @ForeignKey(
+                entity = Label.class,
+                parentColumns = "id",
+                childColumns = "Label_id",
+                onDelete = SET_NULL)
+})
 
 public class Task implements Comparable<Task> {
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String title;
+//    @TypeConverters({Converter.class}) -> make class
     private LocalDateTime deadline;
     private LocalDateTime completed;
     private String description;
-    // foreign keys to be added
 
-    // for demo data on list (constructor and static list):
-    public Task(String title, LocalDateTime deadline, LocalDateTime completed) {
+    @ColumnInfo(name = "User_username")
+    private String ownerUsername;
+
+    @ColumnInfo(name = "Label_id")
+    private Integer labelId;
+
+    @Ignore
+    private User owner;
+
+    @Ignore
+    private Label label;
+
+    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, String description, String ownerUsername, Integer labelId) {
+        this.id = id;
         this.title = title;
         this.deadline = deadline;
         this.completed = completed;
+        this.description = description;
+        this.ownerUsername = ownerUsername;
+        this.labelId = labelId;
     }
 
-    private static ArrayList<Task> demo = new ArrayList<Task>(){{
-        add(new Task("Buy birthday present",
-        LocalDateTime.of(2022, 6, 10, 14, 30),
-        LocalDateTime.of(2022, 6, 8, 14, 10)));
-
-        add(new Task("Submit project",
-        LocalDateTime.of(2022, 6, 17, 23, 59),
-        null));
-
-        add(new Task("Visit grandma",
-        LocalDateTime.of(2022, 7, 1, 11, 0),
-        null));
-
-        add(new Task("Test task One",
-                LocalDateTime.of(2022, 5, 1, 11, 0),
-                null));
-
-        add(new Task("Test task Two",
-                LocalDateTime.of(2022, 7, 1, 11, 0),
-                null));
-    }};
-
-    public static ArrayList<Task> getDemo() {
-        return demo;
+    // for adding a new task:
+    public Task(String title, LocalDateTime deadline, String description, String ownerUsername, Integer labelId) {
+        this.title = title;
+        this.deadline = deadline;
+        this.description = description;
+        this.ownerUsername = ownerUsername;
+        this.labelId = labelId;
     }
 
-    // for db:
+    // constructor for db:
     public Task() {
     }
+
+    public Task(String titleString, LocalDateTime now, String descriptionString, User user, Object labelId) {
+    }
+
 
     // all setters and getters added, remove unneeded
     public Integer getId() {
@@ -87,6 +112,38 @@ public class Task implements Comparable<Task> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getOwnerUsername() {
+        return ownerUsername;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
+    }
+
+    public Integer getLabelId() {
+        return labelId;
+    }
+
+    public void setLabelId(Integer labelOwnerId) {
+        this.labelId = labelOwnerId;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
     }
 
     @Override

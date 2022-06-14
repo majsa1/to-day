@@ -26,6 +26,10 @@
             android:text="@string/login_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_til"
             android:layout_width="match_parent"
@@ -51,8 +55,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/password_et_hint"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:nextFocusDown="@id/login_btn"
+                android:nextFocusForward="@id/login_btn" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +80,7 @@
                 android:text="@string/login_register_instead_tv_text" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/login_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

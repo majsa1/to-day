@@ -79,7 +79,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:hint="@string/register_retype_password_et_hint" />
+                android:hint="@string/register_retype_password_et_hint"
+                android:nextFocusDown="@id/register_btn"
+                android:nextFocusForward="@id/register_btn" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -98,10 +100,11 @@
                 android:text="@string/register_login_instead_tv_text" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/register_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="onRegister"
                 android:text="@string/register_register_btn_title" />
         </LinearLayout>
     </LinearLayout>

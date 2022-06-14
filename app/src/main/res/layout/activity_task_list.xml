@@ -27,6 +27,7 @@
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/add_name_btn_description"
         android:minHeight="48dp"
+        android:onClick="onLogoutBtnPressed"
         android:theme="@android:style/Widget.Material.ImageButton"
         app:layout_constraintBottom_toBottomOf="@+id/task_list_title_tv_id"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:checkable="false"
-            android:onClick="getToDoTasks"
+            android:onClick="onToDoBtnPressed"
             android:text="@string/task_list_todo_mb_text" />
 
         <com.google.android.material.button.MaterialButton
@@ -64,7 +65,7 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="getDoneTasks"
+            android:onClick="onDoneBtnPressed"
             android:text="@string/task_list_done_mb_text" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -76,6 +77,7 @@
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/task_list_filter_btn_description"
         android:minHeight="48dp"
+        android:onClick="onFilterBtnPressed"
         app:layout_constraintBottom_toBottomOf="@+id/toggle_button_group"
         app:layout_constraintEnd_toEndOf="@+id/task_list_logout_btn_id"
         app:layout_constraintHorizontal_bias="1.0"
@@ -92,6 +94,7 @@
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/task_list_sort_btn_description"
         android:minHeight="48dp"
+        android:onClick="onSortBtnPressed"
         app:layout_constraintBottom_toBottomOf="@+id/task_list_filter_btn_id"
         app:layout_constraintEnd_toStartOf="@+id/task_list_filter_btn_id"
         app:layout_constraintTop_toTopOf="@+id/task_list_filter_btn_id"
@@ -105,6 +108,7 @@
         android:clickable="true"
         android:contentDescription="@string/task_list_add_btn_description"
         android:focusable="true"
+        android:onClick="onAddBtnPressed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/task_list_logout_btn_id"
         app:layout_constraintHorizontal_bias="1.0"
@@ -128,5 +132,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggle_button_group"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/task_list_label_btn_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/task_list_label_btn_description"
+        android:minHeight="48dp"
+        android:onClick="onLabelBtnPressed"
+        app:layout_constraintBottom_toBottomOf="@+id/task_list_logout_btn_id"
+        app:layout_constraintEnd_toEndOf="@+id/task_list_sort_btn_id"
+        app:layout_constraintEnd_toStartOf="@+id/task_list_logout_btn_id"
+        app:layout_constraintStart_toStartOf="@+id/task_list_sort_btn_id"
+        app:layout_constraintTop_toTopOf="@+id/task_list_logout_btn_id"
+        app:srcCompat="@drawable/ic_baseline_label_24"
+        app:tint="?android:attr/textColorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

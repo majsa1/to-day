@@ -7,17 +7,31 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="add_date_btn_text">Deadline</string>
+    <string name="add_date_btn_text" translatable="false">Deadline</string>
     <string name="add_name_btn_text">Name</string>
     <string name="add_name_btn_description">Logout</string>
 
     <!-- Task list -->
-    <string name="task_list_title_tv_text">Tasks</string>
+    <string name="task_list_title_tv_text">%s\'s tasks</string>
     <string name="task_list_todo_mb_text">To do</string>
     <string name="task_list_done_mb_text">Done</string>
+    <string name="task_list_label_btn_description" translatable="false">Labels</string>
     <string name="task_list_filter_btn_description">Filter tasks</string>
     <string name="task_list_sort_btn_description">Sort tasks</string>
     <string name="task_list_add_btn_description">Add task</string>
+    <string name="task_list_logout_btn_title_text">Are you sure you want to log out?</string>
+    <string name="task_list_logout_btn_confirm_text">YES</string>
+    <string name="task_list_logout_btn_cancel_text">NO</string>
+    <string name="task_adapter_due_tv_text">Due:</string>
+    <string name="task_adapter_completed_tv_text">Completed:</string>
+
+    <string name="popup_sort_title_text">Sort by deadline</string>
+    <string name="popup_sort_default_text">Default</string>
+    <string name="popup_sort_descending_text">Descending</string>
+    <string name="popup_sort_ascending_text">Ascending</string>
+    <string name="popup_filter_title_text">Filter by label</string>
+    <string name="popup_filter_all_text">All</string>
+    <string name="popup_filter_noLabel_text">No label</string>
 
     <!-- Register -->
     <string name="register_title">Register</string>
@@ -36,28 +50,22 @@
     <string name="password_et_hint">Password</string>
 
     <!-- AddEdit-->
-    <string name="add_edit_name_tv">Name</string>
-    <string name="add_edit_label_tv">Label</string>
-    <string name="add_edit_deadline_tv">Deadline</string>
-    <string name="add_edit_description_tv">Description</string>
     <string name="add_edit_title_pt">Create task</string>
-    <string name="add_edit_deadline_dt">Deadline</string>
-    <string name="add_edit_name_ti_text">Name</string>
-    <string name="add_edit_description_ti_text">Description</string>
-    <string name="add_edit_clear_task_btn_id">Clear task</string>
+    <string name="add_edit_deadline_dt">Deadline test(yyyy-mm-dd hh-mm)</string>
+    <string name="edit_name_ti_text">Name</string>
+    <string name="add_edit_description_ti_text">Description( yyyy-mm-dd hh-mm)</string>
     <string name="add_edit_save_btn_id">Save</string>
     <string name="add_edit_label_sp_text">Label</string>
     <string name="add_edit_back_btn_id">back</string>
+    <string name="add_edit_clear_btn_id">Clear</string>
+
 
     <!--view-->
     <string name="view_name_task_tv">Name Task</string>
     <string name="view_deadline_tv">Deadline</string>
-
     <string name="view_description_tv">Description</string>
     <string name="view_back_btn_id">back</string>
     <string name="view_completed_tv">Completed</string>
-<<<<<<< Updated upstream
-=======
     <string name="add_edit_description_et">Description</string>
     <string name="view_edit_btn_id">Edit</string>
     <string name="back">back</string>
@@ -66,8 +74,20 @@
     <string name="edit_completed_lbl_tv">Completed:</string>
     <string name="edit_label_lbl_tv">Label:</string>
     <string name="edit_description_lbl_tv">Description:</string>
-    <string name="edit_edit_task_tv">View task</string>
->>>>>>> Stashed changes
+    <string name="edit_edit_task_tv">Edit task</string>
 
+    <!-- Labels -->
+    <string name="labels_title">Labels</string>
+    <string name="label_delete_dialog_contents">Are you sure to delete this label?\n\nDeleting this label will not any of the items that currently have it, but it will remove the label from them.</string>
+    <string name="label_edit_dialog_new_title_hint">New title</string>
+    <string name="label_edit_dialog_delete_label_btn">Delete label</string>
+    <string name="label_edit_dialog_cancel_btn">Cancel</string>
+    <string name="label_edit_dialog_save_btn">Save</string>
+    <string name="label_create_dialog_title">New label</string>
+    <string name="label_delete_dialog_cancel_btn">Cancel</string>
+    <string name="label_delete_dialog_delete_btn">Delete label</string>
+    <string name="label_create_dialog_title_hint">Title</string>
+    <string name="label_create_dialog_cancel_btn">Cancel</string>
+    <string name="label_create_dialog_create_btn">Create</string>
 
 </resources>

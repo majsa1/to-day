@@ -13,6 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.idea/deploymentTargetDropDown.xml
+/.idea/misc.xml
 
 # General
 *.bak
@@ -24,4 +26,4 @@ out/
 # Visual Paradigm
 *.lck
 *.bak_*
-/.idea/deploymentTargetDropDown.xml
+
