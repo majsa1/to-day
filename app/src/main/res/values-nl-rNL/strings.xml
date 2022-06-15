@@ -49,7 +49,6 @@
     <string name="add_edit_description_ti_text">Omschrijving</string>
     <string name="add_edit_save_btn_id">Opslaan</string>
     <string name="add_edit_back_btn_id">Terug</string>
-    <string name="add_edit_deadline_dt" translatable="false">Omschrijving test</string>
     <string name="add_edit_clear_btn_id">Opschonen</string>
     <string name="view_name_task_tv">Naam taak</string>
     <string name="view_description_tv">Omschrijving</string>
@@ -70,4 +69,5 @@
     <string name="login_title">Log in</string>
     <string name="first_fragment_label">1e fragment</string>
     <string name="second_fragment_label">2e fragment</string>
+    <string name="edit_edit_title_pt">Bewerk taak</string>
 </resources>
