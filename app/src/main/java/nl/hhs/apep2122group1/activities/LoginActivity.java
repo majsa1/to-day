@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.User;
+import nl.hhs.apep2122group1.utils.Validators;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -58,11 +59,11 @@ public class LoginActivity extends AppCompatActivity {
 
         // validate values
         boolean error = false;
-        if (username == null || username.isEmpty()) {
+        if (!Validators.validateStringNotNullOrEmpty(username)) {
             usernameField.setError("Username cannot be empty");
             error = true;
         }
-        if (password == null || password.isEmpty()) {
+        if (!Validators.validateStringNotNullOrEmpty(password)) {
             passwordField.setError("Password cannot be empty");
             error = true;
         }

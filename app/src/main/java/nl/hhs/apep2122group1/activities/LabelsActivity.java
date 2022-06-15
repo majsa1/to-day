@@ -16,12 +16,15 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.Callable;
 
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
+import nl.hhs.apep2122group1.utils.Validators;
 
+@SuppressWarnings("Convert2MethodRef")
 public class LabelsActivity extends AppCompatActivity {
 
     private String username;
@@ -60,7 +63,7 @@ public class LabelsActivity extends AppCompatActivity {
             chip.setChipBackgroundColor(colorStateList);
 
             // attach event handler using lambda, so we can detect clicks on the chip
-            chip.setOnClickListener(view -> onChipClick(l));
+            chip.setOnClickListener(view -> onLabelClick(l));
 
             // add to ChipGroup, this makes it actually visible in the UI
             chipGroup.addView(chip);
@@ -87,7 +90,7 @@ public class LabelsActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void onChipClick(Label label) {
+    public void onLabelClick(Label label) {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -95,26 +98,27 @@ public class LabelsActivity extends AppCompatActivity {
         builder.setView(labelEditDialogView);
         Dialog dialog = builder.create();
 
-        // set dialog title
+        // set dialog title and prefill current label title
         TextView titleLabel = labelEditDialogView.findViewById(R.id.label_edit_dialog_title);
         titleLabel.setText(label.getTitle());
+        TextInputEditText newLabelEditText = labelEditDialogView.findViewById(R.id.label_edit_dialog_new_title_et);
+        newLabelEditText.setText(label.getTitle());
 
         // set [delete, cancel, save] button handlers
         Button deleteBtn = labelEditDialogView.findViewById(R.id.label_edit_dialog_delete_label_btn);
-        deleteBtn.setOnClickListener(view -> onDeleteButtonClick(label));
+        deleteBtn.setOnClickListener(view -> onDeleteButtonClick(label, () -> dialog.dismiss()));
 
         Button cancelBtn = labelEditDialogView.findViewById(R.id.label_edit_dialog_cancel_btn);
         cancelBtn.setOnClickListener(view -> dialog.cancel());
 
-        TextInputEditText newTitleEditText = labelEditDialogView.findViewById(R.id.label_edit_dialog_new_title_et);
         Button saveBtn = labelEditDialogView.findViewById(R.id.label_edit_dialog_save_btn);
-        saveBtn.setOnClickListener(view -> onSaveButtonClick(label, newTitleEditText, dialog));
+        saveBtn.setOnClickListener(view -> onSaveButtonClick(label, newLabelEditText, dialog));
 
         // actually show dialog
         dialog.show();
     }
 
-    public void onDeleteButtonClick(Label label) {
+    public void onDeleteButtonClick(Label label, Runnable onDeleteConfirmed) {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -129,32 +133,70 @@ public class LabelsActivity extends AppCompatActivity {
         // set [cancel, delete] button handlers
         Button cancelBtn = labelDeleteDialogView.findViewById(R.id.label_delete_dialog_cancel_btn);
         cancelBtn.setOnClickListener(view -> dialog.cancel());
+        Button deleteBtn = labelDeleteDialogView.findViewById(R.id.label_delete_dialog_delete_btn);
+        deleteBtn.setOnClickListener(view -> {
+            onDeleteConfirmButtonClick(label);
+
+            // close both dialogs
+            onDeleteConfirmed.run();
+            dialog.dismiss();
+        });
 
         // actually show dialog
         dialog.show();
     }
 
-    public void onSaveButtonClick(Label label, TextInputEditText editText, Dialog dialog) {
-        // check if value valid
-
-        // then submit and close dialog
-        dialog.dismiss();
-
-        // else set error to editText
+    public void onDeleteConfirmButtonClick(Label label) {
+        DatabaseFactory.getDatabase().deleteLabel(label);
+        refreshLabels();
     }
 
-    public void onCreateButtonClick(TextInputEditText editText, Dialog dialog) {
+    public void onSaveButtonClick(Label label, TextInputEditText editText, Dialog dialog) {
+        // get value from field
+        String newLabelTitle = editText.getText() != null ? editText.getText().toString() : null;
+
         // check if value valid
-        if (editText.getText() == null || editText.getText().toString().equals("")) {
+        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
             editText.setError("Empty not allowed!"); // TODO: translatable
             return;
-        } else if (Arrays.stream(labels).anyMatch(label -> label.getTitle().equalsIgnoreCase(editText.getText().toString()))) {
+        } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
+            editText.setError("No spaces at begin of end allowed"); // TODO: translatable
+            return;
+        } else if (!Validators.validateEditLabelTitleUnique(label.getTitle(), newLabelTitle, labels)) {
             editText.setError("Label must be unique"); // TODO: translatable
             return;
         }
 
+        // then submit and close dialog
+        label.setTitle(newLabelTitle);
+        DatabaseFactory.getDatabase().upsertLabel(label);
+        dialog.dismiss();
+        refreshLabels();
+    }
+
+    public void onCreateButtonClick(TextInputEditText editText, Dialog dialog) {
+        // get value from field
+        String newLabelTitle = editText.getText() != null ? editText.getText().toString() : null;
+
+        // check if value valid
+        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
+            editText.setError("Empty not allowed!"); // TODO: translatable
+            return;
+        } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
+            editText.setError("No spaces at begin of end allowed"); // TODO: translatable
+            return;
+        } else if (!Validators.validateNewLabelTitleUnique(newLabelTitle, labels)) {
+            editText.setError("Label must be unique"); // TODO: translatable
+            return;
+        }
+
+        // generate random color (this could be replaced by a color picker in the future)
+        String colorCodeFormat = "#%02X%02X%02X";
+        Random random = new Random();
+        String colorCode = String.format(colorCodeFormat, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
         // save new label to DB then close dialog
-        Label newLabel = new Label(editText.getText().toString(), "#123456", username);
+        Label newLabel = new Label(editText.getText().toString(), colorCode, username);
         DatabaseFactory.getDatabase().upsertLabel(newLabel);
         dialog.dismiss();
         refreshLabels();

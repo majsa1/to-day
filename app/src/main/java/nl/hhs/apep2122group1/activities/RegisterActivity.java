@@ -1,17 +1,16 @@
 package nl.hhs.apep2122group1.activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.utils.Validators;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -50,19 +49,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         // validate values
         boolean error = false;
-        if (name == null || name.isEmpty()) {
+        if (!Validators.validateStringNotNullOrEmpty(name)) {
             nameField.setError("Name cannot be empty");
             error = true;
         }
-        if (username == null || username.isEmpty()) {
+        if (!Validators.validateStringNotNullOrEmpty(username)) {
             usernameField.setError("Username cannot be empty");
             error = true;
         }
-        if (password == null || password.isEmpty()) {
+        else if (!Validators.validateStringDoesNotContainWhitespace(username)) {
+            usernameField.setError("Username cannot contain whitespace");
+            error = true;
+        }
+        if (!Validators.validateStringNotNullOrEmpty(password)) {
             passwordField.setError("Password cannot be empty");
             error = true;
         }
-        else if (password.length() < 6) {
+        else if (!Validators.validatePasswordComplexity(password)) {
             passwordField.setError("Password should have minimum length of 6");
             error = true;
         }
@@ -76,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // values ok, save to DB
-        if (!DatabaseFactory.getDatabase().insertUser(username, password, name)) {
+        if (!DatabaseFactory.getDatabase().insertUser(username, password, name.trim())) {
             usernameField.setError("Username already in use!");
         } else {
             Toast.makeText(this, "Added account, you can now log in!", Toast.LENGTH_SHORT).show();
