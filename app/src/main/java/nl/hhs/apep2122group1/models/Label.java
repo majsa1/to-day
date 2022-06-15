@@ -5,8 +5,6 @@ import static androidx.room.ForeignKey.CASCADE;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = {
@@ -26,10 +24,7 @@ public class Label {
     @ColumnInfo(name = "User_username")
     private String ownerUsername;
 
-    @Ignore
-    private User owner;
-
-    // for demo:
+    // for demo // TODO: remove when ready
     public Label(Integer id, String title, String colorCode, String ownerUsername) {
         this.id = id;
         this.title = title;
@@ -67,24 +62,8 @@ public class Label {
         return colorCode;
     }
 
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
-
     public String getOwnerUsername() {
         return ownerUsername;
-    }
-
-    public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = ownerUsername;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     @Override
