@@ -77,6 +77,21 @@ public class ValidatorsTests {
         Assert.assertTrue(Validators.validateNewLabelTitleUnique("Kn1tt1ng Club", labels));
     }
 
+    @Test
+    public void validateEditLabelTitleUnique_validates_correctly() {
+        Label[] labels = getLabels();
+
+        Assert.assertFalse(Validators.validateEditLabelTitleUnique("School", "Work", labels));
+        Assert.assertFalse(Validators.validateEditLabelTitleUnique("Groceries", "PETS", labels));
+        Assert.assertFalse(Validators.validateEditLabelTitleUnique("Knitting Club", "school", labels));
+
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("school", "school", labels));
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("school", "Sch00l", labels));
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("Groceries", "u41qu3", labels));
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("Knitting Club", "Dance Association", labels));
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("Work", "w0rk", labels));
+    }
+
     private Label[] getLabels() {
         Label label1 = new Label("School", "#123456", "AvengersFanboy");
         Label label2 = new Label("Work", "#123456", "AvengersFanboy");

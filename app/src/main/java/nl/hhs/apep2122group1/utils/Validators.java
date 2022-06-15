@@ -37,6 +37,15 @@ public class Validators {
         return true;
     }
 
+    public static boolean validateEditLabelTitleUnique(String oldLabelTitle, String newLabelTitle, Label[] existingLabels) {
+        if (newLabelTitle.equalsIgnoreCase(oldLabelTitle)) {
+            return true;
+        } else if (Arrays.stream(existingLabels).noneMatch(l -> l.getTitle().equalsIgnoreCase(newLabelTitle))) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean validateNewLabelTitleUnique(String newLabelTitle, Label[] existingLabels) {
         boolean labelAlreadyUsed = Arrays.stream(existingLabels).anyMatch(l -> l.getTitle().equalsIgnoreCase(newLabelTitle));
         return !labelAlreadyUsed;

@@ -31,7 +31,6 @@
             android:layout_height="8dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/label_edit_dialog_new_title_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
