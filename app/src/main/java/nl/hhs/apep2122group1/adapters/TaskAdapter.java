@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import nl.hhs.apep2122group1.utils.Alerts;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.activities.ViewActivity;
@@ -30,10 +32,12 @@ import nl.hhs.apep2122group1.models.Task;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private Context context;
     private List<Task> tasks;
+    private Runnable onDatabaseUpdated;
 
-    public TaskAdapter(Context context, List<Task> tasks) {
+    public TaskAdapter(Context context, List<Task> tasks, Runnable onDatabaseUpdated) {
         this.context = context;
         this.tasks = tasks;
+        this.onDatabaseUpdated = onDatabaseUpdated;
     }
 
     @NonNull
@@ -69,7 +73,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         holder.taskStatusTv.setText(completed ? R.string.task_adapter_completed_tv_text : R.string.task_adapter_due_tv_text);
 
-        String deadlineString =  task.getDeadline() == null ?
+        String deadlineString = task.getDeadline() == null ?
                 context.getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline());
         String taskDate = completed ? Converter.timeStampToString(task.getCompleted()) : deadlineString;
         holder.taskDateTv.setText(taskDate);
@@ -104,6 +108,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 int taskId = task.getId();
                 intent.putExtra("TASK_ID", taskId);
                 context.startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Alerts.deleteAlert(context, task, onDatabaseUpdated);
+                return false;
             }
         });
     }

@@ -1,6 +1,5 @@
 package nl.hhs.apep2122group1.activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import nl.hhs.apep2122group1.R;
+import nl.hhs.apep2122group1.utils.Alerts;
 import nl.hhs.apep2122group1.utils.Sorting;
 import nl.hhs.apep2122group1.adapters.TaskAdapter;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
@@ -60,6 +60,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void setTaskList() {
+        selectedFilterId = -1;
         setTasks();
         filterAndSortTasksByStatus(toDo);
         setList();
@@ -105,7 +106,7 @@ public class TaskListActivity extends AppCompatActivity {
 
     private void setList() {
         RecyclerView recyclerView = findViewById(R.id.task_list_rv_id);
-        adapter = new TaskAdapter(this, sortedTasks);
+        adapter = new TaskAdapter(this, sortedTasks, () -> setTaskList());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -191,14 +192,14 @@ public class TaskListActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.popup_filter_all_id) {
                 sortedTasks = new ArrayList<>(tasks);
-                filterAndSortTasksByStatus(toDo); // look into preserving current sorting
+                filterAndSortTasksByStatus(toDo);
                 selectedFilterId = -1;
                 setList();
                 return true;
             }
             if (menuItem.getItemId() == R.id.popup_filter_noLabel_id) {
                 sortedTasks = new ArrayList<>(tasks);
-                filterAndSortTasksByStatus(toDo); // look into preserving current sorting
+                filterAndSortTasksByStatus(toDo);
 
                 for (Task task : sortedTasks) {
                     if (task.getLabelId() == null) {
@@ -233,14 +234,14 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onToDoBtnPressed(View view) {
-        selectedFilterId = -1; // reset filter to all?
+        selectedFilterId = -1;
         toDo = true;
         filterAndSortTasksByStatus(toDo);
         adapter.notifyDataSetChanged();
     }
 
     public void onDoneBtnPressed(View view) {
-        selectedFilterId = -1; // reset filter to all?
+        selectedFilterId = -1;
         toDo = false;
         filterAndSortTasksByStatus(toDo);
         adapter.notifyDataSetChanged();
@@ -263,12 +264,6 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onLogoutBtnPressed(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.task_list_logout_btn_title_text)
-                .setCancelable(false) // cannot be cancelled by pressing outside of dialog
-                .setPositiveButton(R.string.task_list_logout_btn_confirm_text, (dialog, id) -> finish())
-                .setNegativeButton(R.string.task_list_logout_btn_cancel_text, (dialog, id) -> dialog.cancel());
-        AlertDialog alert = builder.create();
-        alert.show();
+        Alerts.logoutAlert(this);
     }
 }
