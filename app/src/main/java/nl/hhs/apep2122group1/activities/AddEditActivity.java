@@ -20,7 +20,7 @@ import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
 
-public class AddEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AddEditActivity extends AppCompatActivity {
 
     Label[] labels;
     Task task;
@@ -52,18 +52,8 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
             editHeader.setText(R.string.edit_edit_title_pt);
             title.setText(task.getTitle());
             deadline.setText(task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline()));
-//          labelName
             description.setText(task.getDescription());
         }
-    }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getApplicationContext(), labels[position].getTitle(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        Toast.makeText(this, "<no label>", Toast.LENGTH_LONG).show();
     }
 
     private void setUsernameFromIntent() {
@@ -123,8 +113,24 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void updateTask() {
-        // TODO: save
+        // TODO: dubble finish??
+        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
+        TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
+        Spinner label = findViewById(R.id.add_edit_label_sp_text);
+        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
+        String titleString = title.getText().toString();
+        String descriptionString = description.getText().toString();
+        Label selectedLabel = (Label) label.getSelectedItem();
+        Integer labelId = selectedLabel.getId() == null ? null : selectedLabel.getId();
+
+        task.setTitle(titleString);
+        task.setDescription(descriptionString);
+        task.setLabelId(labelId);
+
+        DatabaseFactory.getDatabase().upsertTask(task);
+        Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
+                .show();
     }
 
     private void makeTask() {
@@ -142,11 +148,14 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         Integer labelId = selectedLabel.getId() == null ? null : selectedLabel.getId();
         Task task = new Task(titleString, null, descriptionString, username, labelId);
         DatabaseFactory.getDatabase().upsertTask(task);
-        System.out.println("task to database");
+        Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
+                .show();
     }
 
     public void onBackBtnPressed(View view) {
         finish();
+        Toast.makeText(this, R.string.add_edit_back_btn, Toast.LENGTH_SHORT)
+                .show();
     }
 
     @Override
@@ -164,7 +173,11 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         deadline.getText().clear();
         label.setSelection(labels.length - 1);
         description.getText().clear();
+
+        Toast.makeText(this, R.string.add_edit_clear_btn_id, Toast.LENGTH_SHORT)
+                .show();
     }
+
 
 
 }
