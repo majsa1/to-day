@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ import nl.hhs.apep2122group1.models.Task;
 
 
 public class AddEditActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    // nog string maken label??
+
     Label[] labels;
     Task task;
     String username;
@@ -143,7 +144,17 @@ public class AddEditActivity extends AppCompatActivity implements AdapterView.On
         super.onStart();
     }
 
+    public void onclear(View view){
+        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
+        TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
+        Spinner label = findViewById(R.id.add_edit_label_sp_text);
+        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
+        title.getText().clear();
+        deadline.getText().clear();
+        //label.getText().clear();
+        description.getText().clear();
+    }
 
 
 }
