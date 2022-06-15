@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
                 android:minHeight="48dp"
-                android:onClick="onclear"
+                android:onClick="onClear"
                 android:text="@string/add_edit_clear_btn_id" />
 
             <Button
