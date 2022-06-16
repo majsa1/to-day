@@ -27,6 +27,7 @@ public class AddEditActivity extends AppCompatActivity {
     String username;
     Label label;
     int taskId;
+    Label noLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,6 @@ public class AddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_edit);
 
         setTaskFromIntent();
-
-        //Getting the instance of Spinner and applying OnItemSelectedListener on it
-
-
-
-
-
 
         if (taskId != -1) {
             TextView editHeader = findViewById(R.id.add_edit_title_pt);
@@ -72,7 +66,8 @@ public class AddEditActivity extends AppCompatActivity {
             setUsernameFromIntent();
         }
 
-        Label noLabel = new Label("No label", "", ""); // TODO: make resource
+        Label noLabel = new Label("<" + getApplicationContext().getResources().
+                getString(R.string.no_label_text) + ">", "", ""); ;
         Label[] tempList = DatabaseFactory.getDatabase().getAllLabels(username);
         labels = new Label[tempList.length + 1];
         for (int i = 0; i < labels.length -1; i++) {
@@ -122,11 +117,11 @@ public class AddEditActivity extends AppCompatActivity {
         String titleString = title.getText().toString();
         String descriptionString = description.getText().toString();
         Label selectedLabel = (Label) label.getSelectedItem();
-        Integer labelId = selectedLabel.getId() == null ? null : selectedLabel.getId();
+        //Integer labelId = selectedLabel.getId() == null ? null : selectedLabel.getId();
 
         task.setTitle(titleString);
         task.setDescription(descriptionString);
-        task.setLabelId(labelId);
+        task.setLabelId(selectedLabel.getId());
 
         DatabaseFactory.getDatabase().upsertTask(task);
         Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
@@ -145,8 +140,7 @@ public class AddEditActivity extends AppCompatActivity {
         String deadlineString = deadline.getText().toString();
 
         Label selectedLabel = (Label) label.getSelectedItem();
-        Integer labelId = selectedLabel.getId() == null ? null : selectedLabel.getId();
-        Task task = new Task(titleString, null, descriptionString, username, labelId);
+        Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
         DatabaseFactory.getDatabase().upsertTask(task);
         Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                 .show();

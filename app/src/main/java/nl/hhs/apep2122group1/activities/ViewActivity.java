@@ -23,6 +23,12 @@ public class ViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         Intent intent = getIntent();
         taskId = intent.getIntExtra("TASK_ID", -1);
         Task task = DatabaseFactory.getDatabase().getTask(taskId);
@@ -43,13 +49,8 @@ public class ViewActivity extends AppCompatActivity {
         completed.setText(
                 task.getCompleted() == null ? getResources().getString(R.string.view_in_progress_text) : Converter.timeStampToString(task.getCompleted()));
         labelName.setText(
-                label == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
+                task.getLabelId() == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
         description.setText(task.getDescription());
-    }
-
-    @Override // TODO: test - does this work without?
-    public void onStart() {
-        super.onStart();
     }
 
     public void onEditBtnPressed(View view) {

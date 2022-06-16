@@ -73,5 +73,6 @@
     <string name="task_delete_message_text">Weet zeker dat je deze taak wilt verwijderen? \n\nDit kan niet ongedaan gemaakt worden.</string>
     <string name="add_edit_back_btn">Terug</string>
     <string name="task_delete_title_text">Taak verwijderen</string>
+    <string name="add_edit_no_label_text">Geen label</string>
 
 </resources>
