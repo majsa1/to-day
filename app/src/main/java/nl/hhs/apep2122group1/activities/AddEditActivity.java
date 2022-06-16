@@ -35,13 +35,6 @@ public class AddEditActivity extends AppCompatActivity {
 
         setTaskFromIntent();
 
-        //Getting the instance of Spinner and applying OnItemSelectedListener on it
-
-
-
-
-
-
         if (taskId != -1) {
             TextView editHeader = findViewById(R.id.add_edit_title_pt);
             TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);

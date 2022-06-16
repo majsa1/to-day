@@ -58,6 +58,7 @@
     <string name="add_edit_back_btn_id">back</string>
     <string name="add_edit_clear_btn_id">Clear</string>
     <string name="edit_edit_title_pt">Edit task</string>
+    <string name="Add_edit_No_label_text">No label</string>
 
     <!--view-->
     <string name="view_name_task_tv">Name Task</string>
@@ -89,6 +90,7 @@
     <string name="label_create_dialog_title_hint">Title</string>
     <string name="label_create_dialog_cancel_btn">Cancel</string>
     <string name="label_create_dialog_create_btn">Create</string>
+
 
     <!-- Generic -->
     <string name="no_label_text">No label</string>
