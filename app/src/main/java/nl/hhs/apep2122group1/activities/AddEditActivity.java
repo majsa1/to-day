@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 import nl.hhs.apep2122group1.utils.Validators;
@@ -55,19 +55,20 @@ public class AddEditActivity extends AppCompatActivity {
     }
 
     private void setTaskFromIntent(){ // ToDo: check if method can be split / renamed
+        FileDatabase db = FileDatabase.getDatabase(this);
         Intent intent = getIntent();
         taskId = intent.getIntExtra("TASK_ID", -1);
 
         if (taskId != -1) {
-            task = DatabaseFactory.getDatabase().getTask(taskId);
-            username = task.getOwnerUsername();
+            task = db.getTask(taskId);
+            username = task.getUserUsername();
         }else{
             setUsernameFromIntent();
         }
 
         Label noLabel = new Label("<" + getApplicationContext().getResources().
                 getString(R.string.no_label_text) + ">", "", ""); ;
-        Label[] tempList = DatabaseFactory.getDatabase().getAllLabels(username);
+        Label[] tempList = db.getAllLabels(username);
         labels = new Label[tempList.length + 1];
         for (int i = 0; i < labels.length -1; i++) {
             labels[i] = tempList[i];
@@ -123,7 +124,7 @@ public class AddEditActivity extends AppCompatActivity {
             task.setDescription(descriptionString);
             task.setLabelId(selectedLabel.getId());
 
-            DatabaseFactory.getDatabase().upsertTask(task);
+            FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
@@ -148,7 +149,7 @@ public class AddEditActivity extends AppCompatActivity {
         if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
             Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
-            DatabaseFactory.getDatabase().upsertTask(task);
+            FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();

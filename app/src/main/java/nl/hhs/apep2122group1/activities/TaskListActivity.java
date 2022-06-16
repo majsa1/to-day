@@ -20,9 +20,9 @@ import java.util.List;
 
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.utils.Alerts;
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Sorting;
 import nl.hhs.apep2122group1.adapters.TaskAdapter;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 import nl.hhs.apep2122group1.models.User;
@@ -54,7 +54,7 @@ public class TaskListActivity extends AppCompatActivity {
     private void getUser() {
         Intent intent = getIntent();
         String username = intent.getStringExtra("USERNAME");
-        user = DatabaseFactory.getDatabase().getUser(username);
+        user = FileDatabase.getDatabase(this).getUser(username);
         TextView title = findViewById(R.id.task_list_title_tv_id);
         title.setText(String.format(getResources().getString(R.string.task_list_title_tv_text), user.getName()));
     }
@@ -67,7 +67,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     private void setTasks() {
-        tasks = Arrays.asList(DatabaseFactory.getDatabase().getAllTasks(user.getUsername()));
+        tasks = Arrays.asList(FileDatabase.getDatabase(this).getAllTasks(user.getUsername()));
         sortedTasks = new ArrayList<>();
     }
 
@@ -168,7 +168,7 @@ public class TaskListActivity extends AppCompatActivity {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
-        Label[] labels = DatabaseFactory.getDatabase().getAllLabels(user.getUsername());
+        Label[] labels = FileDatabase.getDatabase(this).getAllLabels(user.getUsername());
         ArrayList<Label> uniqueLabels = new ArrayList<>();
 
         popupMenu.getMenuInflater().inflate(R.menu.popup_filter, popupMenu.getMenu());

@@ -6,7 +6,7 @@ import android.content.Context;
 import androidx.appcompat.app.AlertDialog;
 
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.models.Task;
 
 public class Alerts {
@@ -27,7 +27,7 @@ public class Alerts {
         builder.setMessage(R.string.task_delete_message_text)
                 .setCancelable(false)
                 .setPositiveButton(R.string.alert_confirm_text, (dialog, id) -> {
-                    DatabaseFactory.getDatabase().deleteTask(task);
+                    FileDatabase.getDatabase(context).deleteTask(task);
                     onPositiveCallback.run();
                 })
                 .setNegativeButton(R.string.alert_cancel_text, (dialog, id) -> dialog.cancel());

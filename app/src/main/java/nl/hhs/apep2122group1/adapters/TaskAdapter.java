@@ -22,10 +22,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import nl.hhs.apep2122group1.utils.Alerts;
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.activities.ViewActivity;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
@@ -88,7 +88,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             }
         }
 
-        Label[] labels = DatabaseFactory.getDatabase().getAllLabels(task.getOwnerUsername());
+        Label[] labels = FileDatabase.getDatabase(context).getAllLabels(task.getUserUsername());
 
         for (Label label : labels) {
             if (label.getId().equals(task.getLabelId())) {
