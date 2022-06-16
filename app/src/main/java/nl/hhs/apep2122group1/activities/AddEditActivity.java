@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
+import nl.hhs.apep2122group1.utils.Validators;
 
 
 public class AddEditActivity extends AppCompatActivity {
@@ -27,7 +27,6 @@ public class AddEditActivity extends AppCompatActivity {
     String username;
     Label label;
     int taskId;
-    Label noLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class AddEditActivity extends AppCompatActivity {
         username = intent.getStringExtra("USERNAME");
     }
 
-    private void setTaskFromIntent(){
+    private void setTaskFromIntent(){ // ToDo: check if method can be split / renamed
         Intent intent = getIntent();
         taskId = intent.getIntExtra("TASK_ID", -1);
 
@@ -104,7 +103,6 @@ public class AddEditActivity extends AppCompatActivity {
         } else {
             updateTask();
         }
-        finish();
     }
 
     private void updateTask() {
@@ -116,16 +114,22 @@ public class AddEditActivity extends AppCompatActivity {
 
         String titleString = title.getText().toString();
         String descriptionString = description.getText().toString();
-        Label selectedLabel = (Label) label.getSelectedItem();
-        //Integer labelId = selectedLabel.getId() == null ? null : selectedLabel.getId();
 
-        task.setTitle(titleString);
-        task.setDescription(descriptionString);
-        task.setLabelId(selectedLabel.getId());
+        // TODO: use same functionality as in login/register, add more validation (see Validators)
+        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
+            Label selectedLabel = (Label) label.getSelectedItem();
 
-        DatabaseFactory.getDatabase().upsertTask(task);
-        Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
-                .show();
+            task.setTitle(titleString);
+            task.setDescription(descriptionString);
+            task.setLabelId(selectedLabel.getId());
+
+            DatabaseFactory.getDatabase().upsertTask(task);
+            Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        } else {
+            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+        }
     }
 
     private void makeTask() {
@@ -139,22 +143,24 @@ public class AddEditActivity extends AppCompatActivity {
         String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
 
-        Label selectedLabel = (Label) label.getSelectedItem();
-        Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
-        DatabaseFactory.getDatabase().upsertTask(task);
-        Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
-                .show();
+        // TODO: does description need to be required?
+        // TODO: use same functionality as in login/register
+        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
+            Label selectedLabel = (Label) label.getSelectedItem();
+            Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
+            DatabaseFactory.getDatabase().upsertTask(task);
+            Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
+                    .show();
+            finish();
+        } else {
+            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+        }
     }
 
     public void onBackBtnPressed(View view) {
         finish();
         Toast.makeText(this, R.string.add_edit_back_btn, Toast.LENGTH_SHORT)
                 .show();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     public void onClear(View view){
@@ -171,7 +177,4 @@ public class AddEditActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.add_edit_clear_btn_id, Toast.LENGTH_SHORT)
                 .show();
     }
-
-
-
 }
