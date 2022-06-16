@@ -26,15 +26,15 @@ public class Validators {
         return true;
     }
 
-    public static boolean validatePasswordComplexity(String password) {
+    public static ValidationResult validatePasswordComplexity(String password) {
         if (password.equals("123456") || password.equalsIgnoreCase("abcdef") || password.equalsIgnoreCase("password") || password.equalsIgnoreCase("batman")) {
-            return false;
+            return ValidationResult.SPECIFIC_INPUT_NOT_ALLOWED;
         } else if (allCharactersAreTheSame(password)) {
-            return false;
+            return ValidationResult.SAME_CHARACTERS;
         } else if (password.length() < 6) {
-            return false;
+            return ValidationResult.TOO_SHORT;
         }
-        return true;
+        return ValidationResult.OK;
     }
 
     public static boolean validateEditLabelTitleUnique(String oldLabelTitle, String newLabelTitle, Label[] existingLabels) {
