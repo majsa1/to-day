@@ -2,9 +2,13 @@ package nl.hhs.apep2122group1.utils;
 
 import androidx.room.TypeConverter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+import java.util.Date;
 
 public class Converter {
     public static String timeStampToString(LocalDateTime timeStamp) {
@@ -13,6 +17,16 @@ public class Converter {
             return formatter.format(timeStamp);
         }
         return null;
+    }
+
+    public static LocalDateTime stringToDate(String userInput) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime timeStamp = LocalDateTime.parse(userInput, formatter);
+            return timeStamp;
+        } catch (DateTimeParseException parseException) {
+            return null;
+        }
     }
 
     @TypeConverter
@@ -30,4 +44,6 @@ public class Converter {
         }
         return localDateTime.toString();
     }
+
+
 }

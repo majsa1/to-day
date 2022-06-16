@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDateTime;
+
 import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
@@ -115,6 +117,8 @@ public class AddEditActivity extends AppCompatActivity {
 
         String titleString = title.getText().toString();
         String descriptionString = description.getText().toString();
+        String deadlineString = deadline.getText().toString();
+        LocalDateTime deadlineInput = Converter.stringToDate(deadlineString);
 
         // TODO: use same functionality as in login/register, add more validation (see Validators)
         if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
@@ -123,17 +127,18 @@ public class AddEditActivity extends AppCompatActivity {
             task.setTitle(titleString);
             task.setDescription(descriptionString);
             task.setLabelId(selectedLabel.getId());
+            task.setDeadline(deadlineInput);
 
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
         } else {
-            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show(); // TODO: use resource
         }
     }
 
-    private void makeTask() {
+    private void makeTask() { // TODO implement same functionality in update
 
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
@@ -143,18 +148,19 @@ public class AddEditActivity extends AppCompatActivity {
         String titleString = title.getText().toString();
         String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
+        LocalDateTime deadlineTimeStamp = Converter.stringToDate(deadlineString);
 
         // TODO: does description need to be required?
         // TODO: use same functionality as in login/register
-        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
+        if ((deadlineString.trim().equals("") || deadlineTimeStamp != null) && Validators.validateStringNotNullOrEmpty(titleString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
-            Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
+            Task task = new Task(titleString.trim(), deadlineTimeStamp, descriptionString.trim(), username, selectedLabel.getId());
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
         } else {
-            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+            Toast.makeText(this, "Please check all fields", Toast.LENGTH_SHORT).show(); // TODO: use resource
         }
     }
 
