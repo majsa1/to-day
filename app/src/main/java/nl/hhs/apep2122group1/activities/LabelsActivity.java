@@ -17,10 +17,9 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Random;
-import java.util.concurrent.Callable;
 
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.utils.Validators;
 
@@ -49,7 +48,7 @@ public class LabelsActivity extends AppCompatActivity {
 
         // clear any previous chips/labels and retrieve current labels
         chipGroup.removeViews(0, chipGroup.getChildCount());
-        labels = DatabaseFactory.getDatabase().getAllLabels(username);
+        labels = FileDatabase.getDatabase(this).getAllLabels(username);
 
         // create all the chips, add to ChipGroup
         for (Label l : labels) {
@@ -147,7 +146,7 @@ public class LabelsActivity extends AppCompatActivity {
     }
 
     public void onDeleteConfirmButtonClick(Label label) {
-        DatabaseFactory.getDatabase().deleteLabel(label);
+        FileDatabase.getDatabase(this).deleteLabel(label);
         refreshLabels();
     }
 
@@ -169,7 +168,7 @@ public class LabelsActivity extends AppCompatActivity {
 
         // then submit and close dialog
         label.setTitle(newLabelTitle);
-        DatabaseFactory.getDatabase().upsertLabel(label);
+        FileDatabase.getDatabase(this).upsertLabel(label);
         dialog.dismiss();
         refreshLabels();
     }
@@ -197,7 +196,7 @@ public class LabelsActivity extends AppCompatActivity {
 
         // save new label to DB then close dialog
         Label newLabel = new Label(editText.getText().toString(), colorCode, username);
-        DatabaseFactory.getDatabase().upsertLabel(newLabel);
+        FileDatabase.getDatabase(this).upsertLabel(newLabel);
         dialog.dismiss();
         refreshLabels();
     }

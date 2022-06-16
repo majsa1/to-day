@@ -7,9 +7,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
@@ -31,10 +31,10 @@ public class ViewActivity extends AppCompatActivity {
         super.onStart();
         Intent intent = getIntent();
         taskId = intent.getIntExtra("TASK_ID", -1);
-        Task task = DatabaseFactory.getDatabase().getTask(taskId);
+        Task task = FileDatabase.getDatabase(this).getTask(taskId);
 
         if (task.getLabelId() != null) {
-            label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
+            label = FileDatabase.getDatabase(this).getLabel(task.getLabelId());
         }
 
         TextView title = findViewById(R.id.view_name_task_tv);

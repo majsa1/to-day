@@ -10,7 +10,6 @@ public interface Database {
     Task getTask(int id);
     void upsertTask(Task task);
     void deleteTask(Task task);
-    void markTask(Task task, boolean done);
 
     // labels
     Label[] getAllLabels(String ownerUsername);
@@ -21,5 +20,5 @@ public interface Database {
     // users
     User getUser(String username, String password);
     User getUser(String username);
-    boolean insertUser(String username, String password, String name);
+    boolean insertUser(User user);
 }

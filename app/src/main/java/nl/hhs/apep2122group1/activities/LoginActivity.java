@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.models.User;
 import nl.hhs.apep2122group1.utils.Validators;
 
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // values ok, save to DB
-        User user = DatabaseFactory.getDatabase().getUser(username, password);
+        User user = FileDatabase.getDatabase(this).getUser(username, password);
         if (user == null) {
             usernameField.setError("Incorrect credentials!");
             passwordField.setError("Incorrect credentials!");

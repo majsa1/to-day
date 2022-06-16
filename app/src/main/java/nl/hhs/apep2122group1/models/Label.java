@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
         @ForeignKey(
                 entity = User.class,
                 parentColumns = "username",
-                childColumns = "User_username",
+                childColumns = "user_username",
                 onDelete = CASCADE),
 })
 
@@ -21,24 +21,15 @@ public class Label {
     private String title;
     private String colorCode;
 
-    @ColumnInfo(name = "User_username")
-    private String ownerUsername;
+    @ColumnInfo(name = "user_username", collate = ColumnInfo.NOCASE)
+    private String userUsername;
 
-    // for demo // TODO: remove when ready
-    public Label(Integer id, String title, String colorCode, String ownerUsername) {
-        this.id = id;
+    public Label(String title, String colorCode, String userUsername) {
         this.title = title;
         this.colorCode = colorCode;
-        this.ownerUsername = ownerUsername;
+        this.userUsername = userUsername;
     }
 
-    public Label(String title, String colorCode, String ownerUsername) {
-        this.title = title;
-        this.colorCode = colorCode;
-        this.ownerUsername = ownerUsername;
-    }
-
-    // for db:
     public Label() {
     }
 
@@ -62,8 +53,16 @@ public class Label {
         return colorCode;
     }
 
-    public String getOwnerUsername() {
-        return ownerUsername;
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    public String getUserUsername() {
+        return userUsername;
+    }
+
+    public void setUserUsername(String userUsername) {
+        this.userUsername = userUsername;
     }
 
     @Override
