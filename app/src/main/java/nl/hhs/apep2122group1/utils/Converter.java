@@ -17,11 +17,17 @@ public class Converter {
 
     @TypeConverter
     public static LocalDateTime LocalDateTimeFromIso8601String(String dateTimeString) {
+        if (dateTimeString == null) {
+            return null;
+        }
         return LocalDateTime.parse(dateTimeString);
     }
 
     @TypeConverter
     public static String iso8601StringFromLocalDateTime(LocalDateTime localDateTime) {
+        if (localDateTime == null) {
+            return null;
+        }
         return localDateTime.toString();
     }
 }
