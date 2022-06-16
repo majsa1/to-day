@@ -29,10 +29,10 @@ public class Validators {
     public static ValidationResult validatePasswordComplexity(String password) {
         if (password.equals("123456") || password.equalsIgnoreCase("abcdef") || password.equalsIgnoreCase("password") || password.equalsIgnoreCase("batman")) {
             return ValidationResult.SPECIFIC_INPUT_NOT_ALLOWED;
-        } else if (allCharactersAreTheSame(password)) {
-            return ValidationResult.SAME_CHARACTERS;
         } else if (password.length() < 6) {
             return ValidationResult.TOO_SHORT;
+        } else if (allCharactersAreTheSame(password)) {
+            return ValidationResult.SAME_CHARACTERS;
         }
         return ValidationResult.OK;
     }
