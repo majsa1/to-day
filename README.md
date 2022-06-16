@@ -2,8 +2,8 @@
 
 >To-day. Everything you need to do today.*
 
-This To-day android application is an application where users can keep a list of everything they need to do. It is a
-so-called 'todo-list' application.
+>This To-day android application is an application where users can keep a list of everything they need to do. It is a
+>so-called 'todo-list' application.
 
 ## Installation
 
