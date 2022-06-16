@@ -37,14 +37,7 @@
     <string name="popup_sort_default_text">Standaard</string>
     <string name="popup_filter_title_text">Filter bij label</string>
     <string name="popup_filter_all_text">Allemaal</string>
-    <string name="register_name_et_hint">Jouw naam</string>
-    <string name="register_retype_password_et_hint">Hertype password</string>
-    <string name="register_login_instead_tv_text">Liever inloggen</string>
-    <string name="login_register_instead_tv_text">Liever registeren</string>
-    <string name="register_register_btn_title">registreren</string>
-    <string name="register_title">Registreren</string>
-    <string name="username_et_hint">Gebruikersnaam</string>
-    <string name="add_edit_title_pt">Voeg  taak toe</string>
+    <string name="add_edit_title_pt">Voeg taak toe</string>
     <string name="edit_name_ti_text">Naam</string>
     <string name="add_edit_description_ti_text">Omschrijving</string>
     <string name="add_edit_save_btn_id">Opslaan</string>
@@ -64,15 +57,36 @@
     <string name="view_in_progress_text">Bezig</string>
     <string name="no_label_text">Geen label</string>
     <string name="no_deadline_text">Geen deadline</string>
-    <string name="password_et_hint">Wachtwoord</string>
-    <string name="login_login_btn_title">Log in</string>
-    <string name="login_title">Log in</string>
     <string name="first_fragment_label">1e fragment</string>
     <string name="second_fragment_label">2e fragment</string>
     <string name="edit_edit_title_pt">Bewerk taak</string>
     <string name="task_delete_message_text">Weet zeker dat je deze taak wilt verwijderen? \n\nDit kan niet ongedaan gemaakt worden.</string>
     <string name="add_edit_back_btn">Terug</string>
     <string name="task_delete_title_text">Taak verwijderen</string>
-    <string name="add_edit_no_label_text">Geen label</string>
 
+    <!-- Register -->
+    <string name="register_title">Registreren</string>
+    <string name="register_name_et_hint">Je naam</string>
+    <string name="register_retype_password_et_hint">Wachtwoord (controle)</string>
+    <string name="register_login_instead_tv_text">Ga naar Log in</string>
+    <string name="register_register_btn_title">Registreren</string>
+    <string name="register_registered_toast">Account aangemaakt, je wordt automatisch ingelogd</string>
+    <string name="register_validation_username_in_use">Gebruikersnaam al in gebruik</string>
+    <string name="register_validation_username_cannot_contain_whitespace">Gebruikersnaam mag geen witruimte bevatten</string>
+    <string name="register_validation_passwords_not_equal">Wachtwoorden zijn niet gelijk</string>
+    <string name="register_validation_password_too_short">Wachtwoord te kort</string>
+    <string name="register_validation_password_too_simple">Wachtwoord mag niet uit allemaal dezelfde karakters bestaan</string>
+    <string name="register_validation_password_is_known_string">Wachtwoord te gemakkelijk te raden</string>
+
+    <!-- Login -->
+    <string name="login_title">Log in</string>
+    <string name="login_register_instead_tv_text">Ga naar Registreren</string>
+    <string name="login_login_btn_title">Log in</string>
+    <string name="login_validation_invalid_credentials">Ongeldige logingegevens</string>
+    <string name="login_logged_in_toast">Ingelogd als %s</string>
+
+    <!-- Register/Login -->
+    <string name="username_et_hint">Gebruikersnaam</string>
+    <string name="password_et_hint">Wachtwoord</string>
+    <string name="validation_field_empty">Veld mag niet leeg zijn</string>
 </resources>

@@ -38,19 +38,29 @@
     <string name="register_retype_password_et_hint">Retype password</string>
     <string name="register_login_instead_tv_text">Login instead</string>
     <string name="register_register_btn_title">Register</string>
+    <string name="register_registered_toast">Account created, you are being logged in automatically</string>
+    <string name="register_validation_username_in_use">Username already in use</string>
+    <string name="register_validation_username_cannot_contain_whitespace">Username cannot contain whitespace</string>
+    <string name="register_validation_passwords_not_equal">Passwords not equal</string>
+    <string name="register_validation_password_too_short">Password too short</string>
+    <string name="register_validation_password_too_simple">Password may not consist of all the same characters</string>
+    <string name="register_validation_password_is_known_string">Password too easy to guess</string>
 
     <!-- Login -->
     <string name="login_title">Login</string>
     <string name="login_register_instead_tv_text">Register instead</string>
     <string name="login_login_btn_title">Login</string>
+    <string name="login_validation_invalid_credentials">Incorrect credentials</string>
+    <string name="login_logged_in_toast">Logged in as %s</string>
 
-    <!-- Generic Register/Login -->
+    <!-- Register/Login -->
     <string name="username_et_hint">Username</string>
     <string name="password_et_hint">Password</string>
+    <string name="validation_field_empty">Field cannot be empty</string>
 
     <!-- AddEdit-->
     <string name="add_edit_title_pt">Create task</string>
-    <string name="add_edit_deadline_dt" translatable="false">Deadline test(yyyy-mm-dd hh-mm)</string>
+    <string name="add_edit_deadline_dt" translatable="false">Deadline (yyyy-mm-dd hh:mm)</string>
     <string name="edit_name_ti_text">Name</string>
     <string name="add_edit_description_ti_text">Description</string>
     <string name="add_edit_save_btn_id">Save</string>

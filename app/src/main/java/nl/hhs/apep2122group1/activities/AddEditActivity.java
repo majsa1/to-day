@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Calendar;
-
 import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
@@ -35,9 +33,7 @@ public class AddEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit);
 
-
         setTaskFromIntent();
-
 
         if (taskId != -1) {
             TextView editHeader = findViewById(R.id.add_edit_title_pt);
@@ -121,7 +117,7 @@ public class AddEditActivity extends AppCompatActivity {
         String descriptionString = description.getText().toString();
 
         // TODO: use same functionality as in login/register, add more validation (see Validators)
-        if (Validators.validateStringNotNullOrEmpty(titleString)) {
+        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
 
             task.setTitle(titleString);
@@ -133,7 +129,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
         }
     }
 
@@ -147,12 +143,10 @@ public class AddEditActivity extends AppCompatActivity {
         String titleString = title.getText().toString();
         String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
-       // String titleString = title.getText() != null ? title.getText().toString() : null;
-        //String descriptionString = description.getText() != null ? description.getText().toString() : null;
 
         // TODO: does description need to be required?
         // TODO: use same functionality as in login/register
-        if (Validators.validateStringNotNullOrEmpty(titleString)) {
+        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
             Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
             FileDatabase.getDatabase(this).upsertTask(task);
@@ -160,7 +154,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
         }
     }
 
@@ -172,7 +166,6 @@ public class AddEditActivity extends AppCompatActivity {
 
     public void onClear(View view){
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
-
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
         Spinner label = findViewById(R.id.add_edit_label_sp_text);
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
