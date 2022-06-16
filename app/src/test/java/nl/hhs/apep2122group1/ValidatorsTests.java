@@ -4,60 +4,57 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import nl.hhs.apep2122group1.models.Label;
+import nl.hhs.apep2122group1.utils.ValidationResult;
 import nl.hhs.apep2122group1.utils.Validators;
 
+/**
+ * These tests verify whether the validation methods pass or fail correctly for all sorts of
+ * given input. Some are written from user perspective, some are written from developer perspective
+ * as they may be used to prevent the database from containing invalid, confusing or aesthetically
+ * unpleasing data such as a label with an empty title, a username containing spaces, or a name
+ * starting with whitespace.
+ */
 @SuppressWarnings("ConstantConditions")
 public class ValidatorsTests {
     @Test
-    public void validateStringNotNullOrEmpty_indentifies_null_and_empty_string() {
+    public void validateStringNotNullOrEmpty_null_and_empty_strings_fail() {
         Assert.assertFalse(Validators.validateStringNotNullOrEmpty(null));
         Assert.assertFalse(Validators.validateStringNotNullOrEmpty(""));
     }
 
     @Test
-    public void validateStringNotNullOrEmpty_indentifies_not_empty_strings() {
+    public void validateStringNotNullOrEmpty_not_empty_strings_pass() {
         Assert.assertTrue(Validators.validateStringNotNullOrEmpty(" "));
         Assert.assertTrue(Validators.validateStringNotNullOrEmpty("Not Empty"));
     }
 
     @Test
-    public void validatePasswordComplexity_validates_correctly() {
-        // too short
-        Assert.assertFalse(Validators.validatePasswordComplexity(""));
-        Assert.assertFalse(Validators.validatePasswordComplexity(" "));
-
-        // too easy to guess
-        Assert.assertFalse(Validators.validatePasswordComplexity("123456"));
-        Assert.assertFalse(Validators.validatePasswordComplexity("abcdef"));
-        Assert.assertFalse(Validators.validatePasswordComplexity("password"));
-        Assert.assertFalse(Validators.validatePasswordComplexity("batman"));
-        Assert.assertFalse(Validators.validatePasswordComplexity("zzzzzzzzzzzzzz"));
-        Assert.assertFalse(Validators.validatePasswordComplexity("000000"));
-
-        // strong enough
-        Assert.assertTrue(Validators.validatePasswordComplexity("918461"));
-        Assert.assertTrue(Validators.validatePasswordComplexity("v3ry$tr0ng"));
-        Assert.assertTrue(Validators.validatePasswordComplexity("myL1ttl3Pa$$w0rd"));
-        Assert.assertTrue(Validators.validatePasswordComplexity("superman"));
+    public void validatePasswordComplexity_too_short_passwords_fail() {
+        Assert.assertEquals(Validators.validatePasswordComplexity(""), ValidationResult.TOO_SHORT);
+        Assert.assertEquals(Validators.validatePasswordComplexity("short"), ValidationResult.TOO_SHORT);
     }
 
     @Test
-    public void validateStringDoesNotBeginOrEndWithWhitespace_validates_correctly() {
-        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace(""));
-        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace("1234"));
-        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace("hoedje van papier"));
-
-        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace("\ttab test"));
-        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace("carriage return test\r"));
-        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace("\nnewline test"));
-        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace("  space test"));
+    public void validatePasswordComplexity_same_char_passwords_fail() {
+        Assert.assertEquals(Validators.validatePasswordComplexity("111111"), ValidationResult.SAME_CHARACTERS);
+        Assert.assertEquals(Validators.validatePasswordComplexity("aaaaaaaaaa"), ValidationResult.SAME_CHARACTERS);
     }
 
     @Test
-    public void validateStringDoesNotContainWhitespace_validates_correctly() {
-        Assert.assertTrue(Validators.validateStringDoesNotContainWhitespace(""));
-        Assert.assertTrue(Validators.validateStringDoesNotContainWhitespace("NoWhitespace"));
+    public void validatePasswordComplexity_known_easy_to_guess_passwords_fail() {
+        Assert.assertEquals(Validators.validatePasswordComplexity("password"), ValidationResult.SPECIFIC_INPUT_NOT_ALLOWED);
+        Assert.assertEquals(Validators.validatePasswordComplexity("123456"), ValidationResult.SPECIFIC_INPUT_NOT_ALLOWED);
+        Assert.assertEquals(Validators.validatePasswordComplexity("batman"), ValidationResult.SPECIFIC_INPUT_NOT_ALLOWED);
+    }
 
+    @Test
+    public void validatePasswordComplexity_valid_password_examples_pass() {
+        Assert.assertEquals(Validators.validatePasswordComplexity("v3ry c0mpl3x"), ValidationResult.OK);
+        Assert.assertEquals(Validators.validatePasswordComplexity("superman"), ValidationResult.OK);
+    }
+
+    @Test
+    public void validateStringDoesNotContainWhitespace_strings_with_whitespace_fail() {
         Assert.assertFalse(Validators.validateStringDoesNotContainWhitespace("Yes Whitespace"));
         Assert.assertFalse(Validators.validateStringDoesNotContainWhitespace(" YesWhitespace"));
         Assert.assertFalse(Validators.validateStringDoesNotContainWhitespace("Yes\tWhitespace"));
@@ -67,33 +64,60 @@ public class ValidatorsTests {
     }
 
     @Test
-    public void validateNewLabelTitleUnique_validates_correctly() {
-        Label[] labels = getLabels();
-
-        Assert.assertFalse(Validators.validateNewLabelTitleUnique("school", labels));
-        Assert.assertFalse(Validators.validateNewLabelTitleUnique("School", labels));
-        Assert.assertFalse(Validators.validateNewLabelTitleUnique("Knitting club", labels));
-        Assert.assertFalse(Validators.validateNewLabelTitleUnique("KnItTiNg ClUb", labels));
-
-        Assert.assertTrue(Validators.validateNewLabelTitleUnique("SchoolX", labels));
-        Assert.assertTrue(Validators.validateNewLabelTitleUnique("XSchool", labels));
-        Assert.assertTrue(Validators.validateNewLabelTitleUnique("XSchool", labels));
-        Assert.assertTrue(Validators.validateNewLabelTitleUnique("Kn1tt1ng Club", labels));
+    public void validateStringDoesNotBeginOrEndWithWhitespace_strings_beginning_or_ending_with_whitespace_fail() {
+        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace(" start with space"));
+        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace("end with newline\n"));
     }
 
     @Test
-    public void validateEditLabelTitleUnique_validates_correctly() {
+    public void validateStringDoesNotBeginOrEndWithWhitespace_strings_not_beginning_or_ending_with_whitespace_pass() {
+        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace(""));
+        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace("Space in the middle"));
+        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace("NoWhitespaceAtAll"));
+    }
+
+    @Test
+    public void validateStringDoesNotContainWhitespace_strings_with_whitespace_pass() {
+        Assert.assertTrue(Validators.validateStringDoesNotContainWhitespace("NoWhitespace"));
+        Assert.assertTrue(Validators.validateStringDoesNotContainWhitespace(""));
+    }
+
+    @Test
+    public void validateNewLabelTitleUnique_non_unique_label_titles_fail() {
+        Label[] labels = getLabels();
+
+        Assert.assertFalse(Validators.validateNewLabelTitleUnique("school", labels));
+        Assert.assertFalse(Validators.validateNewLabelTitleUnique("PETS", labels));
+    }
+
+    @Test
+    public void validateNewLabelTitleUnique_unique_label_title_passes() {
+        Label[] labels = getLabels();
+
+        Assert.assertTrue(Validators.validateNewLabelTitleUnique("Not In The List", labels));
+    }
+
+    @Test
+    public void validateEditLabelTitleUnique_non_unique_label_title_change_fail() {
         Label[] labels = getLabels();
 
         Assert.assertFalse(Validators.validateEditLabelTitleUnique("School", "Work", labels));
         Assert.assertFalse(Validators.validateEditLabelTitleUnique("Groceries", "PETS", labels));
-        Assert.assertFalse(Validators.validateEditLabelTitleUnique("Knitting Club", "school", labels));
+    }
 
-        Assert.assertTrue(Validators.validateEditLabelTitleUnique("school", "school", labels));
-        Assert.assertTrue(Validators.validateEditLabelTitleUnique("school", "Sch00l", labels));
-        Assert.assertTrue(Validators.validateEditLabelTitleUnique("Groceries", "u41qu3", labels));
-        Assert.assertTrue(Validators.validateEditLabelTitleUnique("Knitting Club", "Dance Association", labels));
-        Assert.assertTrue(Validators.validateEditLabelTitleUnique("Work", "w0rk", labels));
+    @Test
+    public void validateEditLabelTitleUniquelabel_title_change_to_same_pass() {
+        Label[] labels = getLabels();
+
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("School", "School", labels));
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("School", "SCHOOL", labels));
+    }
+
+    @Test
+    public void validateEditLabelTitleUniquelabel_title_change_to_unique_pass() {
+        Label[] labels = getLabels();
+
+        Assert.assertTrue(Validators.validateEditLabelTitleUnique("School", "Unique", labels));
     }
 
     private Label[] getLabels() {
