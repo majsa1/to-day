@@ -128,7 +128,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -139,9 +139,11 @@ public class AddEditActivity extends AppCompatActivity {
         Spinner label = findViewById(R.id.add_edit_label_sp_text);
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
-        String titleString = title.getText().toString();
-        String descriptionString = description.getText().toString();
+        //String titleString = title.getText().toString();
+        //String descriptionString = description.getText().toString();
         String deadlineString = deadline.getText().toString();
+        String titleString = title.getText() != null ? title.getText().toString() : null;
+        String descriptionString = description.getText() != null ? description.getText().toString() : null;
 
         // TODO: does description need to be required?
         // TODO: use same functionality as in login/register
@@ -153,7 +155,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -165,6 +167,7 @@ public class AddEditActivity extends AppCompatActivity {
 
     public void onClear(View view){
         TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
+
         TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
         Spinner label = findViewById(R.id.add_edit_label_sp_text);
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
