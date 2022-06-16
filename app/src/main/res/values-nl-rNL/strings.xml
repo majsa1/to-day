@@ -14,7 +14,7 @@
     <string name="task_list_add_btn_description">Voeg taak toe</string>
     <string name="task_list_logout_btn_title_text">Weet je zeker dat je wilt stoppen?</string>
     <string name="alert_confirm_text">JA</string>
-    <string name="alert_cancel_text">NO</string>
+    <string name="alert_cancel_text">NEE</string>
     <string name="popup_sort_title_text">Sorteer bij deadline</string>
     <string name="popup_sort_descending_text">Aflopend</string>
     <string name="popup_sort_ascending_text">Oplopend</string>
@@ -70,6 +70,8 @@
     <string name="first_fragment_label">1e fragment</string>
     <string name="second_fragment_label">2e fragment</string>
     <string name="edit_edit_title_pt">Bewerk taak</string>
-    <string name="task_delete_title_text">Weet je zeker dat je deze taak wilt verwijderen?</string>
-    <string name="task_delete_message_text">Dit kan niet ongedaan gemaakt worden.</string>
+    <string name="task_delete_message_text">Weet zeker dat je deze taak wilt verwijderen? \n\nDit kan niet ongedaan gemaakt worden.</string>
+    <string name="add_edit_back_btn">Terug</string>
+    <string name="task_delete_title_text">Taak verwijderen</string>
+
 </resources>
