@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.database.DatabaseFactory;
+import nl.hhs.apep2122group1.database.FileDatabase;
+import nl.hhs.apep2122group1.models.User;
 import nl.hhs.apep2122group1.utils.Validators;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -79,10 +80,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // values ok, save to DB
-        if (!DatabaseFactory.getDatabase().insertUser(username, password, name.trim())) {
+        User newUser = new User(name.trim(), username, password);
+        if (!FileDatabase.getDatabase(this).insertUser(newUser)) {
             usernameField.setError("Username already in use!");
         } else {
-            Toast.makeText(this, "Added account, you can now log in!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Account created, you can now log in!", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

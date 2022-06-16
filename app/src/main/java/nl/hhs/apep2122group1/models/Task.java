@@ -7,20 +7,23 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.time.LocalDateTime;
+
+import nl.hhs.apep2122group1.utils.Converter;
 
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = User.class,
                 parentColumns = "username",
-                childColumns = "User_username",
+                childColumns = "user_username",
                 onDelete = CASCADE),
 
         @ForeignKey(
                 entity = Label.class,
                 parentColumns = "id",
-                childColumns = "Label_id",
+                childColumns = "label_id",
                 onDelete = SET_NULL)
 })
 
@@ -28,34 +31,24 @@ public class Task implements Comparable<Task> {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String title;
-//    @TypeConverters({Converter.class})
+    @TypeConverters({Converter.class})
     private LocalDateTime deadline;
+    @TypeConverters({Converter.class})
     private LocalDateTime completed;
     private String description;
 
-    @ColumnInfo(name = "User_username")
-    private String ownerUsername;
+    @ColumnInfo(name = "user_username", collate = ColumnInfo.NOCASE)
+    private String userUsername;
 
-    @ColumnInfo(name = "Label_id")
+    @ColumnInfo(name = "label_id")
     private Integer labelId;
 
-    // TODO: for demo, remove when ready
-    public Task(Integer id, String title, LocalDateTime deadline, LocalDateTime completed, String description, String ownerUsername, Integer labelId) {
-        this.id = id;
-        this.title = title;
-        this.deadline = deadline;
-        this.completed = completed;
-        this.description = description;
-        this.ownerUsername = ownerUsername;
-        this.labelId = labelId;
-    }
-
     // for adding a new task:
-    public Task(String title, LocalDateTime deadline, String description, String ownerUsername, Integer labelId) {
+    public Task(String title, LocalDateTime deadline, String description, String userUsername, Integer labelId) {
         this.title = title;
         this.deadline = deadline;
         this.description = description;
-        this.ownerUsername = ownerUsername;
+        this.userUsername = userUsername;
         this.labelId = labelId;
     }
 
@@ -104,12 +97,12 @@ public class Task implements Comparable<Task> {
         this.description = description;
     }
 
-    public String getOwnerUsername() {
-        return ownerUsername;
+    public String getUserUsername() {
+        return userUsername;
     }
 
-    public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = ownerUsername;
+    public void setUserUsername(String userUsername) {
+        this.userUsername = userUsername;
     }
 
     public Integer getLabelId() {
