@@ -23,28 +23,7 @@ public class ViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
-        Intent intent = getIntent();
-        taskId = intent.getIntExtra("TASK_ID", -1);
-        Task task = DatabaseFactory.getDatabase().getTask(taskId);
 
-        if (task.getLabelId() != null) {
-            label = DatabaseFactory.getDatabase().getLabel(task.getLabelId());
-        }
-
-        TextView title = findViewById(R.id.view_name_task_tv);
-        TextView deadline = findViewById(R.id.view_deadline_tv);
-        TextView completed = findViewById(R.id.view_completed_tv);
-        TextView labelName = findViewById(R.id.view_label_tv);
-        TextView description = findViewById(R.id.view_description_tv);
-
-        title.setText(task.getTitle());
-        deadline.setText(
-                task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline()));
-        completed.setText(
-                task.getCompleted() == null ? getResources().getString(R.string.view_in_progress_text) : Converter.timeStampToString(task.getCompleted()));
-        labelName.setText(
-                label == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
-        description.setText(task.getDescription());
     }
 
     @Override
@@ -70,8 +49,8 @@ public class ViewActivity extends AppCompatActivity {
         completed.setText(
                 task.getCompleted() == null ? getResources().getString(R.string.view_in_progress_text) : Converter.timeStampToString(task.getCompleted()));
         labelName.setText(
-                label == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
-        description.setText(task.getDescription());;
+                task.getLabelId() == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
+        description.setText(task.getDescription());
     }
 
     public void onEditBtnPressed(View view) {
