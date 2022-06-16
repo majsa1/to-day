@@ -9,11 +9,15 @@ import nl.hhs.apep2122group1.utils.Validators;
 @SuppressWarnings("ConstantConditions")
 public class ValidatorsTests {
     @Test
-    public void validateStringNotNullOrEmpty_validates_correctly() {
+    public void validateStringNotNullOrEmpty_indentifies_null_and_empty_string() {
         Assert.assertFalse(Validators.validateStringNotNullOrEmpty(null));
         Assert.assertFalse(Validators.validateStringNotNullOrEmpty(""));
-        Assert.assertTrue(Validators.validateStringNotNullOrEmpty("Certainly not empty"));
+    }
+
+    @Test
+    public void validateStringNotNullOrEmpty_indentifies_not_empty_strings() {
         Assert.assertTrue(Validators.validateStringNotNullOrEmpty(" "));
+        Assert.assertTrue(Validators.validateStringNotNullOrEmpty("Not Empty"));
     }
 
     @Test

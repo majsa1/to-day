@@ -60,11 +60,11 @@ public class LoginActivity extends AppCompatActivity {
         // validate values
         boolean error = false;
         if (!Validators.validateStringNotNullOrEmpty(username)) {
-            usernameField.setError("Username cannot be empty");
+            usernameField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
         }
         if (!Validators.validateStringNotNullOrEmpty(password)) {
-            passwordField.setError("Password cannot be empty");
+            passwordField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
         }
         if (error) {
@@ -74,10 +74,11 @@ public class LoginActivity extends AppCompatActivity {
         // values ok, save to DB
         User user = FileDatabase.getDatabase(this).getUser(username, password);
         if (user == null) {
-            usernameField.setError("Incorrect credentials!");
-            passwordField.setError("Incorrect credentials!");
+            usernameField.setError(getResources().getString(R.string.login_validation_invalid_credentials));
+            passwordField.setError(getResources().getString(R.string.login_validation_invalid_credentials));
         } else {
-            Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show();
+            String toastText = String.format(getResources().getString(R.string.login_logged_in_toast), user.getName());
+            Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, TaskListActivity.class);
             String currentUser = user.getUsername();

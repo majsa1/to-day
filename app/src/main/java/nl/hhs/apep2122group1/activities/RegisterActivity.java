@@ -1,5 +1,6 @@
 package nl.hhs.apep2122group1.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.models.User;
+import nl.hhs.apep2122group1.utils.ValidationResult;
 import nl.hhs.apep2122group1.utils.Validators;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -51,28 +53,29 @@ public class RegisterActivity extends AppCompatActivity {
         // validate values
         boolean error = false;
         if (!Validators.validateStringNotNullOrEmpty(name)) {
-            nameField.setError("Name cannot be empty");
+            nameField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
         }
         if (!Validators.validateStringNotNullOrEmpty(username)) {
-            usernameField.setError("Username cannot be empty");
+            usernameField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
         }
         else if (!Validators.validateStringDoesNotContainWhitespace(username)) {
-            usernameField.setError("Username cannot contain whitespace");
+            usernameField.setError(getResources().getString(R.string.register_validation_username_cannot_contain_whitespace));
             error = true;
         }
         if (!Validators.validateStringNotNullOrEmpty(password)) {
-            passwordField.setError("Password cannot be empty");
+            passwordField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
         }
-        else if (!Validators.validatePasswordComplexity(password)) {
-            passwordField.setError("Password should have minimum length of 6");
+        else if (Validators.validatePasswordComplexity(password) != ValidationResult.OK) {
+            ValidationResult validatorResult = Validators.validatePasswordComplexity(password);
+            passwordField.setError(getPasswordValidationError(validatorResult));
             error = true;
         }
         else if (!password.equals(retypePassword)) {
-            passwordField.setError("Passwords not equal");
-            retypePasswordField.setError("Passwords not equal");
+            passwordField.setError(getResources().getString(R.string.register_validation_passwords_not_equal));
+            retypePasswordField.setError(getResources().getString(R.string.register_validation_passwords_not_equal));
             error = true;
         }
         if (error) {
@@ -82,11 +85,26 @@ public class RegisterActivity extends AppCompatActivity {
         // values ok, save to DB
         User newUser = new User(name.trim(), username, password);
         if (!FileDatabase.getDatabase(this).insertUser(newUser)) {
-            usernameField.setError("Username already in use!");
+            usernameField.setError(getResources().getString(R.string.register_validation_username_in_use));
         } else {
-            Toast.makeText(this, "Account created, you can now log in!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.register_registered_toast, Toast.LENGTH_SHORT).show();
             finish();
+
+            Intent intent = new Intent(this, TaskListActivity.class);
+            intent.putExtra("USERNAME", username);
+            this.startActivity(intent);
         }
     }
 
+    private String getPasswordValidationError(ValidationResult validatorResult) {
+        switch (validatorResult) {
+            case TOO_SHORT:
+                return getResources().getString(R.string.register_validation_password_too_short);
+            case SAME_CHARACTERS:
+                return getResources().getString(R.string.register_validation_password_too_simple);
+            case SPECIFIC_INPUT_NOT_ALLOWED:
+                return getResources().getString(R.string.register_validation_password_is_known_string);
+        }
+        return null;
+    }
 }
