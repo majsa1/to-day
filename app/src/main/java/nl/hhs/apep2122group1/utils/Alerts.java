@@ -48,7 +48,7 @@ public class Alerts {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
-        View dateEditDialogView = inflater.inflate(R.layout.date_edit_dialog, null);
+        View dateEditDialogView = inflater.inflate(R.layout.dialog_date_edit, null);
         builder.setView(dateEditDialogView);
         Dialog dialog = builder.create();
 

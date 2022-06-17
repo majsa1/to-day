@@ -32,7 +32,7 @@ public class LabelsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.labels);
+        setContentView(R.layout.activity_labels);
 
         username = getIntent().getStringExtra("USERNAME");
     }
@@ -73,7 +73,7 @@ public class LabelsActivity extends AppCompatActivity {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View labelCreateDialogView = inflater.inflate(R.layout.label_create_dialog, null);
+        View labelCreateDialogView = inflater.inflate(R.layout.dialog_create_label, null);
         builder.setView(labelCreateDialogView);
         Dialog dialog = builder.create();
 
@@ -93,7 +93,7 @@ public class LabelsActivity extends AppCompatActivity {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View labelEditDialogView = inflater.inflate(R.layout.label_edit_dialog, null);
+        View labelEditDialogView = inflater.inflate(R.layout.dialog_edit_label, null);
         builder.setView(labelEditDialogView);
         Dialog dialog = builder.create();
 
@@ -121,7 +121,7 @@ public class LabelsActivity extends AppCompatActivity {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View labelDeleteDialogView = inflater.inflate(R.layout.label_delete_dialog, null);
+        View labelDeleteDialogView = inflater.inflate(R.layout.dialog_delete_label, null);
         builder.setView(labelDeleteDialogView);
         Dialog dialog = builder.create();
 

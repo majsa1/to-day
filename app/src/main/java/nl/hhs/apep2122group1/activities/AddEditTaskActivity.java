@@ -23,7 +23,7 @@ import nl.hhs.apep2122group1.models.Task;
 import nl.hhs.apep2122group1.utils.Validators;
 
 
-public class AddEditActivity extends AppCompatActivity {
+public class AddEditTaskActivity extends AppCompatActivity {
 
     private Label[] labels;
     private Task task;
@@ -40,7 +40,7 @@ public class AddEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit);
+        setContentView(R.layout.activity_add_edit_task);
 
         setTaskFromIntent();
         getTitleAndTexts();

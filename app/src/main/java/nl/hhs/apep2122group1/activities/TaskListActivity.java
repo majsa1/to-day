@@ -254,7 +254,7 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onAddBtnPressed(View view) {
-        Intent intent = new Intent(this, AddEditActivity.class);
+        Intent intent = new Intent(this, AddEditTaskActivity.class);
         intent.putExtra("USERNAME", user.getUsername());
         this.startActivity(intent);
     }

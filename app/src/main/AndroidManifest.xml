@@ -27,7 +27,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".activities.AddEditActivity"
+            android:name=".activities.AddEditTaskActivity"
             android:exported="false">
         </activity>
         <activity
@@ -35,7 +35,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".activities.ViewActivity"
+            android:name=".activities.ViewTaskActivity"
             android:exported="false">
         </activity>
         <activity

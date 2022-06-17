@@ -24,7 +24,7 @@ import nl.hhs.apep2122group1.utils.Alerts;
 import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
-import nl.hhs.apep2122group1.activities.ViewActivity;
+import nl.hhs.apep2122group1.activities.ViewTaskActivity;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
@@ -43,7 +43,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater
-                .from(parent.getContext()).inflate(R.layout.task_list_row, parent, false);
+                .from(parent.getContext()).inflate(R.layout.recycle_task_list_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -103,7 +103,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.taskRowCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewActivity.class);
+                Intent intent = new Intent(context, ViewTaskActivity.class);
                 int taskId = task.getId();
                 intent.putExtra("TASK_ID", taskId);
                 context.startActivity(intent);

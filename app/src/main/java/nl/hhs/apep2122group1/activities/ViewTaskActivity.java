@@ -13,14 +13,14 @@ import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
-public class ViewActivity extends AppCompatActivity {
+public class ViewTaskActivity extends AppCompatActivity {
     private int taskId;
     private Label label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view);
+        setContentView(R.layout.activity_view_task);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ViewActivity extends AppCompatActivity {
     }
 
     public void onEditBtnPressed(View view) {
-        Intent intent = new Intent(this, AddEditActivity.class);
+        Intent intent = new Intent(this, AddEditTaskActivity.class);
         intent.putExtra("TASK_ID", taskId);
         this.startActivity(intent);
     }
