@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.time.LocalDateTime;
 
 import nl.hhs.apep2122group1.database.FileDatabase;
+import nl.hhs.apep2122group1.utils.Alerts;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.models.Label;
@@ -176,5 +177,14 @@ public class AddEditActivity extends AppCompatActivity {
 
         Toast.makeText(this, R.string.add_edit_clear_btn_id, Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    public void onCalendarBtnPressed(View view) {
+
+        LocalDateTime dateTime = task != null ? task.getDeadline() : LocalDateTime.now();
+        Alerts.openDateEditDialog(this, dateTime, (onDateTimeChanged) -> {
+            deadline.setText(Converter.timeStampToInputString(onDateTimeChanged));
+            task.setDeadline(onDateTimeChanged);
+        });
     }
 }

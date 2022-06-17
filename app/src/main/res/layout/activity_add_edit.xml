@@ -58,6 +58,7 @@
                 android:inputType="datetime"
                 android:nextFocusDown="@id/login_btn"
                 android:nextFocusForward="@id/login_btn"
+                android:onClick="onCalendarBtnPressed"
                 android:textColorHint="#546E7A"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
