@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDateTime;
+
 import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
@@ -66,7 +68,7 @@ public class AddEditActivity extends AppCompatActivity {
         }
 
         Label noLabel = new Label("<" + getApplicationContext().getResources().
-                getString(R.string.no_label_text) + ">", "", ""); ;
+                getString(R.string.no_label_text) + ">", "", "");
         Label[] tempList = db.getAllLabels(username);
         labels = new Label[tempList.length + 1];
         for (int i = 0; i < labels.length -1; i++) {
@@ -117,7 +119,7 @@ public class AddEditActivity extends AppCompatActivity {
         String deadlineString = deadline.getText().toString();
         LocalDateTime deadlineInput = Converter.inputStringToTimeStamp(deadlineString);
 
-        if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) 
+        if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
 
             task.setTitle(titleString);

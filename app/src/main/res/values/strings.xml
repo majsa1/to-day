@@ -109,6 +109,5 @@
     <string name="alert_cancel_text">NO</string>
     <string name="add_edit_back_btn">Back</string>
     <string name="task_delete_title_text">Delete task</string>
-    <string name="toast_error_text">Please fill in all fields</string>
 
 </resources>
