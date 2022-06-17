@@ -12,8 +12,6 @@ import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
-import nl.hhs.apep2122group1.utils.Validators;
-
 
 public class ViewActivity extends AppCompatActivity {
     private int taskId;

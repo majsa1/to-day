@@ -2,13 +2,10 @@ package nl.hhs.apep2122group1.utils;
 
 import androidx.room.TypeConverter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
-import java.util.Date;
 
 public class Converter {
     public static String timeStampToReadableString(LocalDateTime timeStamp) {
@@ -52,6 +49,4 @@ public class Converter {
         }
         return localDateTime.toString();
     }
-
-
 }

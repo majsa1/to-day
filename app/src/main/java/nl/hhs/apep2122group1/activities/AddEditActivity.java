@@ -166,7 +166,7 @@ public class AddEditActivity extends AppCompatActivity {
     public void onBackBtnPressed(View view) {
         finish();
 
-        Toast.makeText(this, R.string.add_edit_back_btn, Toast.LENGTH_SHORT)
+        Toast.makeText(this, R.string.back_btn_text, Toast.LENGTH_SHORT)
                 .show();
     }
 

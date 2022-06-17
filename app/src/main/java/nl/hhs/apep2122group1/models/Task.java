@@ -43,7 +43,6 @@ public class Task implements Comparable<Task> {
     @ColumnInfo(name = "label_id")
     private Integer labelId;
 
-    // for adding a new task:
     public Task(String title, LocalDateTime deadline, String description, String userUsername, Integer labelId) {
         this.title = title;
         this.deadline = deadline;
@@ -52,11 +51,9 @@ public class Task implements Comparable<Task> {
         this.labelId = labelId;
     }
 
-    // constructor for db:
     public Task() {
     }
 
-    // all setters and getters added, remove unneeded
     public Integer getId() {
         return id;
     }
