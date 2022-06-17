@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.time.LocalDateTime;
-
 import nl.hhs.apep2122group1.database.FileDatabase;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
@@ -119,19 +117,19 @@ public class AddEditActivity extends AppCompatActivity {
         String deadlineString = deadline.getText().toString();
         LocalDateTime deadlineInput = Converter.inputStringToTimeStamp(deadlineString);
 
-        if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
+        if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) 
             Label selectedLabel = (Label) label.getSelectedItem();
 
             task.setTitle(titleString);
             task.setDescription(descriptionString);
             task.setLabelId(selectedLabel.getId());
-            task.setDeadline(deadlineInput);
 
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
         } else {
+
             Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
@@ -146,16 +144,21 @@ public class AddEditActivity extends AppCompatActivity {
         String titleString = title.getText().toString().trim();
         String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
+
+
         LocalDateTime deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
 
         if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
             Task task = new Task(titleString, deadlineTimeStamp, descriptionString, username, selectedLabel.getId());
+
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
         } else {
+
+
             Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }

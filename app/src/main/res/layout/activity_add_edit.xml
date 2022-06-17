@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:gravity="center|left"
+                android:gravity="start|left"
                 android:hint="@string/edit_name_ti_text"
                 android:textColorHint="#546E7A" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -53,11 +53,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:gravity="center|left"
+                android:gravity="start|left"
                 android:hint="@string/add_edit_deadline_dt"
                 android:inputType="datetime"
                 android:nextFocusDown="@id/login_btn"
                 android:nextFocusForward="@id/login_btn"
+                android:textColorHint="#546E7A"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,11 +85,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:gravity="center|left"
+                android:gravity="start"
                 android:hint="@string/add_edit_description_et"
                 android:inputType="textPersonName"
                 android:nextFocusDown="@id/login_btn"
                 android:nextFocusForward="@id/login_btn"
+                android:textColorHint="#546E7A"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,7 +108,8 @@
                 android:gravity="center|center_vertical"
                 android:minHeight="48dp"
                 android:onClick="onClear"
-                android:text="@string/add_edit_clear_btn_id" />
+                android:text="@string/add_edit_clear_btn_id"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/add_edit_save_btn_id"
@@ -114,7 +117,8 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:onClick="upsertTask"
-                android:text="@string/add_edit_save_btn_id" />
+                android:text="@string/add_edit_save_btn_id"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
 
     </LinearLayout>
@@ -125,6 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/add_edit_back_btn"
         android:onClick="onBackBtnPressed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"

@@ -12,6 +12,7 @@ import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
+import nl.hhs.apep2122group1.utils.Validators;
 
 
 public class ViewActivity extends AppCompatActivity {
@@ -22,8 +23,6 @@ public class ViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
-
-
     }
 
     @Override

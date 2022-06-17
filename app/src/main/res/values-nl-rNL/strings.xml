@@ -91,4 +91,5 @@
     <string name="toast_error_text">Controleer alle velden a.u.b.</string>
     <string name="edit_completed_lbl_tv">Klaar:</string>
     <string name="add_edit_deadline_dt" translatable="false">Deadline (yyyy-mm-dd hh:mm) of leeg</string>
+
 </resources>
