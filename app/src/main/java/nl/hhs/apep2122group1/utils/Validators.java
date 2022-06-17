@@ -60,5 +60,12 @@ public class Validators {
         }
         return true;
     }
+
+    public static boolean validateDateIsEmptyOrNotNull(String str) {
+        if (str.trim().equals("") || Converter.inputStringToTimeStamp(str) != null) {
+            return true;
+        }
+        return false;
+    }
 }
 

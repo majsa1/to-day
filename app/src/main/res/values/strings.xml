@@ -60,7 +60,7 @@
 
     <!-- AddEdit-->
     <string name="add_edit_title_pt">Create task</string>
-    <string name="add_edit_deadline_dt" translatable="false">Deadline (yyyy-mm-dd hh:mm)</string>
+    <string name="add_edit_deadline_dt">Deadline (yyyy-mm-dd hh:mm) or empty</string>
     <string name="edit_name_ti_text">Name</string>
     <string name="add_edit_description_ti_text">Description</string>
     <string name="add_edit_save_btn_id">Save</string>
@@ -68,7 +68,7 @@
     <string name="add_edit_back_btn_id">back</string>
     <string name="add_edit_clear_btn_id">Clear</string>
     <string name="edit_edit_title_pt">Edit task</string>
-
+    <string name="toast_error_text">Please check all fields</string>
 
     <!--view-->
     <string name="view_name_task_tv">Name Task</string>

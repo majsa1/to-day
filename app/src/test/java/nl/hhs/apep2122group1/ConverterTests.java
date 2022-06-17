@@ -18,7 +18,7 @@ public class ConverterTests {
 
         // ACT:
         String expected = "14 jun. 2022 14:10";
-        String result = Converter.timeStampToString(timeStamp);
+        String result = Converter.timeStampToReadableString(timeStamp);
 
         // ASSERT:
         Assert.assertEquals(expected, result);
@@ -32,7 +32,7 @@ public class ConverterTests {
 
         // ACT:
         String expected = "Jun 14, 2022, 2:10 PM";
-        String result = Converter.timeStampToString(timeStamp);
+        String result = Converter.timeStampToReadableString(timeStamp);
 
         // ASSERT:
         Assert.assertEquals(expected, result);
@@ -45,6 +45,6 @@ public class ConverterTests {
         // ACT:
 
         // ASSERT:
-        Assert.assertNull(Converter.timeStampToString(null));
+        Assert.assertNull(Converter.timeStampToReadableString(null));
     }
 }
