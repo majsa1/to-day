@@ -25,19 +25,22 @@ public abstract class FileDatabase extends RoomDatabase implements Database {
 
     public abstract UserDao userDao();
 
+    private static FileDatabase INSTANCE;
+
     public static FileDatabase getDatabase(Context context) {
-        FileDatabase database;
-        synchronized (FileDatabase.class) {
-            database = Room.
-                    databaseBuilder(
-                            context,
-                            FileDatabase.
-                                    class,
-                            "database")
-                    .allowMainThreadQueries()
-                    .build();
+        if (INSTANCE == null) {
+            synchronized (FileDatabase.class) {
+                INSTANCE = Room.
+                        databaseBuilder(
+                                context,
+                                FileDatabase.
+                                        class,
+                                "database")
+                        .allowMainThreadQueries()
+                        .build();
+            }
         }
-        return database;
+        return INSTANCE;
     }
 
     @Override
