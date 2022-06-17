@@ -262,4 +262,9 @@ public class TaskListActivity extends AppCompatActivity {
     public void onLogoutBtnPressed(View v) {
         Alerts.logoutAlert(this);
     }
+
+    @Override
+    public void onBackPressed() {
+        Alerts.logoutAlert(this);
+    }
 }
