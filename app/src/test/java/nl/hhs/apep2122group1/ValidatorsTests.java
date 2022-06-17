@@ -111,13 +111,13 @@ public class ValidatorsTests {
     @Test
     public void validateDateIsEmptyOrNotNull_null_and_empty_strings_pass(){
         Assert.assertTrue(Validators.validateDateIsEmptyOrNotNull(""));
-        Assert.assertTrue(Converter.inputStringToTimeStamp("1234") != null);
+        Assert.assertTrue(Validators.validateDateIsEmptyOrNotNull("2022-06-14 14:10"));
     }
 
     @Test
     public void validateDateIsEmptyOrNotNull_null_and_empty_strings_fail(){
         Assert.assertFalse(Validators.validateDateIsEmptyOrNotNull("niet leeg"));
-        Assert.assertFalse(Converter.inputStringToTimeStamp("yyyy-MM-dd HH:mm") != null);
+        Assert.assertFalse(Validators.validateDateIsEmptyOrNotNull("2022-06-11"));
     }
 
     private Label[] getLabels() {
