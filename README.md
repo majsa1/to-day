@@ -26,6 +26,7 @@ When you're good and ready you can log out in the task list screen. So you know 
 
 To create To-Day we use Android Studio® as Development Environment (IDE) for Android app development and use Java as code language. As SDK we use API 29 and use Pixel 5.
 We choose to use localDateTime for the deadline. The tasks are retrieved from the database per method. We give the tasks through the intents with the taskId number and then retrieve the task from the database in the next view. Our application is designed with English as main language. However, if you change the settings on your device to NL, you can use the app in Dutch.
+The app is designed with dark mode in mind, but it supports light mode just as well.
 In our ERD diagram, there are sometimes uppercase letters while we use for the code consistency, variables with lowercase letters.
 
 
