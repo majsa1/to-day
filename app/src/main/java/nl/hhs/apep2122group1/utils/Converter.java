@@ -27,8 +27,7 @@ public class Converter {
     public static LocalDateTime inputStringToTimeStamp(String userInput) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime timeStamp = LocalDateTime.parse(userInput, formatter);
-            return timeStamp;
+            return LocalDateTime.parse(userInput, formatter);
         } catch (DateTimeParseException parseException) {
             return null;
         }

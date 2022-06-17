@@ -29,9 +29,9 @@ import nl.hhs.apep2122group1.models.Label;
 import nl.hhs.apep2122group1.models.Task;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    private Context context;
-    private List<Task> tasks;
-    private Runnable onDatabaseUpdated;
+    private final Context context;
+    private final List<Task> tasks;
+    private final Runnable onDatabaseUpdated;
 
     public TaskAdapter(Context context, List<Task> tasks, Runnable onDatabaseUpdated) {
         this.context = context;
@@ -125,12 +125,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private CheckBox taskStatusCb;
-        private TextView taskTitleTv;
-        private TextView taskStatusTv;
-        private TextView taskDateTv;
-        private CardView taskRowCv;
-        private ImageView taskLabelIb;
+        private final CheckBox taskStatusCb;
+        private final TextView taskTitleTv;
+        private final TextView taskStatusTv;
+        private final TextView taskDateTv;
+        private final CardView taskRowCv;
+        private final ImageView taskLabelIb;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -84,9 +84,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
                 getString(R.string.no_label_text) + ">", "", "");
         Label[] tempList = FileDatabase.getDatabase(this).getAllLabels(username);
         labels = new Label[tempList.length + 1];
-        for (int i = 0; i < labels.length - 1; i++) {
-            labels[i] = tempList[i];
-        }
+        System.arraycopy(tempList, 0, labels, 0, labels.length - 1);
         labels[labels.length - 1] = noLabel;
 
         Spinner choice = findViewById(R.id.add_edit_label_sp_text);

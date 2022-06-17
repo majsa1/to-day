@@ -60,7 +60,7 @@ public class TaskListActivity extends AppCompatActivity {
     private void setTaskList() {
         selectedFilterId = -1;
         setTasks();
-        filterAndSortTasksByStatus(toDo);
+        filterAndSortTasksByStatus();
         setList();
     }
 
@@ -69,7 +69,7 @@ public class TaskListActivity extends AppCompatActivity {
         sortedTasks = new ArrayList<>();
     }
 
-    private void filterAndSortTasksByStatus(boolean toDo) {
+    private void filterAndSortTasksByStatus() {
         filterTasksByStatus();
         sortTasksByStatus();
     }
@@ -188,14 +188,14 @@ public class TaskListActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             if (menuItem.getItemId() == R.id.popup_filter_all_id) {
                 sortedTasks = new ArrayList<>(tasks);
-                filterAndSortTasksByStatus(toDo);
+                filterAndSortTasksByStatus();
                 selectedFilterId = -1;
                 setList();
                 return true;
             }
             if (menuItem.getItemId() == R.id.popup_filter_noLabel_id) {
                 sortedTasks = new ArrayList<>(tasks);
-                filterAndSortTasksByStatus(toDo);
+                filterAndSortTasksByStatus();
 
                 for (Task task : sortedTasks) {
                     if (task.getLabelId() == null) {
@@ -211,7 +211,7 @@ public class TaskListActivity extends AppCompatActivity {
             for (int i = 0; i < uniqueLabels.size(); i++) {
                 if (uniqueLabels.get(i).getId() == menuItem.getItemId()) {
                     sortedTasks = new ArrayList<>(tasks);
-                    filterAndSortTasksByStatus(toDo);
+                    filterAndSortTasksByStatus();
 
                     for (Task task : sortedTasks) {
                         if (task.getLabelId() != null && task.getLabelId().equals(uniqueLabels.get(i).getId())) {
@@ -232,23 +232,23 @@ public class TaskListActivity extends AppCompatActivity {
     public void onToDoBtnPressed(View view) {
         selectedFilterId = -1;
         toDo = true;
-        filterAndSortTasksByStatus(toDo);
+        filterAndSortTasksByStatus();
         adapter.notifyDataSetChanged();
     }
 
     public void onDoneBtnPressed(View view) {
         selectedFilterId = -1;
         toDo = false;
-        filterAndSortTasksByStatus(toDo);
+        filterAndSortTasksByStatus();
         adapter.notifyDataSetChanged();
     }
 
     public void onCheckChanged(View view) { // bound to checkbox for updating view
         MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
         if (toDoBtn.isChecked()) {
-            filterAndSortTasksByStatus(true);
+            filterAndSortTasksByStatus();
         } else {
-            filterAndSortTasksByStatus(false);
+            filterAndSortTasksByStatus();
         }
         adapter.notifyDataSetChanged();
     }
