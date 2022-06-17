@@ -49,7 +49,8 @@ public class ViewActivity extends AppCompatActivity {
                 task.getCompleted() == null ? getResources().getString(R.string.view_in_progress_text) : Converter.timeStampToReadableString(task.getCompleted()));
         labelName.setText(
                 task.getLabelId() == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
-        description.setText(task.getDescription());
+        description.setText(
+                task.getDescription().trim().equals("") ? getResources().getString(R.string.no_description_text) : String.valueOf(task.getDescription()));
     }
 
     public void onEditBtnPressed(View view) {

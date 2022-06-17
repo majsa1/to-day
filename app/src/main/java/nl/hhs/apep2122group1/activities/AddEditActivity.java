@@ -24,11 +24,16 @@ import nl.hhs.apep2122group1.utils.Validators;
 
 public class AddEditActivity extends AppCompatActivity {
 
-    Label[] labels;
-    Task task;
-    String username;
-    Label label;
-    int taskId;
+    private Label[] labels;
+    private Task task;
+    private String username;
+    private int taskId;
+
+    TextInputEditText description;
+    TextInputEditText deadline;
+    TextInputEditText title;
+    TextView editHeader;
+    Spinner labelSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +41,10 @@ public class AddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_edit);
 
         setTaskFromIntent();
+        getTitleAndTexts();
+        setLabelSpinner();
 
         if (taskId != -1) {
-            TextView editHeader = findViewById(R.id.add_edit_title_pt);
-            TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
-            TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
-            TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
-
             editHeader.setText(R.string.edit_edit_title_pt);
             title.setText(task.getTitle());
             deadline.setText(task.getDeadline() == null ? "" : Converter.timeStampToInputString(task.getDeadline()));
@@ -50,48 +52,54 @@ public class AddEditActivity extends AppCompatActivity {
         }
     }
 
+    private void getTitleAndTexts() {
+        editHeader = findViewById(R.id.add_edit_title_pt);
+        title = findViewById(R.id.add_edit_name_ti_text);
+        deadline = findViewById(R.id.add_edit_deadline_dt);
+        description = findViewById(R.id.add_edit_description_etn_et);
+        labelSpinner = findViewById(R.id.add_edit_label_sp_text);
+    }
+
     private void setUsernameFromIntent() {
         Intent intent = getIntent();
         username = intent.getStringExtra("USERNAME");
     }
 
-    private void setTaskFromIntent(){ // ToDo: check if method can be split / renamed
-        FileDatabase db = FileDatabase.getDatabase(this);
+    private void setTaskFromIntent() {
         Intent intent = getIntent();
         taskId = intent.getIntExtra("TASK_ID", -1);
 
         if (taskId != -1) {
-            task = db.getTask(taskId);
+            task = FileDatabase.getDatabase(this).getTask(taskId);
             username = task.getUserUsername();
-        }else{
+        } else {
             setUsernameFromIntent();
         }
+    }
 
+    private void setLabelSpinner() {
         Label noLabel = new Label("<" + getApplicationContext().getResources().
                 getString(R.string.no_label_text) + ">", "", "");
-        Label[] tempList = db.getAllLabels(username);
+        Label[] tempList = FileDatabase.getDatabase(this).getAllLabels(username);
         labels = new Label[tempList.length + 1];
-        for (int i = 0; i < labels.length -1; i++) {
+        for (int i = 0; i < labels.length - 1; i++) {
             labels[i] = tempList[i];
         }
-        labels[labels.length -1] = noLabel;
+        labels[labels.length - 1] = noLabel;
 
         Spinner choice = findViewById(R.id.add_edit_label_sp_text);
-        ArrayAdapter<Label> dataAdapter = new ArrayAdapter<Label>(this,android.R.layout.simple_spinner_item, labels);
+        ArrayAdapter<Label> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, labels);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         choice.setAdapter(dataAdapter);
         if (taskId != -1) {
 
             if (task.getLabelId() != null) {
                 for (int i = 0; i < labels.length; i++) {
-                    Label l = labels[i];
-                    if (task.getLabelId().equals(l.getId())) {
-                        label = l;
+                    if (task.getLabelId().equals(labels[i].getId())) {
                         choice.setSelection(i);
                     }
                 }
-            }
-            else {
+            } else {
                 choice.setSelection(labels.length - 1);
             }
         } else {
@@ -109,49 +117,37 @@ public class AddEditActivity extends AppCompatActivity {
 
     private void updateTask() {
         // TODO: dubble finish??
-        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
-        TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
-        Spinner label = findViewById(R.id.add_edit_label_sp_text);
-        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
-
         String titleString = title.getText().toString().trim();
         String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
+        Label selectedLabel = (Label) labelSpinner.getSelectedItem();
+
         LocalDateTime deadlineInput = Converter.inputStringToTimeStamp(deadlineString);
 
         if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
-            Label selectedLabel = (Label) label.getSelectedItem();
-
             task.setTitle(titleString);
             task.setDescription(descriptionString);
             task.setLabelId(selectedLabel.getId());
+            task.setDeadline(deadlineInput);
 
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
         } else {
-
             Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void makeTask() {
-
-        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
-        TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
-        Spinner label = findViewById(R.id.add_edit_label_sp_text);
-        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
-
         String titleString = title.getText().toString().trim();
         String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
 
-
         LocalDateTime deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
+        Label selectedLabel = (Label) labelSpinner.getSelectedItem();
 
         if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
-            Label selectedLabel = (Label) label.getSelectedItem();
             Task task = new Task(titleString, deadlineTimeStamp, descriptionString, username, selectedLabel.getId());
 
             FileDatabase.getDatabase(this).upsertTask(task);
@@ -159,27 +155,21 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-
-
             Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void onBackBtnPressed(View view) {
         finish();
+
         Toast.makeText(this, R.string.add_edit_back_btn, Toast.LENGTH_SHORT)
                 .show();
     }
 
-    public void onClear(View view){
-        TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
-        TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
-        Spinner label = findViewById(R.id.add_edit_label_sp_text);
-        TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
-
+    public void onClear(View view) {
         title.getText().clear();
         deadline.getText().clear();
-        label.setSelection(labels.length - 1);
+        labelSpinner.setSelection(labels.length - 1);
         description.getText().clear();
 
         Toast.makeText(this, R.string.add_edit_clear_btn_id, Toast.LENGTH_SHORT)
