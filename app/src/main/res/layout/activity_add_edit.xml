@@ -87,7 +87,6 @@
                 android:ems="10"
                 android:gravity="start"
                 android:hint="@string/add_edit_description_et"
-                android:inputType="textPersonName"
                 android:nextFocusDown="@id/login_btn"
                 android:nextFocusForward="@id/login_btn"
                 android:textColorHint="#546E7A"
