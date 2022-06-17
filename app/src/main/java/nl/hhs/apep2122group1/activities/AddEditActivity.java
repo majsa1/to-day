@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.time.LocalDateTime;
 
 import nl.hhs.apep2122group1.database.FileDatabase;
+import nl.hhs.apep2122group1.utils.Alerts;
 import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.R;
 import nl.hhs.apep2122group1.models.Label;
@@ -34,6 +35,7 @@ public class AddEditActivity extends AppCompatActivity {
     TextInputEditText title;
     TextView editHeader;
     Spinner labelSpinner;
+    LocalDateTime deadlineTimeStamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +148,7 @@ public class AddEditActivity extends AppCompatActivity {
         String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
 
-        LocalDateTime deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
+        deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
         Label selectedLabel = (Label) labelSpinner.getSelectedItem();
 
         if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
@@ -176,5 +178,13 @@ public class AddEditActivity extends AppCompatActivity {
 
         Toast.makeText(this, R.string.add_edit_clear_btn_id, Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    public void onCalendarBtnPressed(View view) {
+        LocalDateTime dateTime = task != null ? task.getDeadline() : LocalDateTime.now();
+        Alerts.openDateEditDialog(this, dateTime, (onDateTimeChanged) -> {
+            deadline.setText(Converter.timeStampToInputString(onDateTimeChanged));
+            deadlineTimeStamp = onDateTimeChanged;
+        });
     }
 }
