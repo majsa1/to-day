@@ -51,7 +51,6 @@
     <string name="back">Terug</string>
     <string name="view_edit_btn_id">Bewerk</string>
     <string name="edit_name_lbl_tv">Naam:</string>
-    <string name="edit_completed_lbl_tv" translatable="false">Klaar:</string>
     <string name="edit_description_lbl_tv">Omschrijving</string>
     <string name="view_view_task_tv">Bekijk taak</string>
     <string name="view_in_progress_text">Bezig</string>
@@ -89,5 +88,8 @@
     <string name="username_et_hint">Gebruikersnaam</string>
     <string name="password_et_hint">Wachtwoord</string>
     <string name="validation_field_empty">Veld mag niet leeg zijn</string>
-    <string name="toast_error_text">Vul alle velden in a.u.b.</string>
+    <string name="toast_error_text">Controleer alle velden a.u.b.</string>
+    <string name="edit_completed_lbl_tv">Klaar:</string>
+    <string name="add_edit_deadline_dt" translatable="false">Deadline (yyyy-mm-dd hh:mm) of leeg</string>
+
 </resources>

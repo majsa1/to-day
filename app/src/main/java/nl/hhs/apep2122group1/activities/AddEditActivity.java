@@ -39,12 +39,11 @@ public class AddEditActivity extends AppCompatActivity {
             TextView editHeader = findViewById(R.id.add_edit_title_pt);
             TextInputEditText title = findViewById(R.id.add_edit_name_ti_text);
             TextInputEditText deadline = findViewById(R.id.add_edit_deadline_dt);
-            Spinner labelName = findViewById(R.id.add_edit_label_sp_text);
             TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
             editHeader.setText(R.string.edit_edit_title_pt);
             title.setText(task.getTitle());
-            deadline.setText(task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline()));
+            deadline.setText(task.getDeadline() == null ? "" : Converter.timeStampToInputString(task.getDeadline()));
             description.setText(task.getDescription());
         }
     }
@@ -75,7 +74,7 @@ public class AddEditActivity extends AppCompatActivity {
         }
         labels[labels.length -1] = noLabel;
 
-        Spinner choice = (Spinner) findViewById(R.id.add_edit_label_sp_text);
+        Spinner choice = findViewById(R.id.add_edit_label_sp_text);
         ArrayAdapter<Label> dataAdapter = new ArrayAdapter<Label>(this,android.R.layout.simple_spinner_item, labels);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         choice.setAdapter(dataAdapter);
@@ -113,11 +112,12 @@ public class AddEditActivity extends AppCompatActivity {
         Spinner label = findViewById(R.id.add_edit_label_sp_text);
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
-        String titleString = title.getText().toString();
-        String descriptionString = description.getText().toString();
+        String titleString = title.getText().toString().trim();
+        String descriptionString = description.getText().toString().trim();
+        String deadlineString = deadline.getText().toString();
+        LocalDateTime deadlineInput = Converter.inputStringToTimeStamp(deadlineString);
 
-        // TODO: use same functionality as in login/register, add more validation (see Validators)
-        if (Validators.validateStringNotNullOrEmpty(titleString)) {
+        if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) 
             Label selectedLabel = (Label) label.getSelectedItem();
 
             task.setTitle(titleString);
@@ -129,7 +129,8 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show(); // TODO: use resource
+
+            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -140,21 +141,25 @@ public class AddEditActivity extends AppCompatActivity {
         Spinner label = findViewById(R.id.add_edit_label_sp_text);
         TextInputEditText description = findViewById(R.id.add_edit_description_etn_et);
 
-        String titleString = title.getText().toString();
-        String descriptionString = description.getText().toString();
+        String titleString = title.getText().toString().trim();
+        String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
 
-        // TODO: does description need to be required?
-        // TODO: use same functionality as in login/register
-        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
+
+        LocalDateTime deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
+
+        if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
-            Task task = new Task(titleString, null, descriptionString, username, selectedLabel.getId());
+            Task task = new Task(titleString, deadlineTimeStamp, descriptionString, username, selectedLabel.getId());
+
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
             finish();
         } else {
-            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show(); // TODO: use resource
+
+
+            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
     }
 
