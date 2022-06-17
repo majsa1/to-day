@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import nl.hhs.apep2122group1.models.Label;
+import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.utils.ValidationResult;
 import nl.hhs.apep2122group1.utils.Validators;
 
@@ -105,6 +106,18 @@ public class ValidatorsTests {
         Label[] labels = getLabels();
 
         Assert.assertTrue(Validators.validateEditLabelTitleUnique("School", "Unique", labels));
+    }
+
+    @Test
+    public void validateDateIsEmptyOrNotNull_null_and_empty_strings_pass(){
+        Assert.assertTrue(Validators.validateDateIsEmptyOrNotNull(""));
+        Assert.assertTrue(Converter.inputStringToTimeStamp("1234") != null);
+    }
+
+    @Test
+    public void validateDateIsEmptyOrNotNull_null_and_empty_strings_fail(){
+        Assert.assertFalse(Validators.validateDateIsEmptyOrNotNull("niet leeg"));
+        Assert.assertFalse(Converter.inputStringToTimeStamp("yyyy-MM-dd HH:mm") != null);
     }
 
     private Label[] getLabels() {

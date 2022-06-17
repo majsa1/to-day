@@ -39,12 +39,30 @@ public class ConverterTests {
     }
 
     @Test
-    public void timeStampToString_null_returns_null() {
+    public void inputStringToTimeStamp_returns_correct_string() {
         // ARRANGE:
+        LocalDateTime timeStamp = LocalDateTime.of( 2022,6, 14, 14, 10);
+        String input = "2022-06-14 14:10";
 
         // ACT:
+        String expected = "14 jun. 2022 14:10";
+        LocalDateTime result = Converter.inputStringToTimeStamp(input);
 
         // ASSERT:
-        Assert.assertNull(Converter.timeStampToReadableString(null));
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void LocalDateTimeFromIso8601String_returns_time_returns_incorrect_string() {
+        //ARRANGE
+        LocalDateTime timeStamp = LocalDateTime.of(2022, 6, 14, 14, 10);
+        String input = null;
+
+        // ACT:
+        String expected = "14 jun. 2022 14:10";
+        LocalDateTime result = Converter.LocalDateTimeFromIso8601String(input);
+
+        // ASSERT:
+        Assert.assertNotEquals(expected, result);
     }
 }
