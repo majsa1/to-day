@@ -115,7 +115,7 @@ public class ValidatorsTests {
     }
 
     @Test
-    public void validateDateIsEmptyOrNotNull_null_and_empty_strings_fail(){
+    public void validateDateIsEmptyOrNotNull_not_null_or_empty_strings_fail(){
         Assert.assertFalse(Validators.validateDateIsEmptyOrNotNull("niet leeg"));
         Assert.assertFalse(Validators.validateDateIsEmptyOrNotNull("2022-06-11"));
     }

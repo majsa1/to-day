@@ -154,6 +154,5 @@ public class ConverterTests {
 
         // ASSERT:
         Assert.assertEquals(null, Converter.iso8601StringFromLocalDateTime(null));
-
     }
 }
