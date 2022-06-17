@@ -116,7 +116,6 @@ public class AddEditActivity extends AppCompatActivity {
     }
 
     private void updateTask() {
-        // TODO: dubble finish??
         String titleString = title.getText().toString().trim();
         String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
@@ -133,7 +132,10 @@ public class AddEditActivity extends AppCompatActivity {
             FileDatabase.getDatabase(this).upsertTask(task);
             Toast.makeText(this, R.string.add_edit_save_btn_id, Toast.LENGTH_SHORT)
                     .show();
-            finish();
+
+            Intent intent = new Intent(this, TaskListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         } else {
             Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show();
         }
