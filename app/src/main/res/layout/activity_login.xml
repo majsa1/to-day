@@ -18,6 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo" />
+
         <TextView
             android:id="@+id/title_tv"
             android:layout_width="match_parent"
@@ -86,5 +92,7 @@
                 android:onClick="onLogin"
                 android:text="@string/login_login_btn_title" />
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
