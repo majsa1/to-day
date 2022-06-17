@@ -93,4 +93,9 @@
     <string name="edit_completed_lbl_tv">Klaar:</string>
     <string name="add_edit_deadline_dt" translatable="false">Deadline (yyyy-mm-dd hh:mm) of leeg</string>
 
+    <!-- Date/Time edit dialog -->
+    <string name="date_edit_dialog_title">Wijzig datum of tijd</string>
+    <string name="date_edit_dialog_cancel_btn">Annuleren</string>
+    <string name="date_edit_dialog_clear_btn">Maak leeg</string>
+    <string name="date_edit_dialog_ok_btn">OK</string>
 </resources>

@@ -101,7 +101,6 @@
     <string name="label_create_dialog_cancel_btn">Cancel</string>
     <string name="label_create_dialog_create_btn">Create</string>
 
-
     <!-- Generic -->
     <string name="no_label_text">No label</string>
     <string name="no_deadline_text">No deadline</string>
@@ -111,4 +110,9 @@
     <string name="add_edit_back_btn">Back</string>
     <string name="task_delete_title_text">Delete task</string>
 
+    <!-- Date/Time edit dialog -->
+    <string name="date_edit_dialog_title">Change date/time</string>
+    <string name="date_edit_dialog_cancel_btn">Cancel</string>
+    <string name="date_edit_dialog_clear_btn">Clear</string>
+    <string name="date_edit_dialog_ok_btn">OK</string>
 </resources>
