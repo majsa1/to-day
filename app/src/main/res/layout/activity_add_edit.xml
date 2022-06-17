@@ -43,25 +43,44 @@
                 android:textColorHint="#546E7A" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/deadline_til"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_edit_deadline_dt"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/deadline_til"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="start|left"
-                android:hint="@string/add_edit_deadline_dt"
-                android:inputType="datetime"
-                android:nextFocusDown="@id/login_btn"
-                android:nextFocusForward="@id/login_btn"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_edit_deadline_dt"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|left"
+                    android:hint="@string/add_edit_deadline_dt"
+                    android:inputType="datetime"
+                    android:nextFocusDown="@id/login_btn"
+                    android:nextFocusForward="@id/login_btn"
+                    android:textColorHint="#546E7A"
+                    android:textSize="14dp"
+                    app:endIconMode="clear_text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/add_edit_calendar_btn_id"
+                android:layout_width="66dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00673AB7"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:onClick="onCalendarBtnPressed"
-                android:textColorHint="#546E7A"
-                app:endIconMode="clear_text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:src="@android:drawable/ic_menu_my_calendar"
+                app:tint="?android:attr/textColorPrimary" />
+
+        </LinearLayout>
 
         <Spinner
             android:id="@+id/add_edit_label_sp_text"

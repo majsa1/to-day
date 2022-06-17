@@ -35,6 +35,7 @@ public class AddEditActivity extends AppCompatActivity {
     TextInputEditText title;
     TextView editHeader;
     Spinner labelSpinner;
+    LocalDateTime deadlineTimeStamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,7 @@ public class AddEditActivity extends AppCompatActivity {
         String descriptionString = description.getText().toString().trim();
         String deadlineString = deadline.getText().toString();
 
-        LocalDateTime deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
+        deadlineTimeStamp = Converter.inputStringToTimeStamp(deadlineString);
         Label selectedLabel = (Label) labelSpinner.getSelectedItem();
 
         if (Validators.validateDateIsEmptyOrNotNull(deadlineString) && Validators.validateStringNotNullOrEmpty(titleString)) {
@@ -183,7 +184,7 @@ public class AddEditActivity extends AppCompatActivity {
         LocalDateTime dateTime = task != null ? task.getDeadline() : LocalDateTime.now();
         Alerts.openDateEditDialog(this, dateTime, (onDateTimeChanged) -> {
             deadline.setText(Converter.timeStampToInputString(onDateTimeChanged));
-            task.setDeadline(onDateTimeChanged);
+            deadlineTimeStamp = onDateTimeChanged;
         });
     }
 }
