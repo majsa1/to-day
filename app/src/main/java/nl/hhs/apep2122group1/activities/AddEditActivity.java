@@ -180,7 +180,6 @@ public class AddEditActivity extends AppCompatActivity {
     }
 
     public void onCalendarBtnPressed(View view) {
-
         LocalDateTime dateTime = task != null ? task.getDeadline() : LocalDateTime.now();
         Alerts.openDateEditDialog(this, dateTime, (onDateTimeChanged) -> {
             deadline.setText(Converter.timeStampToInputString(onDateTimeChanged));
