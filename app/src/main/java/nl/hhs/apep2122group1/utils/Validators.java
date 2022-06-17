@@ -19,13 +19,6 @@ public class Validators {
         return true;
     }
 
-    public static boolean validateStringDoesNotBeginOrEndWithWhitespace(String str) {
-        if (!str.trim().equals(str)) {
-            return false;
-        }
-        return true;
-    }
-
     public static ValidationResult validatePasswordComplexity(String password) {
         if (password.equals("123456") || password.equalsIgnoreCase("abcdef") || password.equalsIgnoreCase("password") || password.equalsIgnoreCase("batman")) {
             return ValidationResult.SPECIFIC_INPUT_NOT_ALLOWED;

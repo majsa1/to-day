@@ -56,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:textColor="@color/design_default_color_error"
                 android:text="@string/delete_label_text">
 
             </Button>

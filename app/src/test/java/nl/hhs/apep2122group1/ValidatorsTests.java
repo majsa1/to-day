@@ -64,19 +64,6 @@ public class ValidatorsTests {
     }
 
     @Test
-    public void validateStringDoesNotBeginOrEndWithWhitespace_strings_beginning_or_ending_with_whitespace_fail() {
-        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace(" start with space"));
-        Assert.assertFalse(Validators.validateStringDoesNotBeginOrEndWithWhitespace("end with newline\n"));
-    }
-
-    @Test
-    public void validateStringDoesNotBeginOrEndWithWhitespace_strings_not_beginning_or_ending_with_whitespace_pass() {
-        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace(""));
-        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace("Space in the middle"));
-        Assert.assertTrue(Validators.validateStringDoesNotBeginOrEndWithWhitespace("NoWhitespaceAtAll"));
-    }
-
-    @Test
     public void validateStringDoesNotContainWhitespace_strings_with_whitespace_pass() {
         Assert.assertTrue(Validators.validateStringDoesNotContainWhitespace("NoWhitespace"));
         Assert.assertTrue(Validators.validateStringDoesNotContainWhitespace(""));

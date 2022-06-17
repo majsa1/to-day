@@ -69,6 +69,8 @@ public class LabelsActivity extends AppCompatActivity {
         }
     }
 
+    // create new label
+
     public void onNewLabelClick(View view) {
         // create dialog builder and view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -88,6 +90,33 @@ public class LabelsActivity extends AppCompatActivity {
         // actually show dialog
         dialog.show();
     }
+
+    public void onCreateButtonClick(TextInputEditText editText, Dialog dialog) {
+        // get value from field
+        String newLabelTitle = editText.getText() != null ? editText.getText().toString().trim() : null;
+
+        // check if value valid
+        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
+            editText.setError(getResources().getString(R.string.label_error_empty_text));
+            return;
+        } else if (!Validators.validateNewLabelTitleUnique(newLabelTitle, labels)) {
+            editText.setError(getResources().getString(R.string.label_error_unique_text));
+            return;
+        }
+
+        // generate random color (this could be replaced by a color picker in the future)
+        String colorCodeFormat = "#%02X%02X%02X";
+        Random random = new Random();
+        String colorCode = String.format(colorCodeFormat, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
+        // save new label to DB then close dialog
+        Label newLabel = new Label(editText.getText().toString(), colorCode, username);
+        FileDatabase.getDatabase(this).upsertLabel(newLabel);
+        dialog.dismiss();
+        refreshLabels();
+    }
+
+    // edit existing label
 
     public void onLabelClick(Label label) {
         // create dialog builder and view
@@ -116,6 +145,28 @@ public class LabelsActivity extends AppCompatActivity {
         // actually show dialog
         dialog.show();
     }
+
+    public void onSaveButtonClick(Label label, TextInputEditText editText, Dialog dialog) {
+        // get value from field
+        String newLabelTitle = editText.getText() != null ? editText.getText().toString().trim() : null;
+
+        // check if value valid
+        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
+            editText.setError((getResources().getString(R.string.label_error_empty_text)));
+            return;
+        } else if (!Validators.validateEditLabelTitleUnique(label.getTitle(), newLabelTitle, labels)) {
+            editText.setError(getResources().getString(R.string.label_error_unique_text));
+            return;
+        }
+
+        // then submit and close dialog
+        label.setTitle(newLabelTitle);
+        FileDatabase.getDatabase(this).upsertLabel(label);
+        dialog.dismiss();
+        refreshLabels();
+    }
+
+    // delete label
 
     public void onDeleteButtonClick(Label label, Runnable onDeleteConfirmed) {
         // create dialog builder and view
@@ -147,57 +198,6 @@ public class LabelsActivity extends AppCompatActivity {
 
     public void onDeleteConfirmButtonClick(Label label) {
         FileDatabase.getDatabase(this).deleteLabel(label);
-        refreshLabels();
-    }
-
-    public void onSaveButtonClick(Label label, TextInputEditText editText, Dialog dialog) {
-        // get value from field
-        String newLabelTitle = editText.getText() != null ? editText.getText().toString() : null;
-
-        // check if value valid
-        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
-            editText.setError((getResources().getString(R.string.label_error_empty_text)));
-            return;
-        } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
-            editText.setError(getResources().getString(R.string.label_error_spaces_text));
-            return;
-        } else if (!Validators.validateEditLabelTitleUnique(label.getTitle(), newLabelTitle, labels)) {
-            editText.setError(getResources().getString(R.string.label_error_unique_text));
-            return;
-        }
-
-        // then submit and close dialog
-        label.setTitle(newLabelTitle);
-        FileDatabase.getDatabase(this).upsertLabel(label);
-        dialog.dismiss();
-        refreshLabels();
-    }
-
-    public void onCreateButtonClick(TextInputEditText editText, Dialog dialog) {
-        // get value from field
-        String newLabelTitle = editText.getText() != null ? editText.getText().toString() : null;
-
-        // check if value valid
-        if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
-            editText.setError(getResources().getString(R.string.label_error_empty_text));
-            return;
-        } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
-            editText.setError(getResources().getString(R.string.label_error_spaces_text));
-            return;
-        } else if (!Validators.validateNewLabelTitleUnique(newLabelTitle, labels)) {
-            editText.setError(getResources().getString(R.string.label_error_unique_text));
-            return;
-        }
-
-        // generate random color (this could be replaced by a color picker in the future)
-        String colorCodeFormat = "#%02X%02X%02X";
-        Random random = new Random();
-        String colorCode = String.format(colorCodeFormat, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-        // save new label to DB then close dialog
-        Label newLabel = new Label(editText.getText().toString(), colorCode, username);
-        FileDatabase.getDatabase(this).upsertLabel(newLabel);
-        dialog.dismiss();
         refreshLabels();
     }
 

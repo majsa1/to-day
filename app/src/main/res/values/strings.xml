@@ -93,7 +93,7 @@
     <string name="label_create_dialog_title_hint">Title</string>
     <string name="label_create_dialog_create_btn">Create</string>
     <string name="delete_label_text">Delete label</string>
-    <string name="label_error_empty_text">Empty not allowed!</string>
+    <string name="label_error_empty_text">Empty not allowed</string>
     <string name="label_error_spaces_text">No spaces at begin of end allowed</string>
     <string name="label_error_unique_text">Label must be unique</string>
 
