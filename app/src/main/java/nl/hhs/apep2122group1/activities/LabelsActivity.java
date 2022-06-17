@@ -201,4 +201,7 @@ public class LabelsActivity extends AppCompatActivity {
         refreshLabels();
     }
 
+    public void onBackButtonClick(View view) {
+        finish();
+    }
 }
