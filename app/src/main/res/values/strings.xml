@@ -105,6 +105,7 @@
     <!-- Generic -->
     <string name="no_label_text">No label</string>
     <string name="no_deadline_text">No deadline</string>
+    <string name="no_description_text">No description</string>
     <string name="alert_confirm_text">YES</string>
     <string name="alert_cancel_text">NO</string>
     <string name="add_edit_back_btn">Back</string>

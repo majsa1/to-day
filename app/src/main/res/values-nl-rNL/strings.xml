@@ -56,6 +56,7 @@
     <string name="view_in_progress_text">Bezig</string>
     <string name="no_label_text">Geen label</string>
     <string name="no_deadline_text">Geen deadline</string>
+    <string name="no_description_text">Geen omschrijving</string>
     <string name="first_fragment_label">1e fragment</string>
     <string name="second_fragment_label">2e fragment</string>
     <string name="edit_edit_title_pt">Bewerk taak</string>
