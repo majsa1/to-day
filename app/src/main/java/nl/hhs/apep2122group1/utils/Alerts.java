@@ -11,10 +11,7 @@ import android.widget.TimePicker;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.function.Consumer;
 
 import nl.hhs.apep2122group1.R;

@@ -9,7 +9,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import nl.hhs.apep2122group1.models.Label;
-import nl.hhs.apep2122group1.models.Task;
 
 @Dao
 public interface LabelDao {

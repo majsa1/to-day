@@ -65,7 +65,6 @@
     <string name="add_edit_description_ti_text">Description</string>
     <string name="add_edit_save_btn_id">Save</string>
     <string name="add_edit_label_sp_text" translatable="false">Label</string>
-    <string name="add_edit_back_btn_id">back</string>
     <string name="add_edit_clear_btn_id">Clear</string>
     <string name="edit_edit_title_pt">Edit task</string>
     <string name="toast_error_text">Please check all fields</string>
@@ -74,11 +73,9 @@
     <string name="view_name_task_tv">Name Task</string>
     <string name="view_deadline_tv" translatable="false">Deadline</string>
     <string name="view_description_tv">Description</string>
-    <string name="view_back_btn_id">back</string>
     <string name="view_completed_tv">Completed</string>
     <string name="add_edit_description_et">Description</string>
     <string name="view_edit_btn_id">Edit</string>
-    <string name="back">back</string>
     <string name="edit_name_lbl_tv">Name:</string>
     <string name="edit_deadline_lbl_tv" translatable="false">Deadline:</string>
     <string name="edit_completed_lbl_tv">Completed:</string>
@@ -91,15 +88,15 @@
     <string name="labels_title">Labels</string>
     <string name="label_delete_dialog_contents">Are you sure to delete this label?\n\nDeleting this label will not delete any of the items that currently have it, but it will remove the label from them.</string>
     <string name="label_edit_dialog_new_title_hint">New title</string>
-    <string name="label_edit_dialog_delete_label_btn">Delete label</string>
-    <string name="label_edit_dialog_cancel_btn">Cancel</string>
     <string name="label_edit_dialog_save_btn">Save</string>
     <string name="label_create_dialog_title">New label</string>
-    <string name="label_delete_dialog_cancel_btn">Cancel</string>
-    <string name="label_delete_dialog_delete_btn">Delete label</string>
     <string name="label_create_dialog_title_hint">Title</string>
-    <string name="label_create_dialog_cancel_btn">Cancel</string>
     <string name="label_create_dialog_create_btn">Create</string>
+    <string name="delete_label_text">Delete label</string>
+    <string name="label_error_empty_text">Empty not allowed!</string>
+    <string name="label_error_spaces_text">No spaces at begin of end allowed</string>
+    <string name="label_error_unique_text">Label must be unique</string>
+
 
     <!-- Generic -->
     <string name="no_label_text">No label</string>
@@ -107,12 +104,14 @@
     <string name="no_description_text">No description</string>
     <string name="alert_confirm_text">YES</string>
     <string name="alert_cancel_text">NO</string>
-    <string name="add_edit_back_btn">Back</string>
     <string name="task_delete_title_text">Delete task</string>
+    <string name="back_btn_text">Back</string>
+    <string name="cancel_btn_text">Cancel</string>
+
+
 
     <!-- Date/Time edit dialog -->
     <string name="date_edit_dialog_title">Change date/time</string>
-    <string name="date_edit_dialog_cancel_btn">Cancel</string>
     <string name="date_edit_dialog_clear_btn">Clear</string>
     <string name="date_edit_dialog_ok_btn">OK</string>
 </resources>

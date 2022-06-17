@@ -36,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
         nameField.requestFocus();
     }
 
-    // TODO: validations should be translatable
     public void onRegister(View view) {
         // get fields
         TextInputEditText nameField = findViewById(R.id.name_et);
@@ -59,21 +58,18 @@ public class RegisterActivity extends AppCompatActivity {
         if (!Validators.validateStringNotNullOrEmpty(username)) {
             usernameField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
-        }
-        else if (!Validators.validateStringDoesNotContainWhitespace(username)) {
+        } else if (!Validators.validateStringDoesNotContainWhitespace(username)) {
             usernameField.setError(getResources().getString(R.string.register_validation_username_cannot_contain_whitespace));
             error = true;
         }
         if (!Validators.validateStringNotNullOrEmpty(password)) {
             passwordField.setError(getResources().getString(R.string.validation_field_empty));
             error = true;
-        }
-        else if (Validators.validatePasswordComplexity(password) != ValidationResult.OK) {
+        } else if (Validators.validatePasswordComplexity(password) != ValidationResult.OK) {
             ValidationResult validatorResult = Validators.validatePasswordComplexity(password);
             passwordField.setError(getPasswordValidationError(validatorResult));
             error = true;
-        }
-        else if (!password.equals(retypePassword)) {
+        } else if (!password.equals(retypePassword)) {
             passwordField.setError(getResources().getString(R.string.register_validation_passwords_not_equal));
             retypePasswordField.setError(getResources().getString(R.string.register_validation_passwords_not_equal));
             error = true;

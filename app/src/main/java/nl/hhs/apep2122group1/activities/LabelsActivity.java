@@ -156,13 +156,13 @@ public class LabelsActivity extends AppCompatActivity {
 
         // check if value valid
         if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
-            editText.setError("Empty not allowed!"); // TODO: translatable
+            editText.setError((getResources().getString(R.string.label_error_empty_text)));
             return;
         } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
-            editText.setError("No spaces at begin of end allowed"); // TODO: translatable
+            editText.setError(getResources().getString(R.string.label_error_spaces_text));
             return;
         } else if (!Validators.validateEditLabelTitleUnique(label.getTitle(), newLabelTitle, labels)) {
-            editText.setError("Label must be unique"); // TODO: translatable
+            editText.setError(getResources().getString(R.string.label_error_unique_text));
             return;
         }
 
@@ -179,13 +179,13 @@ public class LabelsActivity extends AppCompatActivity {
 
         // check if value valid
         if (!Validators.validateStringNotNullOrEmpty(newLabelTitle)) {
-            editText.setError("Empty not allowed!"); // TODO: translatable
+            editText.setError(getResources().getString(R.string.label_error_empty_text));
             return;
         } else if (!Validators.validateStringDoesNotBeginOrEndWithWhitespace(newLabelTitle)) {
-            editText.setError("No spaces at begin of end allowed"); // TODO: translatable
+            editText.setError(getResources().getString(R.string.label_error_spaces_text));
             return;
         } else if (!Validators.validateNewLabelTitleUnique(newLabelTitle, labels)) {
-            editText.setError("Label must be unique"); // TODO: translatable
+            editText.setError(getResources().getString(R.string.label_error_unique_text));
             return;
         }
 

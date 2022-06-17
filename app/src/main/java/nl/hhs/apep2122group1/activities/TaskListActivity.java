@@ -33,7 +33,7 @@ public class TaskListActivity extends AppCompatActivity {
     private ArrayList<Task> sortedTasks;
     private User user;
     private Sorting sorting = Sorting.DEFAULT;
-    private int selectedFilterId = -1; // is this clear enough?
+    private int selectedFilterId = -1;
     private boolean toDo = true;
 
     @Override
@@ -48,8 +48,6 @@ public class TaskListActivity extends AppCompatActivity {
         getUser();
         setTaskList();
     }
-
-//    private methods:
 
     private void getUser() {
         Intent intent = getIntent();
@@ -71,7 +69,7 @@ public class TaskListActivity extends AppCompatActivity {
         sortedTasks = new ArrayList<>();
     }
 
-    private void filterAndSortTasksByStatus(boolean toDo) { // test
+    private void filterAndSortTasksByStatus(boolean toDo) {
         filterTasksByStatus();
         sortTasksByStatus();
     }
@@ -110,8 +108,6 @@ public class TaskListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-//    public methods for views:
 
     public void onLabelBtnPressed(View view) {
         Intent intent = new Intent(this, LabelsActivity.class);
@@ -213,8 +209,8 @@ public class TaskListActivity extends AppCompatActivity {
             }
 
             for (int i = 0; i < uniqueLabels.size(); i++) {
-                if (uniqueLabels.get(i).getId() == menuItem.getItemId()) { // pressed - find corresponding label
-                    sortedTasks = new ArrayList<>(tasks); // look into current sorting
+                if (uniqueLabels.get(i).getId() == menuItem.getItemId()) {
+                    sortedTasks = new ArrayList<>(tasks);
                     filterAndSortTasksByStatus(toDo);
 
                     for (Task task : sortedTasks) {

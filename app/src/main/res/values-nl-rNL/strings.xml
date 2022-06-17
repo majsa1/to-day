@@ -23,14 +23,11 @@
     <string name="labels_title">Labels</string>
     <string name="label_delete_dialog_contents">Weet je zeker dat je dit label wil wissen?\n\nHet wissen van dit label wist geen items die het gebruiken, maar haalt het label wel weg bij deze items.</string>
     <string name="label_edit_dialog_new_title_hint">Nieuwe titek</string>
-    <string name="label_edit_dialog_delete_label_btn">Wis label</string>
-    <string name="label_edit_dialog_cancel_btn">Annuleer</string>
+    <string name="delete_label_text">Wis label</string>
     <string name="label_edit_dialog_save_btn">Opslaan</string>
     <string name="label_create_dialog_title">New label</string>
-    <string name="label_delete_dialog_cancel_btn">Annuleer</string>
-    <string name="label_delete_dialog_delete_btn">Wis label</string>
     <string name="label_create_dialog_title_hint">Titel</string>
-    <string name="label_create_dialog_cancel_btn">Annuleer</string>
+    <string name="cancel_btn_text">Annuleer</string>
     <string name="label_create_dialog_create_btn">Voeg toe</string>
     <string name="task_adapter_due_tv_text">Klaar voor:</string>
     <string name="task_adapter_completed_tv_text">Klaar:</string>
@@ -41,14 +38,12 @@
     <string name="edit_name_ti_text">Naam</string>
     <string name="add_edit_description_ti_text">Omschrijving</string>
     <string name="add_edit_save_btn_id">Opslaan</string>
-    <string name="add_edit_back_btn_id">Terug</string>
+    <string name="back_btn_text">Terug</string>
     <string name="add_edit_clear_btn_id">Opschonen</string>
     <string name="view_name_task_tv">Naam taak</string>
     <string name="view_description_tv">Omschrijving</string>
-    <string name="view_back_btn_id">Terug</string>
     <string name="view_completed_tv">Klaar</string>
     <string name="add_edit_description_et">Omschrijving</string>
-    <string name="back">Terug</string>
     <string name="view_edit_btn_id">Bewerk</string>
     <string name="edit_name_lbl_tv">Naam:</string>
     <string name="edit_description_lbl_tv">Omschrijving</string>
@@ -61,7 +56,6 @@
     <string name="second_fragment_label">2e fragment</string>
     <string name="edit_edit_title_pt">Bewerk taak</string>
     <string name="task_delete_message_text">Weet zeker dat je deze taak wilt verwijderen? \n\nDit kan niet ongedaan gemaakt worden.</string>
-    <string name="add_edit_back_btn">Terug</string>
     <string name="task_delete_title_text">Taak verwijderen</string>
 
     <!-- Register -->
@@ -91,11 +85,13 @@
     <string name="validation_field_empty">Veld mag niet leeg zijn</string>
     <string name="toast_error_text">Controleer alle velden a.u.b.</string>
     <string name="edit_completed_lbl_tv">Klaar:</string>
-    <string name="add_edit_deadline_dt" translatable="false">Deadline (yyyy-mm-dd hh:mm) of leeg</string>
+    <string name="add_edit_deadline_dt">Deadline (yyyy-mm-dd hh:mm) of leeg</string>
 
     <!-- Date/Time edit dialog -->
     <string name="date_edit_dialog_title">Wijzig datum of tijd</string>
-    <string name="date_edit_dialog_cancel_btn">Annuleren</string>
     <string name="date_edit_dialog_clear_btn">Maak leeg</string>
     <string name="date_edit_dialog_ok_btn">OK</string>
+    <string name="label_error_empty_text">Leeg niet toegestaan!</string>
+    <string name="label_error_spaces_text">Beginnen of eindigen met witruimte niet toegestaan</string>
+    <string name="label_error_unique_text">Label moet uniek zijn</string>
 </resources>

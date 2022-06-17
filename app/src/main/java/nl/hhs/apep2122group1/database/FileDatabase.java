@@ -20,10 +20,12 @@ import nl.hhs.apep2122group1.models.User;
         exportSchema = false)
 public abstract class FileDatabase extends RoomDatabase implements Database {
     public abstract LabelDao labelDao();
+
     public abstract TaskDao taskDao();
+
     public abstract UserDao userDao();
 
-    public static FileDatabase getDatabase(Context context){
+    public static FileDatabase getDatabase(Context context) {
         FileDatabase database;
         synchronized (FileDatabase.class) {
             database = Room.

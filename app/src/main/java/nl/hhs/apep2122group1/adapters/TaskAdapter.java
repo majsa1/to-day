@@ -43,7 +43,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater
-                .from(parent.getContext()).inflate(R.layout.task_list_row, parent,false);
+                .from(parent.getContext()).inflate(R.layout.task_list_row, parent, false);
         return new ViewHolder(view);
     }
 
@@ -84,7 +84,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             } else {
                 holder.taskDateTv.setTextColor(ContextCompat.getColor(context, com.google.android.material.R.color.m3_dark_default_color_primary_text));
                 // TODO: how to get the right dynamic colour? Some dynamic colours crash
-                // TODO: force dark mode?
             }
         }
 
@@ -125,7 +124,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         return tasks.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private CheckBox taskStatusCb;
         private TextView taskTitleTv;
         private TextView taskStatusTv;
