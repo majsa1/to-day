@@ -11,7 +11,7 @@ import java.time.format.FormatStyle;
 import java.util.Date;
 
 public class Converter {
-    public static String timeStampToString(LocalDateTime timeStamp) {
+    public static String timeStampToReadableString(LocalDateTime timeStamp) {
         if (timeStamp != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
             return formatter.format(timeStamp);
@@ -19,7 +19,15 @@ public class Converter {
         return null;
     }
 
-    public static LocalDateTime stringToDate(String userInput) {
+    public static String timeStampToInputString(LocalDateTime timeStamp) {
+        if (timeStamp != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            return formatter.format(timeStamp);
+        }
+        return null;
+    }
+
+    public static LocalDateTime inputStringToTimeStamp(String userInput) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime timeStamp = LocalDateTime.parse(userInput, formatter);

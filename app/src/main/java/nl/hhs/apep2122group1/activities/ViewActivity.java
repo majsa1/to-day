@@ -45,9 +45,9 @@ public class ViewActivity extends AppCompatActivity {
 
         title.setText(task.getTitle());
         deadline.setText(
-                task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToString(task.getDeadline()));
+                task.getDeadline() == null ? getResources().getString(R.string.no_deadline_text) : Converter.timeStampToReadableString(task.getDeadline()));
         completed.setText(
-                task.getCompleted() == null ? getResources().getString(R.string.view_in_progress_text) : Converter.timeStampToString(task.getCompleted()));
+                task.getCompleted() == null ? getResources().getString(R.string.view_in_progress_text) : Converter.timeStampToReadableString(task.getCompleted()));
         labelName.setText(
                 task.getLabelId() == null ? getResources().getString(R.string.no_label_text) : String.valueOf(label.getTitle()));
         description.setText(task.getDescription());
