@@ -117,7 +117,7 @@ public class AddEditActivity extends AppCompatActivity {
         String descriptionString = description.getText().toString();
 
         // TODO: use same functionality as in login/register, add more validation (see Validators)
-        if (Validators.validateStringNotNullOrEmpty(titleString) && Validators.validateStringNotNullOrEmpty(descriptionString)) {
+        if (Validators.validateStringNotNullOrEmpty(titleString)) {
             Label selectedLabel = (Label) label.getSelectedItem();
 
             task.setTitle(titleString);
@@ -129,7 +129,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show(); // TODO: use resource
         }
     }
 
@@ -154,7 +154,7 @@ public class AddEditActivity extends AppCompatActivity {
                     .show();
             finish();
         } else {
-            Toast.makeText(this, "Please fill in all fieds", Toast.LENGTH_SHORT).show(); // TODO: use resource
+            Toast.makeText(this, (R.string.toast_error_text), Toast.LENGTH_SHORT).show(); // TODO: use resource
         }
     }
 

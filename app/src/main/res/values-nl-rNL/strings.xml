@@ -89,4 +89,5 @@
     <string name="username_et_hint">Gebruikersnaam</string>
     <string name="password_et_hint">Wachtwoord</string>
     <string name="validation_field_empty">Veld mag niet leeg zijn</string>
+    <string name="toast_error_text">Vul alle velden in a.u.b.</string>
 </resources>
