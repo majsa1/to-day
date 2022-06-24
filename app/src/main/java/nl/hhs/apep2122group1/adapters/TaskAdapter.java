@@ -83,7 +83,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 holder.taskDateTv.setTextColor(Color.rgb(255, 184, 28));
             } else {
                 holder.taskDateTv.setTextColor(ContextCompat.getColor(context, com.google.android.material.R.color.m3_dark_default_color_primary_text));
-                // TODO: how to get the right dynamic colour? Some dynamic colours crash
             }
         }
 

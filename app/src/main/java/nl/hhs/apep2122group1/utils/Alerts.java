@@ -56,7 +56,7 @@ public class Alerts {
         DatePicker datePicker = dateEditDialogView.findViewById(R.id.date_edit_dialog_dp);
         TimePicker timePicker = dateEditDialogView.findViewById(R.id.date_edit_dialog_tp);
         if (currentDateTime != null) {
-            datePicker.updateDate(currentDateTime.getYear(), currentDateTime.getMonthValue(), currentDateTime.getDayOfMonth());
+            datePicker.updateDate(currentDateTime.getYear(), currentDateTime.getMonthValue() - 1, currentDateTime.getDayOfMonth());
             timePicker.setHour(currentDateTime.getHour());
             timePicker.setMinute(currentDateTime.getMinute());
         }
@@ -74,7 +74,7 @@ public class Alerts {
         Button createBtn = dateEditDialogView.findViewById(R.id.date_edit_dialog_save_btn);
         createBtn.setOnClickListener(createBtnView -> {
             // extract date and time from DatePicker and TimePicker
-            LocalDateTime newDateTime = LocalDateTime.of(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
+            LocalDateTime newDateTime = LocalDateTime.of(datePicker.getYear(), datePicker.getMonth() + 1, datePicker.getDayOfMonth(), timePicker.getHour(), timePicker.getMinute());
 
             onDateTimeChanged.accept(newDateTime);
             dialog.dismiss();

@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import nl.hhs.apep2122group1.models.Label;
-import nl.hhs.apep2122group1.utils.Converter;
 import nl.hhs.apep2122group1.utils.ValidationResult;
 import nl.hhs.apep2122group1.utils.Validators;
 

@@ -245,11 +245,7 @@ public class TaskListActivity extends AppCompatActivity {
 
     public void onCheckChanged(View view) { // bound to checkbox for updating view
         MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
-        if (toDoBtn.isChecked()) {
-            filterAndSortTasksByStatus();
-        } else {
-            filterAndSortTasksByStatus();
-        }
+        filterAndSortTasksByStatus();
         adapter.notifyDataSetChanged();
     }
 

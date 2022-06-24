@@ -48,7 +48,7 @@ public class ConverterTests {
         // ACT:
 
         // ASSERT:
-        Assert.assertEquals(null, Converter.timeStampToReadableString(null));
+        Assert.assertNull(Converter.timeStampToReadableString(null));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ConverterTests {
         // ACT:
 
         // ASSERT:
-        Assert.assertEquals(null, Converter.timeStampToInputString(null));
+        Assert.assertNull(Converter.timeStampToInputString(null));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class ConverterTests {
         LocalDateTime result = Converter.inputStringToTimeStamp(input);
 
         // ASSERT:
-        Assert.assertEquals(null, result);
+        Assert.assertNull(result);
     }
 
     @Test
@@ -130,7 +130,7 @@ public class ConverterTests {
         // ACT:
 
         // ASSERT:
-        Assert.assertEquals(null, Converter.LocalDateTimeFromIso8601String(null));
+        Assert.assertNull(Converter.LocalDateTimeFromIso8601String(null));
        }
 
     @Test
@@ -153,6 +153,6 @@ public class ConverterTests {
         // ACT:
 
         // ASSERT:
-        Assert.assertEquals(null, Converter.iso8601StringFromLocalDateTime(null));
+        Assert.assertNull(Converter.iso8601StringFromLocalDateTime(null));
     }
 }
