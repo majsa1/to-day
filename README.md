@@ -31,3 +31,13 @@ In our ERD diagram, there are sometimes uppercase letters while we use for the c
 
 
 Quote *(assignment Haagse Hogeschool( nd.), To-Day application, APEP CASE)
+
+![](Screenshots/1-Login.png)
+
+![](Screenshots/2-TaskList.png)
+
+![](Screenshots/4-Labels.png)
+
+![](Screenshots/5-ViewTask.png)
+
+![](Screenshots/7-DatePicker.png)
