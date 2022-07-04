@@ -38,4 +38,4 @@ Quote *(assignment Haagse Hogeschool( nd.), To-Day application, APEP CASE)
 
 <img src="Screenshots/4-Labels.png" width ="300">       <img src="Screenshots/5-ViewTask.png" width ="300">
 
-<img src="Screenshots/7-DatePicker.png" width ="300">       <img src="Screenshots/6-Edit.png" width ="300">
+<img src="Screenshots/6-Edit.png" width ="300">     <img src="Screenshots/7-DatePicker.png" width ="300">       
