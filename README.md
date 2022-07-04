@@ -32,12 +32,12 @@ In our ERD diagram, there are sometimes uppercase letters while we use for the c
 
 Quote *(assignment Haagse Hogeschool( nd.), To-Day application, APEP CASE)
 
-![](Screenshots/1-Login.png)
+<img src="Screenshots/1-login.png" width ="300">
 
-![](Screenshots/2-TaskList.png)
+<img src="Screenshots/2-TaskList.png" width ="300">
 
-![](Screenshots/4-Labels.png)
+<img src="Screenshots/4-Labels.png" width ="300">
 
-![](Screenshots/5-ViewTask.png)
+<img src="Screenshots/5-ViewTask.png" width ="300">
 
-![](Screenshots/7-DatePicker.png)
+<img src="Screenshots/7-DatePicker.png" width ="300">
