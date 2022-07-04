@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -118,7 +116,6 @@ public class TaskListActivity extends AppCompatActivity {
     public void onSortBtnPressed(View view) {
         PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
-        // inflate & set checked based on state:
         popupMenu.getMenuInflater().inflate(R.menu.popup_sort, popupMenu.getMenu());
 
         if (sorting == Sorting.DEFAULT) {
@@ -244,7 +241,6 @@ public class TaskListActivity extends AppCompatActivity {
     }
 
     public void onCheckChanged(View view) { // bound to checkbox for updating view
-        MaterialButton toDoBtn = findViewById(R.id.task_list_todo_mb_id);
         filterAndSortTasksByStatus();
         adapter.notifyDataSetChanged();
     }
